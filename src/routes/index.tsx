@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
 import { CtaBand } from "@/components/cta-band";
 import { Testimonials } from "@/components/testimonials";
+import { ClientSpotlight } from "@/components/client-spotlight";
 import { FeatureSplit, FlowMedia, OrbitMedia } from "@/components/feature-split";
 
 import { SectionHeading } from "@/components/section-heading";
@@ -250,6 +251,8 @@ function Home() {
         }
       />
 
+
+      <ClientSpotlight />
 
       <section className="container-page py-20 md:py-28">
         <SectionHeading
