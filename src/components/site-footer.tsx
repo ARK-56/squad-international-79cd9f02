@@ -4,8 +4,9 @@ import { services, industries, site } from "@/lib/site-data";
 
 export function SiteFooter() {
   return (
-    <footer className="surface-dark border-t border-offwhite/10">
-      <div className="container-page grid gap-10 py-16 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="bg-offwhite px-4 pb-6 pt-10 md:px-6">
+      <div className="mx-auto w-full max-w-[84rem] overflow-hidden rounded-[2rem] bg-charcoal text-offwhite">
+      <div className="grid gap-10 px-8 py-16 md:grid-cols-2 md:px-12 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-2.5">
             <span className="grid h-9 w-9 place-items-center rounded-sm bg-marigold font-display text-lg text-primary-foreground">
@@ -82,12 +83,13 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-offwhite/10">
-        <div className="container-page flex flex-col items-center justify-between gap-3 py-6 text-xs text-offwhite/50 sm:flex-row">
+        <div className="flex flex-col items-center justify-between gap-3 px-8 py-6 text-xs text-offwhite/50 sm:flex-row md:px-12">
           <p>
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
           <p>Business process outsourcing · Dedicated teams · Global delivery</p>
         </div>
+      </div>
       </div>
     </footer>
   );
