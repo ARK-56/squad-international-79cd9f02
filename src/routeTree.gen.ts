@@ -12,7 +12,12 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as CareersRouteImport } from './routes/careers'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FaqsRouteImport } from './routes/faqs'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 import { Route as CaseStudiesIndexRouteImport } from './routes/case-studies/index'
 import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies/$slug'
 import { Route as IndustriesIndexRouteImport } from './routes/industries/index'
@@ -35,9 +40,34 @@ const CareersRoute = CareersRouteImport.update({
   path: '/careers',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FaqsRoute = FaqsRouteImport.update({
   id: '/faqs',
   path: '/faqs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
+  id: '/terms-of-service',
+  path: '/terms-of-service',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CaseStudiesIndexRoute = CaseStudiesIndexRouteImport.update({
@@ -75,10 +105,15 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/careers': typeof CareersRoute
+  '/contact': typeof ContactRoute
   '/faqs': typeof FaqsRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/case-studies/': typeof CaseStudiesIndexRoute
   '/industries/': typeof IndustriesIndexRoute
   '/services/': typeof ServicesIndexRoute
@@ -87,10 +122,15 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/careers': typeof CareersRoute
+  '/contact': typeof ContactRoute
   '/faqs': typeof FaqsRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/blog': typeof BlogIndexRoute
   '/case-studies': typeof CaseStudiesIndexRoute
   '/industries': typeof IndustriesIndexRoute
   '/services': typeof ServicesIndexRoute
@@ -100,10 +140,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/careers': typeof CareersRoute
+  '/contact': typeof ContactRoute
   '/faqs': typeof FaqsRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/case-studies/': typeof CaseStudiesIndexRoute
   '/industries/': typeof IndustriesIndexRoute
   '/services/': typeof ServicesIndexRoute
@@ -114,10 +159,15 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/careers'
+    | '/contact'
     | '/faqs'
+    | '/privacy-policy'
+    | '/terms-of-service'
+    | '/blog/$slug'
     | '/case-studies/$slug'
     | '/industries/$slug'
     | '/services/$slug'
+    | '/blog/'
     | '/case-studies/'
     | '/industries/'
     | '/services/'
@@ -126,10 +176,15 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/careers'
+    | '/contact'
     | '/faqs'
+    | '/privacy-policy'
+    | '/terms-of-service'
+    | '/blog/$slug'
     | '/case-studies/$slug'
     | '/industries/$slug'
     | '/services/$slug'
+    | '/blog'
     | '/case-studies'
     | '/industries'
     | '/services'
@@ -138,10 +193,15 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/careers'
+    | '/contact'
     | '/faqs'
+    | '/privacy-policy'
+    | '/terms-of-service'
+    | '/blog/$slug'
     | '/case-studies/$slug'
     | '/industries/$slug'
     | '/services/$slug'
+    | '/blog/'
     | '/case-studies/'
     | '/industries/'
     | '/services/'
@@ -151,10 +211,15 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   CareersRoute: typeof CareersRoute
+  ContactRoute: typeof ContactRoute
   FaqsRoute: typeof FaqsRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  TermsOfServiceRoute: typeof TermsOfServiceRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   CaseStudiesSlugRoute: typeof CaseStudiesSlugRoute
   IndustriesSlugRoute: typeof IndustriesSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
   CaseStudiesIndexRoute: typeof CaseStudiesIndexRoute
   IndustriesIndexRoute: typeof IndustriesIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
@@ -183,11 +248,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CareersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/faqs': {
       id: '/faqs'
       path: '/faqs'
       fullPath: '/faqs'
       preLoaderRoute: typeof FaqsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms-of-service': {
+      id: '/terms-of-service'
+      path: '/terms-of-service'
+      fullPath: '/terms-of-service'
+      preLoaderRoute: typeof TermsOfServiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/case-studies/': {
@@ -239,10 +339,15 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   CareersRoute: CareersRoute,
+  ContactRoute: ContactRoute,
   FaqsRoute: FaqsRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
+  TermsOfServiceRoute: TermsOfServiceRoute,
+  BlogSlugRoute: BlogSlugRoute,
   CaseStudiesSlugRoute: CaseStudiesSlugRoute,
   IndustriesSlugRoute: IndustriesSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
   CaseStudiesIndexRoute: CaseStudiesIndexRoute,
   IndustriesIndexRoute: IndustriesIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
