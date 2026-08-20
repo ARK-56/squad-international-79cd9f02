@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PageHero } from "@/components/page-hero";
+
 import { site } from "@/lib/site-data";
 
 export const Route = createFileRoute("/privacy-policy")({
