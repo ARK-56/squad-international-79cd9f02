@@ -12,18 +12,23 @@ export function CtaBand({
   return (
     <section className="border-y border-border bg-offwhite">
       <div className="container-page flex flex-col items-center py-20 text-center md:py-28">
-        <h2 className="font-display max-w-4xl text-balance text-4xl uppercase leading-[0.95] tracking-tight text-charcoal sm:text-5xl md:text-6xl lg:text-7xl">
+        <span className="eyebrow">
+          <span className="h-px w-8 bg-marigold" /> Next step
+        </span>
+        <h2 className="font-display mt-5 max-w-4xl text-balance text-4xl uppercase leading-[0.95] tracking-tight text-charcoal sm:text-5xl md:text-6xl lg:text-7xl">
           {title}
         </h2>
+        <span className="mt-6 block h-1 w-16 bg-marigold" />
         <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
           {description}
         </p>
         <div className="mt-10 flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">
-          <Button variant="charcoal" size="xl" asChild>
+          <Button variant="marigold" size="xl" asChild>
             <a href={site.calendly} target="_blank" rel="noreferrer">
               <CalendarDays /> Book a Meeting
             </a>
           </Button>
+
           <Button variant="outlineDark" size="xl" asChild>
             <a href={site.whatsapp} target="_blank" rel="noreferrer">
               <MessageCircle /> Chat With Us
