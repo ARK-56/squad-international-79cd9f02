@@ -1,0 +1,161 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { CalendarDays, MessageCircle, Mail, Phone, MapPin, Clock } from "lucide-react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { PageHero } from "@/components/page-hero";
+import { services, site } from "@/lib/site-data";
+
+export const Route = createFileRoute("/contact")({
+  head: () => ({
+    meta: [
+      { title: "Contact Meridian BPO | Book a Discovery Call" },
+      {
+        name: "description",
+        content:
+          "Talk to Meridian BPO about dedicated offshore teams. Book a 30-minute discovery call, message us on WhatsApp, or send an enquiry.",
+      },
+      { property: "og:title", content: "Contact Meridian BPO" },
+      {
+        property: "og:description",
+        content: "Book a discovery call or start a WhatsApp conversation with our team.",
+      },
+    ],
+  }),
+  component: ContactPage,
+});
+
+function ContactPage() {
+  const [submitting, setSubmitting] = useState(false);
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitting(true);
+    const form = e.currentTarget;
+    setTimeout(() => {
+      setSubmitting(false);
+      form.reset();
+      toast.success("Enquiry received", {
+        description: "We'll reply within one working day. For anything urgent, use WhatsApp.",
+      });
+    }, 600);
+  };
+
+  return (
+    <>
+      <PageHero
+        eyebrow="Contact"
+        title="Let's scope the team you need"
+        description="A 30-minute call is usually enough to size the roles, coverage and cost. Prefer messaging? WhatsApp gets the fastest reply."
+      >
+        <Button variant="marigold" size="lg" asChild>
+          <a href={site.calendly} target="_blank" rel="noreferrer">
+            <CalendarDays /> Book a Meeting
+          </a>
+        </Button>
+        <Button variant="outlineLight" size="lg" asChild>
+          <a href={site.whatsapp} target="_blank" rel="noreferrer">
+            <MessageCircle /> Chat With Us
+          </a>
+        </Button>
+      </PageHero>
+
+      <section className="container-page grid gap-12 py-20 lg:grid-cols-[1.1fr_0.9fr] md:py-24">
+        <form onSubmit={onSubmit} className="rounded-lg border border-border bg-card p-8">
+          <h2 className="text-2xl text-charcoal">Send an enquiry</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Tell us roughly what you need covered and we'll come back with a proposed team shape.
+          </p>
+
+          <div className="mt-8 grid gap-5 sm:grid-cols-2">
+            <div className="grid gap-2">
+              <Label htmlFor="name">Full name</Label>
+              <Input id="name" name="name" required placeholder="Jane Doe" />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="company">Company</Label>
+              <Input id="company" name="company" required placeholder="Acme Ltd" />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="email">Work email</Label>
+              <Input id="email" name="email" type="email" required placeholder="jane@acme.com" />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="phone">Phone / WhatsApp</Label>
+              <Input id="phone" name="phone" placeholder="+1 555 000 0000" />
+            </div>
+            <div className="grid gap-2 sm:col-span-2">
+              <Label htmlFor="service">Service of interest</Label>
+              <select
+                id="service"
+                name="service"
+                className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                defaultValue={services[0].title}
+              >
+                {services.map((s) => (
+                  <option key={s.slug}>{s.title}</option>
+                ))}
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <div className="grid gap-2 sm:col-span-2">
+              <Label htmlFor="message">What do you need covered?</Label>
+              <Textarea
+                id="message"
+                name="message"
+                required
+                rows={5}
+                placeholder="Volumes, hours of coverage, tools you use, timelines…"
+              />
+            </div>
+          </div>
+
+          <Button type="submit" variant="marigold" size="lg" className="mt-8" disabled={submitting}>
+            {submitting ? "Sending…" : "Send enquiry"}
+          </Button>
+        </form>
+
+        <aside className="space-y-6">
+          <div className="rounded-lg border border-border bg-card p-8">
+            <h2 className="text-xl text-charcoal">Direct contact</h2>
+            <ul className="mt-6 space-y-4 text-sm text-muted-foreground">
+              <li className="flex items-center gap-3">
+                <Mail className="size-4 text-marigold" />
+                <a href={`mailto:${site.email}`} className="hover:text-marigold">
+                  {site.email}
+                </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="size-4 text-marigold" /> {site.phone}
+              </li>
+              <li className="flex items-start gap-3">
+                <MapPin className="mt-0.5 size-4 shrink-0 text-marigold" /> {site.address}
+              </li>
+              <li className="flex items-start gap-3">
+                <Clock className="mt-0.5 size-4 shrink-0 text-marigold" />
+                Replies within one working day; WhatsApp usually within the hour.
+              </li>
+            </ul>
+          </div>
+
+          <div className="rounded-lg border border-marigold/40 bg-accent/40 p-8">
+            <h2 className="text-xl text-charcoal">What happens on the call</h2>
+            <ol className="mt-5 space-y-3 text-sm text-charcoal">
+              <li>1. We map the work, volumes and tools involved.</li>
+              <li>2. We propose a team shape, coverage model and indicative cost.</li>
+              <li>3. If it fits, we agree SLAs and a start date.</li>
+            </ol>
+            <Button variant="charcoal" className="mt-6 w-full" size="lg" asChild>
+              <a href={site.calendly} target="_blank" rel="noreferrer">
+                <CalendarDays /> Book a Meeting
+              </a>
+            </Button>
+          </div>
+        </aside>
+      </section>
+    </>
+  );
+}
