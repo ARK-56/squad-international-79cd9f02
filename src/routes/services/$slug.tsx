@@ -30,22 +30,28 @@ function ServiceDetail() {
 
   return (
     <>
-      <section className="surface-dark">
-        <div className="container-page py-20 md:py-24">
-          <Link to="/services" className="eyebrow hover:opacity-80">
+      <section className="relative overflow-hidden bg-offwhite">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-0 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-marigold/15 blur-3xl"
+        />
+        <div className="container-page relative flex flex-col items-center py-24 text-center md:py-28">
+          <Link to="/services" className="eyebrow justify-center text-marigold hover:opacity-80">
             <span className="h-px w-8 bg-marigold" /> Services
           </Link>
-          <h1 className="mt-5 max-w-4xl text-4xl md:text-6xl">{service.title}</h1>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-offwhite/70 md:text-lg">
+          <h1 className="mt-6 max-w-4xl text-5xl leading-[0.92] tracking-tight text-charcoal md:text-7xl">
+            {service.title}
+          </h1>
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
             {service.summary}
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-9 flex flex-wrap justify-center gap-3">
             <BookingDialog>
               <Button variant="marigold" size="lg">
                 <CalendarDays /> Book a Meeting
               </Button>
             </BookingDialog>
-            <Button variant="outlineLight" size="lg" asChild>
+            <Button variant="outlineDark" size="lg" asChild>
               <a href={site.whatsapp} target="_blank" rel="noreferrer">
                 <MessageCircle /> Chat With Us
               </a>

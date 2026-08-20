@@ -57,7 +57,7 @@ function ContactPage() {
               <CalendarDays /> Book a Meeting
             </Button>
           </BookingDialog>
-        <Button variant="outlineLight" size="lg" asChild>
+        <Button variant="outlineDark" size="lg" asChild>
           <a href={site.whatsapp} target="_blank" rel="noreferrer">
             <MessageCircle /> Chat With Us
           </a>
