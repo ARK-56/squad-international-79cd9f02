@@ -66,7 +66,7 @@ const differentiators = [
 function Home() {
   return (
     <>
-      <section className="surface-dark relative overflow-hidden">
+      <section className="surface-dark relative overflow-hidden pt-24 lg:pt-32">
         <div className="container-page grid items-center gap-14 py-20 lg:grid-cols-[1.05fr_1fr] lg:py-28">
           <div>
             <span className="eyebrow">
