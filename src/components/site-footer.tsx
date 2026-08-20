@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { services, industries, site } from "@/lib/site-data";
+import logo from "@/assets/squad-logo.png.asset.json";
 
 export function SiteFooter() {
   return (
@@ -9,10 +10,11 @@ export function SiteFooter() {
       <div className="grid gap-10 px-8 py-16 md:grid-cols-2 md:px-12 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-2.5">
-            <span className="grid h-9 w-9 place-items-center rounded-sm bg-marigold font-display text-lg text-primary-foreground">
-              M
-            </span>
-            <span className="font-display text-xl tracking-wide">{site.name}</span>
+            <img
+              src={logo.url}
+              alt={`${site.name} logo`}
+              className="h-8 w-auto brightness-0 invert"
+            />
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-offwhite/65">
             Dedicated offshore teams for customer support, business assistance, lead generation and

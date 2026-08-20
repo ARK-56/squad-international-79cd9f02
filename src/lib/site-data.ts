@@ -1,9 +1,9 @@
 export const site = {
-  name: "Meridian BPO",
+  name: "Squad International",
   tagline: "Dedicated offshore teams that run your operations",
   calendly: "https://calendly.com/meridian-bpo/discovery",
   whatsapp: "https://wa.me/10000000000",
-  email: "hello@meridianbpo.com",
+  email: "inquire@squadinternational.net",
   phone: "+1 (000) 000-0000",
   address: "Global delivery centres • Americas · EMEA · APAC",
 };
