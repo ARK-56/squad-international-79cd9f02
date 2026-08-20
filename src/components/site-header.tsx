@@ -20,7 +20,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-offwhite/80 px-4 py-3 backdrop-blur md:px-6">
+    <header className="sticky top-0 z-50 px-4 py-3 md:px-6">
       <div className="mx-auto flex w-full max-w-[84rem] items-center justify-between gap-6 rounded-full border border-border bg-background px-5 py-2.5 shadow-sm md:px-7">
         <Link to="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
           <img src={logo.url} alt={`${site.name} logo`} className="h-8 w-auto" />
