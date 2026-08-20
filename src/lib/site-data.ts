@@ -500,3 +500,30 @@ export const stats = [
   { value: "98%", label: "Client retention" },
   { value: "60%", label: "Average cost saving" },
 ];
+
+export type Testimonial = { quote: string; author: string; role: string };
+
+export const testimonials: Testimonial[] = [
+  {
+    quote: "They absorbed our worst quarter without us hiring a single person locally.",
+    author: "Dana Whitfield",
+    role: "Head of Customer Experience, D2C home goods brand",
+  },
+  {
+    quote:
+      "The pod produces more qualified meetings than our previous in-house team, at a third of the cost.",
+    author: "Marcus Reyes",
+    role: "VP Revenue, B2B workflow software",
+  },
+  {
+    quote: "Nothing waits for morning anymore. That single change paid for the whole engagement.",
+    author: "Priya Nandakumar",
+    role: "Director of Operations, freight forwarding group",
+  },
+  {
+    quote:
+      "Onboarding took two weeks, not two quarters. The documentation they built is better than ours.",
+    author: "Elena Cardoso",
+    role: "COO, healthcare services group",
+  },
+];

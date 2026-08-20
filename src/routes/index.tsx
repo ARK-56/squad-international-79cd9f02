@@ -12,6 +12,7 @@ import {
 import heroImage from "@/assets/hero-operations.jpg";
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/cta-band";
+import { Testimonials } from "@/components/testimonials";
 import { FeatureSplit, FlowMedia, OrbitMedia } from "@/components/feature-split";
 
 import { SectionHeading } from "@/components/section-heading";
@@ -337,6 +338,8 @@ function Home() {
           </div>
         </div>
       </section>
+
+      <Testimonials />
 
       <CtaBand />
     </>
