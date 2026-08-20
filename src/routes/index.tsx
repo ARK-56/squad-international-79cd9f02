@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import heroImage from "@/assets/hero-operations.jpg";
 import { Button } from "@/components/ui/button";
+import { BookingDialog } from "@/components/booking-dialog";
 import { CtaBand } from "@/components/cta-band";
 import { Testimonials } from "@/components/testimonials";
 import { FeatureSplit, FlowMedia, OrbitMedia } from "@/components/feature-split";
@@ -81,11 +82,11 @@ function Home() {
               measured against your SLAs.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <Button variant="marigold" size="xl" asChild>
-                <a href={site.calendly} target="_blank" rel="noreferrer">
+              <BookingDialog>
+                <Button variant="marigold" size="xl">
                   <CalendarDays /> Book a Meeting
-                </a>
-              </Button>
+                </Button>
+              </BookingDialog>
               <Button variant="outlineLight" size="xl" asChild>
                 <a href={site.whatsapp} target="_blank" rel="noreferrer">
                   <MessageCircle /> Chat With Us
@@ -197,11 +198,11 @@ function Home() {
           "Shadowing, certification and a staged go-live",
         ]}
         actions={
-          <Button variant="marigold" size="lg" asChild>
-            <a href={site.calendly} target="_blank" rel="noreferrer">
+          <BookingDialog>
+            <Button variant="marigold" size="lg">
               <CalendarDays /> Book a Meeting
-            </a>
-          </Button>
+            </Button>
+          </BookingDialog>
         }
         media={
           <FlowMedia

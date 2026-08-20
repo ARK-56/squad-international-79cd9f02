@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { CalendarDays, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BookingDialog } from "@/components/booking-dialog";
 import { CtaBand } from "@/components/cta-band";
 import { industries, services, caseStudies, site } from "@/lib/site-data";
 
@@ -111,11 +112,11 @@ function IndustryDetail() {
           ))}
         </div>
         <div className="mt-10 flex flex-wrap gap-3">
-          <Button variant="charcoal" size="lg" asChild>
-            <a href={site.calendly} target="_blank" rel="noreferrer">
+          <BookingDialog>
+            <Button variant="charcoal" size="lg">
               <CalendarDays /> Book a Meeting
-            </a>
-          </Button>
+            </Button>
+          </BookingDialog>
           <Button variant="outlineDark" size="lg" asChild>
             <a href={site.whatsapp} target="_blank" rel="noreferrer">
               <MessageCircle /> Chat With Us

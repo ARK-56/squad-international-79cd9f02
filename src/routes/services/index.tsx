@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BookingDialog } from "@/components/booking-dialog";
 import { PageHero } from "@/components/page-hero";
 import { CtaBand } from "@/components/cta-band";
 import { services, site } from "@/lib/site-data";
@@ -32,11 +33,11 @@ function ServicesPage() {
         title="Delivery capability, staffed and supervised"
         description="Every service line comes with trained specialists, documented process, quality sampling and reporting against agreed SLAs."
       >
-        <Button variant="marigold" size="lg" asChild>
-          <a href={site.calendly} target="_blank" rel="noreferrer">
+        <BookingDialog>
+          <Button variant="marigold" size="lg">
             <CalendarDays /> Book a Meeting
-          </a>
-        </Button>
+          </Button>
+        </BookingDialog>
       </PageHero>
 
       <section className="container-page py-20 md:py-24">
