@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X, CalendarDays, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BookingDialog } from "@/components/booking-dialog";
 import { site } from "@/lib/site-data";
 
 const nav = [
@@ -45,11 +46,11 @@ export function SiteHeader() {
               <MessageCircle /> WhatsApp
             </a>
           </Button>
-          <Button variant="marigold" size="sm" asChild>
-            <a href={site.calendly} target="_blank" rel="noreferrer">
+          <BookingDialog>
+            <Button variant="marigold" size="sm">
               <CalendarDays /> Book a Meeting
-            </a>
-          </Button>
+            </Button>
+          </BookingDialog>
         </div>
 
         <button
@@ -83,11 +84,11 @@ export function SiteHeader() {
               Contact
             </Link>
             <div className="mt-3 flex flex-col gap-2">
-              <Button variant="marigold" asChild>
-                <a href={site.calendly} target="_blank" rel="noreferrer">
-                  <CalendarDays /> Book a Meeting
-                </a>
-              </Button>
+              <BookingDialog>
+            <Button variant="marigold">
+              <CalendarDays /> Book a Meeting
+            </Button>
+          </BookingDialog>
               <Button variant="outlineLight" asChild>
                 <a href={site.whatsapp} target="_blank" rel="noreferrer">
                   <MessageCircle /> Chat on WhatsApp

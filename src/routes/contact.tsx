@@ -3,6 +3,7 @@ import { useState } from "react";
 import { CalendarDays, MessageCircle, Mail, Phone, MapPin, Clock } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { BookingDialog } from "@/components/booking-dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -51,11 +52,11 @@ function ContactPage() {
         title="Let's scope the team you need"
         description="A 30-minute call is usually enough to size the roles, coverage and cost. Prefer messaging? WhatsApp gets the fastest reply."
       >
-        <Button variant="marigold" size="lg" asChild>
-          <a href={site.calendly} target="_blank" rel="noreferrer">
-            <CalendarDays /> Book a Meeting
-          </a>
-        </Button>
+        <BookingDialog>
+            <Button variant="marigold" size="lg">
+              <CalendarDays /> Book a Meeting
+            </Button>
+          </BookingDialog>
         <Button variant="outlineLight" size="lg" asChild>
           <a href={site.whatsapp} target="_blank" rel="noreferrer">
             <MessageCircle /> Chat With Us
@@ -148,11 +149,11 @@ function ContactPage() {
               <li>2. We propose a team shape, coverage model and indicative cost.</li>
               <li>3. If it fits, we agree SLAs and a start date.</li>
             </ol>
-            <Button variant="charcoal" className="mt-6 w-full" size="lg" asChild>
-              <a href={site.calendly} target="_blank" rel="noreferrer">
-                <CalendarDays /> Book a Meeting
-              </a>
+            <BookingDialog>
+            <Button variant="charcoal" className="mt-6 w-full" size="lg">
+              <CalendarDays /> Book a Meeting
             </Button>
+          </BookingDialog>
           </div>
         </aside>
       </section>
