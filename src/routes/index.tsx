@@ -66,60 +66,55 @@ const differentiators = [
 function Home() {
   return (
     <>
-      <section className="surface-dark relative overflow-hidden pt-24 lg:pt-32">
-        <div className="container-page grid items-center gap-14 py-20 lg:grid-cols-[1.05fr_1fr] lg:py-28">
-          <div>
-            <span className="eyebrow">
-              <span className="h-px w-8 bg-marigold" />
-              Business Process Outsourcing
+      <section className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-charcoal">
+        {/* Full-bleed background image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src={heroImage}
+            alt="Offshore support agents working on an operations floor"
+            className="h-full w-full object-cover opacity-40"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-charcoal/90 via-charcoal/60 to-charcoal" />
+        </div>
+
+        {/* Hero content */}
+        <div className="relative z-10 max-w-5xl px-6 pb-20 pt-32 text-center md:pt-36">
+          <div className="mb-6 flex items-center justify-center gap-4">
+            <div className="h-px w-8 bg-marigold" />
+            <span className="text-xs font-semibold uppercase tracking-[0.4em] text-marigold">
+              {site.name}
             </span>
-            <h1 className="mt-6 text-5xl leading-[0.92] md:text-7xl">
-              Dedicated teams that <span className="text-marigold">run the work</span> your business
-              keeps outgrowing
-            </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-offwhite/70 md:text-lg">
-              {site.name} builds and manages offshore teams for customer support, business
-              assistance, lead generation and back-office operations — trained on your process,
-              measured against your SLAs.
-            </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <BookingDialog>
-                <Button variant="marigold" size="xl">
-                  <CalendarDays /> Book a Meeting
-                </Button>
-              </BookingDialog>
-              <Button variant="outlineLight" size="xl" asChild>
-                <a href={site.whatsapp} target="_blank" rel="noreferrer">
-                  <MessageCircle /> Chat With Us
-                </a>
-              </Button>
-            </div>
-            <ul className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-sm text-offwhite/65">
-              {["Live in 10-14 days", "No per-ticket surprises", "NDA & access controls"].map((t) => (
-                <li key={t} className="flex items-center gap-2">
-                  <CheckCircle2 className="size-4 text-marigold" /> {t}
-                </li>
-              ))}
-            </ul>
+            <div className="h-px w-8 bg-marigold" />
           </div>
 
-          <div className="relative">
-            <div className="overflow-hidden rounded-lg border border-offwhite/10 shadow-[var(--shadow-elevated)]">
-              <img
-                src={heroImage}
-                alt="Offshore support agents working on an operations floor"
-                width={1600}
-                height={1008}
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="absolute -bottom-6 -left-4 hidden rounded-md bg-marigold px-6 py-4 sm:block">
-              <p className="font-display text-3xl text-charcoal">60%</p>
-              <p className="text-xs font-medium uppercase tracking-wider text-charcoal/70">
-                Average cost saving
-              </p>
-            </div>
+          <h1 className="font-display text-5xl uppercase leading-none tracking-tight text-offwhite md:text-7xl lg:text-9xl">
+            Dedicated <br /> <span className="text-marigold">Offshore</span> Teams
+          </h1>
+
+          <p className="mx-auto mt-8 max-w-2xl text-lg font-light leading-relaxed text-offwhite/70 md:text-xl">
+            Scale your business with high-performing remote teams integrated seamlessly into your
+            workflow. Expert talent, managed for you.
+          </p>
+
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <BookingDialog>
+              <Button variant="marigold" size="xl" className="group relative uppercase tracking-widest">
+                <CalendarDays /> Start Scaling
+                <div className="absolute -bottom-1 -right-1 size-3 bg-offwhite" />
+              </Button>
+            </BookingDialog>
+            <Button variant="outlineLight" size="xl" asChild className="uppercase tracking-widest">
+              <a href={site.whatsapp} target="_blank" rel="noreferrer">
+                <MessageCircle /> Explore Services
+              </a>
+            </Button>
           </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-10 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 opacity-50">
+          <span className="text-[10px] uppercase tracking-[0.5em] text-offwhite">Scroll</span>
+          <div className="h-12 w-px bg-marigold" />
         </div>
       </section>
 
