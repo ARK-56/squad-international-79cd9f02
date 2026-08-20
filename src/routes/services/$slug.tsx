@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, CalendarDays, MessageCircle, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BookingDialog } from "@/components/booking-dialog";
 import { CtaBand } from "@/components/cta-band";
 import { services, site } from "@/lib/site-data";
 
@@ -39,11 +40,11 @@ function ServiceDetail() {
             {service.summary}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button variant="marigold" size="lg" asChild>
-              <a href={site.calendly} target="_blank" rel="noreferrer">
+            <BookingDialog>
+              <Button variant="marigold" size="lg">
                 <CalendarDays /> Book a Meeting
-              </a>
-            </Button>
+              </Button>
+            </BookingDialog>
             <Button variant="outlineLight" size="lg" asChild>
               <a href={site.whatsapp} target="_blank" rel="noreferrer">
                 <MessageCircle /> Chat With Us
@@ -108,11 +109,11 @@ function ServiceDetail() {
             <p className="text-sm leading-relaxed text-muted-foreground">
               Not sure which shape fits? A 30-minute call is usually enough to size the team.
             </p>
-            <Button variant="marigold" className="mt-5 w-full" size="lg" asChild>
-              <a href={site.calendly} target="_blank" rel="noreferrer">
+            <BookingDialog>
+              <Button variant="marigold" className="mt-5 w-full" size="lg">
                 <CalendarDays /> Book a Meeting
-              </a>
-            </Button>
+              </Button>
+            </BookingDialog>
           </div>
 
           <div className="mt-8 border-t border-border pt-6">
