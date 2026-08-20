@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PageHero } from "@/components/page-hero";
+
 import { site } from "@/lib/site-data";
 
 export const Route = createFileRoute("/privacy-policy")({
@@ -55,30 +55,39 @@ const sections = [
 
 function PrivacyPage() {
   return (
-    <>
-      <PageHero
-        eyebrow="Legal"
-        title="Privacy Policy"
-        description="Last updated 20 August 2026. This policy explains how we handle personal data."
-      />
-      <section className="container-page max-w-3xl space-y-10 py-20 md:py-24">
-        {sections.map((s) => (
-          <div key={s.title}>
-            <h2 className="text-xl text-charcoal">{s.title}</h2>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
-          </div>
-        ))}
-        <div>
-          <h2 className="text-xl text-charcoal">Contact</h2>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            Questions or requests about this policy can be sent to{" "}
-            <a href={`mailto:${site.email}`} className="text-charcoal underline hover:text-marigold">
-              {site.email}
-            </a>
-            .
-          </p>
+    <article className="bg-charcoal text-offwhite">
+      <div className="container-page max-w-3xl py-24 md:py-32">
+        <h1 className="text-4xl md:text-5xl text-offwhite">Privacy Policy</h1>
+        <p className="mt-3 text-sm text-offwhite/50">Last updated: 20 August 2026</p>
+
+        <p className="mt-10 text-sm font-semibold uppercase leading-7 tracking-wide text-offwhite">
+          Please read this privacy policy carefully. It explains what personal data
+          Meridian BPO collects, how we use and store it, who we share it with, and the
+          rights you have over it.
+        </p>
+
+        <div className="mt-6 h-px w-16 bg-marigold" />
+
+        <div className="mt-12 space-y-10">
+          {sections.map((s) => (
+            <section key={s.title}>
+              <h2 className="text-2xl text-offwhite">{s.title}</h2>
+              <p className="mt-3 text-base leading-8 text-offwhite/70">{s.body}</p>
+            </section>
+          ))}
+          <section>
+            <h2 className="text-2xl text-offwhite">Contact</h2>
+            <p className="mt-3 text-base leading-8 text-offwhite/70">
+              Questions or requests about this policy can be sent to{" "}
+              <a href={`mailto:${site.email}`} className="text-marigold underline underline-offset-4">
+                {site.email}
+              </a>
+              .
+            </p>
+          </section>
         </div>
-      </section>
-    </>
+      </div>
+    </article>
   );
 }
+
