@@ -12,6 +12,8 @@ import {
 import heroImage from "@/assets/hero-operations.jpg";
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/cta-band";
+import { FeatureSplit, FlowMedia, OrbitMedia } from "@/components/feature-split";
+
 import { SectionHeading } from "@/components/section-heading";
 import { services, industries, caseStudies, stats, faqs, site } from "@/lib/site-data";
 
@@ -183,6 +185,69 @@ function Home() {
           </div>
         </div>
       </section>
+
+      <FeatureSplit
+        eyebrow="How it works"
+        title="Stand up a team in weeks, not quarters"
+        description="We document your process, hire against it, train in your tools and go live under an agreed SLA — with a named team lead accountable from day one."
+        bullets={[
+          "Discovery call and scope in the first week",
+          "Recruitment and vetting against your role profile",
+          "Shadowing, certification and a staged go-live",
+        ]}
+        actions={
+          <Button variant="marigold" size="lg" asChild>
+            <a href={site.calendly} target="_blank" rel="noreferrer">
+              <CalendarDays /> Book a Meeting
+            </a>
+          </Button>
+        }
+        media={
+          <FlowMedia
+            badge="Live in 10–14 days"
+            steps={[
+              { label: "Week 1", value: "Discovery, process mapping and role scoping" },
+              { label: "Week 2", value: "Recruit, vet and assign your named team lead" },
+              { label: "Week 3", value: "Tool access, shadowing and QA calibration" },
+              { label: "Go live", value: "SLA reporting and weekly performance review" },
+            ]}
+          />
+        }
+      />
+
+      <FeatureSplit
+        tone="muted"
+        reverse
+        eyebrow="Your pod"
+        title="One dedicated pod, every role covered"
+        description="Instead of shared agents on a ticket queue, you get a defined pod: specialists for each workstream, a supervisor who owns quality, and reporting you can audit."
+        bullets={[
+          "Exclusive to your account, in your systems",
+          "Supervisor-led QA sampling every week",
+          "Scale the pod up or down as volume moves",
+        ]}
+        actions={
+          <Button variant="outlineDark" size="lg" asChild>
+            <Link to="/services">
+              Explore services <ArrowRight />
+            </Link>
+          </Button>
+        }
+        media={
+          <OrbitMedia
+            center="Your pod"
+            roles={[
+              "Support Agent",
+              "Team Lead",
+              "QA Analyst",
+              "Virtual Assistant",
+              "SDR",
+              "Back Office",
+            ]}
+          />
+        }
+      />
+
 
       <section className="container-page py-20 md:py-28">
         <SectionHeading
