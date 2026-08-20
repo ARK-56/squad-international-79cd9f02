@@ -1,5 +1,6 @@
 import { CalendarDays, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BookingDialog } from "@/components/booking-dialog";
 import { site } from "@/lib/site-data";
 
 export function CtaBand({
@@ -23,11 +24,11 @@ export function CtaBand({
           {description}
         </p>
         <div className="mt-10 flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">
-          <Button variant="marigold" size="xl" asChild>
-            <a href={site.calendly} target="_blank" rel="noreferrer">
+          <BookingDialog>
+            <Button variant="marigold" size="xl">
               <CalendarDays /> Book a Meeting
-            </a>
-          </Button>
+            </Button>
+          </BookingDialog>
 
           <Button variant="outlineDark" size="xl" asChild>
             <a href={site.whatsapp} target="_blank" rel="noreferrer">
