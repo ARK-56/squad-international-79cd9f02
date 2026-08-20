@@ -7,13 +7,13 @@ import { industries } from "@/lib/site-data";
 export const Route = createFileRoute("/industries/")({
   head: () => ({
     meta: [
-      { title: "Industries We Support | Meridian BPO" },
+      { title: "Industries We Support | Squad International" },
       {
         name: "description",
         content:
           "Outsourced teams for e-commerce, SaaS, healthcare, logistics, financial services and real estate — staffed and trained around sector-specific operations.",
       },
-      { property: "og:title", content: "Industries We Support | Meridian BPO" },
+      { property: "og:title", content: "Industries We Support | Squad International" },
       {
         property: "og:description",
         content: "Sector-specific outsourcing teams with operating knowledge, not generic scripts.",

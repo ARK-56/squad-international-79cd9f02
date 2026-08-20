@@ -10,7 +10,7 @@ export function ClientSpotlight() {
       <div className="container-page grid items-center gap-14 lg:grid-cols-2">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-marigold">
-            Meridian for professional services
+            Squad International for professional services
           </p>
           <h2 className="mt-5 font-display text-4xl leading-[1.05] tracking-tight text-charcoal md:text-6xl">
             Best-in-class service
@@ -38,7 +38,7 @@ export function ClientSpotlight() {
         <div className="relative">
           <img
             src={teamImage}
-            alt="Meridian BPO specialists supporting client accounts"
+            alt="Squad International specialists supporting client accounts"
             loading="lazy"
             className="ml-auto h-[420px] w-full max-w-xl rounded-xl object-cover"
           />

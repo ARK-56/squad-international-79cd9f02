@@ -18,7 +18,7 @@ export const Route = createFileRoute("/faqs")({
         content:
           "Answers on BPO pricing, onboarding timelines, quality control, data security, team management and scaling dedicated offshore teams.",
       },
-      { property: "og:title", content: "Outsourcing FAQs | Meridian BPO" },
+      { property: "og:title", content: "Outsourcing FAQs | Squad International" },
       {
         property: "og:description",
         content: "Pricing, onboarding, quality control, security and scalability — answered plainly.",

@@ -23,13 +23,13 @@ import { services, industries, caseStudies, stats, faqs, site } from "@/lib/site
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Meridian BPO | Dedicated Offshore Teams & Business Support" },
+      { title: "Squad International | Dedicated Offshore Teams & Business Support" },
       {
         name: "description",
         content:
-          "Meridian BPO builds dedicated offshore teams for customer support, virtual assistance, lead generation and operational delivery. Book a discovery call today.",
+          "Squad International builds dedicated offshore teams for customer support, virtual assistance, lead generation and operational delivery. Book a discovery call today.",
       },
-      { property: "og:title", content: "Meridian BPO | Dedicated Offshore Teams" },
+      { property: "og:title", content: "Squad International | Dedicated Offshore Teams" },
       {
         property: "og:description",
         content:
@@ -164,7 +164,7 @@ function Home() {
       <section className="surface-dark py-20 md:py-28">
         <div className="container-page">
           <SectionHeading
-            eyebrow="Why Meridian"
+            eyebrow="Why Squad"
             title="Outsourcing without the usual trade-offs"
             description="The reason teams stay with us is boring and deliberate: documented process, named ownership and reporting that holds up."
             tone="light"

@@ -13,7 +13,7 @@ export const Route = createFileRoute("/case-studies/")({
         content:
           "Real outsourcing engagements: peak-season support, outbound pipeline generation and 24/7 logistics desks — with the numbers behind them.",
       },
-      { property: "og:title", content: "BPO Case Studies | Meridian BPO" },
+      { property: "og:title", content: "BPO Case Studies | Squad International" },
       {
         property: "og:description",
         content: "Three engagements, three problems solved, with measurable outcomes.",

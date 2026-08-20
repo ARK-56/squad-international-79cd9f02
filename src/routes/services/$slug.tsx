@@ -14,9 +14,9 @@ export const Route = createFileRoute("/services/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.title} | Meridian BPO Services` },
+          { title: `${loaderData.title} | Squad International Services` },
           { name: "description", content: loaderData.short },
-          { property: "og:title", content: `${loaderData.title} | Meridian BPO` },
+          { property: "og:title", content: `${loaderData.title} | Squad International` },
           { property: "og:description", content: loaderData.short },
         ]
       : [],

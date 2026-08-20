@@ -13,12 +13,12 @@ export const Route = createFileRoute("/services/")({
       {
         name: "description",
         content:
-          "Explore Meridian BPO services: customer support, virtual and business assistance, lead generation, dedicated pods, operational management and growth support.",
+          "Explore Squad International services: customer support, virtual and business assistance, lead generation, dedicated pods, operational management and growth support.",
       },
-      { property: "og:title", content: "BPO Services | Meridian BPO" },
+      { property: "og:title", content: "BPO Services | Squad International" },
       {
         property: "og:description",
-        content: "Six delivery lines staffed, trained and supervised by Meridian BPO.",
+        content: "Six delivery lines staffed, trained and supervised by Squad International.",
       },
     ],
   }),

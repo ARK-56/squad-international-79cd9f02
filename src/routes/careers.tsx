@@ -8,13 +8,13 @@ import { site } from "@/lib/site-data";
 export const Route = createFileRoute("/careers")({
   head: () => ({
     meta: [
-      { title: "Careers at Meridian BPO | Support, SDR & Operations Roles" },
+      { title: "Careers at Squad International | Support, SDR & Operations Roles" },
       {
         name: "description",
         content:
-          "Join Meridian BPO. Open roles in customer support, virtual assistance, sales development, quality assurance and team leadership across global delivery centres.",
+          "Join Squad International. Open roles in customer support, virtual assistance, sales development, quality assurance and team leadership across global delivery centres.",
       },
-      { property: "og:title", content: "Careers at Meridian BPO" },
+      { property: "og:title", content: "Careers at Squad International" },
       {
         property: "og:description",
         content: "Structured training, real career paths and dedicated client accounts.",
