@@ -7,13 +7,13 @@ import { posts } from "@/lib/site-data";
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
-      { title: "Outsourcing Insights Blog | Meridian BPO" },
+      { title: "Outsourcing Insights Blog | Squad International" },
       {
         name: "description",
         content:
           "Practical writing on outsourcing, customer support operations, lead generation, SOPs and quality control for teams scaling their operations.",
       },
-      { property: "og:title", content: "Outsourcing Insights Blog | Meridian BPO" },
+      { property: "og:title", content: "Outsourcing Insights Blog | Squad International" },
       {
         property: "og:description",
         content: "Field notes on support operations, SOPs, quality control and pipeline generation.",

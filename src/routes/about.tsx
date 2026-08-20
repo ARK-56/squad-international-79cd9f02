@@ -8,13 +8,13 @@ import { stats } from "@/lib/site-data";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Meridian BPO | Operational Support Partner" },
+      { title: "About Squad International | Operational Support Partner" },
       {
         name: "description",
         content:
-          "Meridian BPO is an outsourcing partner providing dedicated teams, customer and operational management, and growth support for scaling businesses.",
+          "Squad International is an outsourcing partner providing dedicated teams, customer and operational management, and growth support for scaling businesses.",
       },
-      { property: "og:title", content: "About Meridian BPO" },
+      { property: "og:title", content: "About Squad International" },
       {
         property: "og:description",
         content: "Who we are, how we operate, and the principles behind every engagement.",
@@ -65,7 +65,7 @@ function AboutPage() {
         <div className="overflow-hidden rounded-lg border border-border">
           <img
             src={teamImage}
-            alt="Meridian BPO delivery team in a planning session"
+            alt="Squad International delivery team in a planning session"
             width={1400}
             height={900}
             loading="lazy"

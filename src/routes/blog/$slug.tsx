@@ -12,7 +12,7 @@ export const Route = createFileRoute("/blog/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.title} | Meridian BPO Blog` },
+          { title: `${loaderData.title} | Squad International Blog` },
           { name: "description", content: loaderData.excerpt.slice(0, 155) },
           { property: "og:title", content: loaderData.title },
           { property: "og:description", content: loaderData.excerpt.slice(0, 155) },

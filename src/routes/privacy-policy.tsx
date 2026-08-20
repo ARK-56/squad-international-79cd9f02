@@ -5,13 +5,13 @@ import { site } from "@/lib/site-data";
 export const Route = createFileRoute("/privacy-policy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy | Meridian BPO" },
+      { title: "Privacy Policy | Squad International" },
       {
         name: "description",
         content:
-          "How Meridian BPO collects, uses, stores and protects personal data submitted through this website and during client engagements.",
+          "How Squad International collects, uses, stores and protects personal data submitted through this website and during client engagements.",
       },
-      { property: "og:title", content: "Privacy Policy | Meridian BPO" },
+      { property: "og:title", content: "Privacy Policy | Squad International" },
       { property: "og:description", content: "Our data collection, use and retention practices." },
     ],
   }),
@@ -62,7 +62,7 @@ function PrivacyPage() {
 
         <p className="mt-10 text-sm font-semibold uppercase leading-7 tracking-wide text-offwhite">
           Please read this privacy policy carefully. It explains what personal data
-          Meridian BPO collects, how we use and store it, who we share it with, and the
+          Squad International collects, how we use and store it, who we share it with, and the
           rights you have over it.
         </p>
 

@@ -82,14 +82,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Meridian BPO | Dedicated Offshore Teams" },
+      { title: "Squad International | Dedicated Offshore Teams" },
       {
         name: "description",
         content:
           "Dedicated offshore teams for customer support, business assistance, lead generation and operational delivery.",
       },
-      { name: "author", content: "Meridian BPO" },
-      { property: "og:title", content: "Meridian BPO | Dedicated Offshore Teams" },
+      { name: "author", content: "Squad International" },
+      { property: "og:title", content: "Squad International | Dedicated Offshore Teams" },
       {
         property: "og:description",
         content:

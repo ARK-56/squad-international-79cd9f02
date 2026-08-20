@@ -11,9 +11,9 @@ export const Route = createFileRoute("/case-studies/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.client} Case Study | Meridian BPO` },
+          { title: `${loaderData.client} Case Study | Squad International` },
           { name: "description", content: loaderData.challenge.slice(0, 155) },
-          { property: "og:title", content: `${loaderData.client} Case Study | Meridian BPO` },
+          { property: "og:title", content: `${loaderData.client} Case Study | Squad International` },
           { property: "og:description", content: loaderData.challenge.slice(0, 155) },
         ]
       : [],

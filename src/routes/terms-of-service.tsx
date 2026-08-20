@@ -5,13 +5,13 @@ import { site } from "@/lib/site-data";
 export const Route = createFileRoute("/terms-of-service")({
   head: () => ({
     meta: [
-      { title: "Terms of Service | Meridian BPO" },
+      { title: "Terms of Service | Squad International" },
       {
         name: "description",
         content:
-          "The terms governing use of the Meridian BPO website, including acceptable use, intellectual property, disclaimers and limitation of liability.",
+          "The terms governing use of the Squad International website, including acceptable use, intellectual property, disclaimers and limitation of liability.",
       },
-      { property: "og:title", content: "Terms of Service | Meridian BPO" },
+      { property: "og:title", content: "Terms of Service | Squad International" },
       { property: "og:description", content: "Terms governing use of this website." },
     ],
   }),

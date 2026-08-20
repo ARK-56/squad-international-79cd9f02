@@ -13,13 +13,13 @@ import { services, site } from "@/lib/site-data";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact Meridian BPO | Book a Discovery Call" },
+      { title: "Contact Squad International | Book a Discovery Call" },
       {
         name: "description",
         content:
-          "Talk to Meridian BPO about dedicated offshore teams. Book a 30-minute discovery call, message us on WhatsApp, or send an enquiry.",
+          "Talk to Squad International about dedicated offshore teams. Book a 30-minute discovery call, message us on WhatsApp, or send an enquiry.",
       },
-      { property: "og:title", content: "Contact Meridian BPO" },
+      { property: "og:title", content: "Contact Squad International" },
       {
         property: "og:description",
         content: "Book a discovery call or start a WhatsApp conversation with our team.",
