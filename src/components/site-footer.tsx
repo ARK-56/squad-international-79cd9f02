@@ -32,29 +32,52 @@ export function SiteFooter() {
 
         <FooterCol title="Services">
           {services.map((s) => (
-            <FooterLink key={s.slug} to="/services/$slug" params={{ slug: s.slug }}>
-              {s.title}
-            </FooterLink>
+            <li key={s.slug}>
+              <Link
+                to="/services/$slug"
+                params={{ slug: s.slug }}
+                className="text-sm text-offwhite/65 transition-colors hover:text-marigold"
+              >
+                {s.title}
+              </Link>
+            </li>
           ))}
         </FooterCol>
 
         <FooterCol title="Industries">
           {industries.map((i) => (
-            <FooterLink key={i.slug} to="/industries/$slug" params={{ slug: i.slug }}>
-              {i.name}
-            </FooterLink>
+            <li key={i.slug}>
+              <Link
+                to="/industries/$slug"
+                params={{ slug: i.slug }}
+                className="text-sm text-offwhite/65 transition-colors hover:text-marigold"
+              >
+                {i.name}
+              </Link>
+            </li>
           ))}
         </FooterCol>
 
         <FooterCol title="Company">
-          <FooterLink to="/about">About</FooterLink>
-          <FooterLink to="/case-studies">Case Studies</FooterLink>
-          <FooterLink to="/blog">Blog</FooterLink>
-          <FooterLink to="/careers">Careers</FooterLink>
-          <FooterLink to="/faqs">FAQs</FooterLink>
-          <FooterLink to="/contact">Contact</FooterLink>
-          <FooterLink to="/privacy-policy">Privacy Policy</FooterLink>
-          <FooterLink to="/terms-of-service">Terms of Service</FooterLink>
+          {[
+            { to: "/about", label: "About" },
+            { to: "/case-studies", label: "Case Studies" },
+            { to: "/blog", label: "Blog" },
+            { to: "/careers", label: "Careers" },
+            { to: "/faqs", label: "FAQs" },
+            { to: "/contact", label: "Contact" },
+            { to: "/privacy-policy", label: "Privacy Policy" },
+            { to: "/terms-of-service", label: "Terms of Service" },
+          ].map((l) => (
+            <li key={l.to}>
+              <Link
+                to={l.to}
+                className="text-sm text-offwhite/65 transition-colors hover:text-marigold"
+              >
+                {l.label}
+              </Link>
+            </li>
+          ))}
         </FooterCol>
       </div>
 
@@ -79,13 +102,3 @@ function FooterCol({ title, children }: { title: string; children: React.ReactNo
   );
 }
 
-function FooterLink(props: React.ComponentProps<typeof Link>) {
-  return (
-    <li>
-      <Link
-        {...props}
-        className="text-sm text-offwhite/65 transition-colors hover:text-marigold"
-      />
-    </li>
-  );
-}
