@@ -12,6 +12,8 @@ import {
 import heroImage from "@/assets/hero-operations.jpg";
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/cta-band";
+import { FeatureSplit, FlowMedia, OrbitMedia } from "@/components/feature-split";
+
 import { SectionHeading } from "@/components/section-heading";
 import { services, industries, caseStudies, stats, faqs, site } from "@/lib/site-data";
 
