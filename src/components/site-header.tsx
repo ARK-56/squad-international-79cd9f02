@@ -19,21 +19,23 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-offwhite/10 bg-charcoal/95 text-offwhite backdrop-blur">
-      <div className="container-page flex h-18 items-center justify-between gap-6 py-3">
+    <header className="sticky top-0 z-50 bg-offwhite/80 px-4 py-3 backdrop-blur md:px-6">
+      <div className="mx-auto flex w-full max-w-[84rem] items-center justify-between gap-6 rounded-full border border-border bg-background px-5 py-2.5 shadow-sm md:px-7">
         <Link to="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
-          <span className="grid h-9 w-9 place-items-center rounded-sm bg-marigold font-display text-lg text-primary-foreground">
+          <span className="grid h-9 w-9 place-items-center rounded-full bg-marigold font-display text-lg text-primary-foreground">
             M
           </span>
-          <span className="font-display text-xl leading-none tracking-wide">{site.name}</span>
+          <span className="font-display text-xl leading-none tracking-wide text-charcoal">
+            {site.name}
+          </span>
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex">
+        <nav className="hidden items-center gap-7 lg:flex">
           {nav.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="text-sm font-medium text-offwhite/75 transition-colors hover:text-marigold [&.active]:text-marigold"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-charcoal [&.active]:text-charcoal"
             >
               {item.label}
             </Link>
@@ -41,13 +43,13 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <Button variant="outlineLight" size="sm" asChild>
+          <Button variant="ghost" size="sm" className="rounded-full bg-muted text-charcoal hover:bg-muted/70" asChild>
             <a href={site.whatsapp} target="_blank" rel="noreferrer">
               <MessageCircle /> WhatsApp
             </a>
           </Button>
           <BookingDialog>
-            <Button variant="marigold" size="sm">
+            <Button variant="charcoal" size="sm" className="rounded-full">
               <CalendarDays /> Book a Meeting
             </Button>
           </BookingDialog>
@@ -56,7 +58,7 @@ export function SiteHeader() {
         <button
           type="button"
           aria-label={open ? "Close menu" : "Open menu"}
-          className="grid h-10 w-10 place-items-center rounded-sm border border-offwhite/20 lg:hidden"
+          className="grid h-10 w-10 place-items-center rounded-full border border-border text-charcoal lg:hidden"
           onClick={() => setOpen((v) => !v)}
         >
           {open ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -64,14 +66,14 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div className="border-t border-offwhite/10 bg-charcoal lg:hidden">
-          <div className="container-page flex flex-col gap-1 py-4">
+        <div className="mx-auto mt-2 w-full max-w-[84rem] rounded-3xl border border-border bg-background p-4 shadow-sm lg:hidden">
+          <div className="flex flex-col gap-1">
             {nav.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
                 onClick={() => setOpen(false)}
-                className="rounded-sm px-2 py-2.5 text-sm font-medium text-offwhite/80 hover:bg-offwhite/5 hover:text-marigold"
+                className="rounded-full px-4 py-2.5 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-charcoal"
               >
                 {item.label}
               </Link>
@@ -79,17 +81,17 @@ export function SiteHeader() {
             <Link
               to="/contact"
               onClick={() => setOpen(false)}
-              className="rounded-sm px-2 py-2.5 text-sm font-medium text-offwhite/80 hover:bg-offwhite/5 hover:text-marigold"
+              className="rounded-full px-4 py-2.5 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-charcoal"
             >
               Contact
             </Link>
             <div className="mt-3 flex flex-col gap-2">
               <BookingDialog>
-            <Button variant="marigold">
-              <CalendarDays /> Book a Meeting
-            </Button>
-          </BookingDialog>
-              <Button variant="outlineLight" asChild>
+                <Button variant="charcoal" className="rounded-full">
+                  <CalendarDays /> Book a Meeting
+                </Button>
+              </BookingDialog>
+              <Button variant="outlineDark" className="rounded-full" asChild>
                 <a href={site.whatsapp} target="_blank" rel="noreferrer">
                   <MessageCircle /> Chat on WhatsApp
                 </a>
