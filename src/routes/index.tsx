@@ -70,9 +70,15 @@ function Home() {
       <section className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-charcoal">
         {/* Full-bleed background image */}
         <div className="absolute inset-0 z-0">
-          <img
-            src={heroImage}
-            alt="Offshore support agents working on an operations floor"
+          <video
+            src={heroVideo.url}
+            poster={heroImage}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            aria-label="Offshore support agents working on an operations floor"
             className="h-full w-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-charcoal/90 via-charcoal/60 to-charcoal" />
