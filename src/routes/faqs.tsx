@@ -65,6 +65,7 @@ function FaqPage() {
             </AccordionItem>
           ))}
         </Accordion>
+        </div>
       </section>
 
       <CtaBand title="Still have a question we haven't answered?" />
