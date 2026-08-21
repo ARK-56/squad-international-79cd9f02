@@ -26,7 +26,11 @@ export function SiteHeader({ variant = "default" }: { variant?: "default" | "ove
     >
       <div className="mx-auto flex w-full max-w-[84rem] items-center justify-between gap-6 rounded-full border border-border bg-background px-5 py-2.5 shadow-sm md:px-7">
         <Link to="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
-          <img src={logo} alt={`${site.name} logo`} className="h-8 w-auto" />
+          <img
+            src={logo}
+            alt={`${site.name} logo`}
+            className={`h-8 w-auto transition duration-300 ${isOverlay ? "brightness-0 invert" : ""}`}
+          />
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
