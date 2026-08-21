@@ -6,13 +6,13 @@ import { site } from "@/lib/site-data";
 
 export function ClientSpotlight() {
   return (
-    <section className="bg-background py-20 md:py-28">
+    <section className="bg-card py-20 md:py-28">
       <div className="container-page grid items-center gap-14 lg:grid-cols-2">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-marigold">
-            Squad International for professional services
-          </p>
-          <h2 className="mt-5 font-display text-4xl leading-[1.05] tracking-tight text-charcoal md:text-6xl">
+          <span className="eyebrow">
+            <span className="h-px w-8 bg-marigold" /> For professional services
+          </span>
+          <h2 className="mt-4 font-display text-4xl leading-[0.95] tracking-tight text-charcoal md:text-5xl">
             Best-in-class service
             <br />
             for your clients

@@ -17,12 +17,12 @@ export function PageHero({
         aria-hidden
         className="pointer-events-none absolute left-1/2 top-0 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-marigold/15 blur-3xl"
       />
-      <div className="container-page relative flex flex-col items-center py-24 text-center md:py-32">
+      <div className="container-page relative flex flex-col items-center py-20 text-center md:py-24">
         <span className="eyebrow justify-center text-marigold">
           <span className="h-px w-8 bg-marigold" />
           {eyebrow}
         </span>
-        <h1 className="mt-6 max-w-4xl text-5xl leading-[0.92] tracking-tight text-charcoal md:text-7xl">
+        <h1 className="mt-5 max-w-4xl text-balance text-5xl leading-[0.92] tracking-tight text-charcoal md:text-6xl">
           {title}
         </h1>
         {description && (

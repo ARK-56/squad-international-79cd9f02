@@ -51,7 +51,8 @@ function FaqPage() {
         description="Pricing, onboarding, quality, security and continuity — what buyers ask before signing."
       />
 
-      <section className="container-page max-w-3xl py-20 md:py-24">
+      <section className="bg-card py-20 md:py-24">
+        <div className="container-page max-w-3xl rounded-xl border border-border bg-background p-6 md:p-10">
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((f, i) => (
             <AccordionItem key={f.q} value={`item-${i}`}>
@@ -64,6 +65,7 @@ function FaqPage() {
             </AccordionItem>
           ))}
         </Accordion>
+        </div>
       </section>
 
       <CtaBand title="Still have a question we haven't answered?" />
