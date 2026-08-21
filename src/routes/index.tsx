@@ -10,6 +10,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import heroImage from "@/assets/hero-operations.jpg";
+import heroVideo from "@/assets/hero-video.mp4.asset.json";
 import teamImage from "@/assets/team-about.jpg";
 import { Button } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
