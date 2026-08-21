@@ -1,11 +1,18 @@
 export const site = {
   name: "Squad International",
   tagline: "Dedicated offshore teams that run your operations",
-  calendly: "https://calendly.com/meridian-bpo/discovery",
+  calendly: "https://calendly.com/squadinternational/30min",
   whatsapp: "https://wa.me/10000000000",
   email: "inquire@squadinternational.net",
   phone: "+1 (000) 000-0000",
-  address: "Global delivery centres • Americas · EMEA · APAC",
+  address: "276 Holten Ave, Staten Island, NY 10309-4028, United States",
+  socials: [
+    { name: "LinkedIn", url: "https://www.linkedin.com/company/squadinternational" },
+    { name: "Instagram", url: "https://www.instagram.com/thesquadinternational" },
+    { name: "Facebook", url: "https://www.facebook.com/Squadinternational.net" },
+    { name: "YouTube", url: "https://www.youtube.com/@thesquadinternational" },
+    { name: "TikTok", url: "https://www.tiktok.com/@squadiansinternational" },
+  ],
 };
 
 export type Service = {
@@ -17,6 +24,9 @@ export type Service = {
   capabilities: string[];
   process: { step: string; detail: string }[];
   idealFor: string[];
+  tools: string[];
+  teamShape: string;
+  ramp: string;
 };
 
 export const services: Service[] = [
@@ -46,6 +56,16 @@ export const services: Service[] = [
       { step: "Run & improve", detail: "Weekly reporting, QA sampling and quarterly scope reviews." },
     ],
     idealFor: ["Founder-led businesses", "Professional services firms", "Agencies and consultancies"],
+    tools: [
+      "Google Workspace and Microsoft 365",
+      "HubSpot, Salesforce and Pipedrive",
+      "Slack, Teams and Notion",
+      "Xero, QuickBooks and Bill.com",
+      "Asana, ClickUp and Monday.com",
+      "DocuSign and PandaDoc",
+    ],
+    teamShape: "1-3 dedicated assistants sharing a team lead",
+    ramp: "Live in 10-14 days",
   },
   {
     slug: "customer-support",
@@ -73,6 +93,16 @@ export const services: Service[] = [
       { step: "Steady state", detail: "SLA reporting, QA sampling and continuous coaching." },
     ],
     idealFor: ["E-commerce and D2C", "SaaS platforms", "Healthcare and insurance services"],
+    tools: [
+      "Zendesk, Freshdesk and Intercom",
+      "Gorgias and Shopify",
+      "Salesforce Service Cloud",
+      "Talkdesk, Aircall and RingCentral",
+      "Front and Help Scout",
+      "Your knowledge base and macro library",
+    ],
+    teamShape: "3-15 agents with a supervisor and QA analyst",
+    ramp: "Supervised pilot in 3-4 weeks",
   },
   {
     slug: "lead-generation",
@@ -100,6 +130,16 @@ export const services: Service[] = [
       { step: "Scale", detail: "Add channels or seats once cost per meeting is proven." },
     ],
     idealFor: ["B2B services", "Software and technology", "Logistics and manufacturing"],
+    tools: [
+      "Apollo, ZoomInfo and Cognism",
+      "Instantly, Smartlead and Lemlist",
+      "LinkedIn Sales Navigator",
+      "HubSpot, Salesforce and Close",
+      "Clay and Dropcontact enrichment",
+      "Aircall and power dialers",
+    ],
+    teamShape: "SDR pod: 2-6 reps, a researcher and a lead",
+    ramp: "First booked meetings in 4-6 weeks",
   },
   {
     slug: "dedicated-team-support",
@@ -127,6 +167,16 @@ export const services: Service[] = [
       { step: "Govern", detail: "Monthly business reviews with performance and improvement plans." },
     ],
     idealFor: ["Scaling operations teams", "Companies replacing contractor sprawl", "Multi-shift service businesses"],
+    tools: [
+      "Whichever helpdesk and CRM you already run",
+      "Assembled and Playvox for workforce management",
+      "Confluence, Notion and Guru for SOPs",
+      "Okta and Google Workspace access control",
+      "Looker, Power BI and Sheets reporting",
+      "Shared Slack or Teams channels",
+    ],
+    teamShape: "Managed pod of 5-25, with its own lead and QA",
+    ramp: "Stood up in 3-5 weeks",
   },
   {
     slug: "operational-management",
@@ -154,6 +204,16 @@ export const services: Service[] = [
       { step: "Optimise", detail: "Automation and rework-reduction opportunities each quarter." },
     ],
     idealFor: ["Logistics and supply chain", "Financial services", "Healthcare administration"],
+    tools: [
+      "NetSuite, SAP and Dynamics",
+      "Shopify, Amazon Seller Central and Magento",
+      "Salesforce and ServiceNow",
+      "UiPath and Zapier automation",
+      "Excel, Sheets and SQL reporting",
+      "Your ERP, claims and carrier portals",
+    ],
+    teamShape: "4-20 operators with dedicated QA and audit sampling",
+    ramp: "Parallel run from week 3",
   },
   {
     slug: "growth-support",
@@ -181,6 +241,16 @@ export const services: Service[] = [
       { step: "Expand", detail: "Add specialisms as trust and throughput increase." },
     ],
     idealFor: ["Marketing teams", "E-commerce operators", "Revenue operations leaders"],
+    tools: [
+      "HubSpot, Marketo and Klaviyo",
+      "Google, Meta and LinkedIn Ads managers",
+      "Webflow, WordPress and Shopify",
+      "Canva, Figma and Adobe Creative Cloud",
+      "GA4 and Looker Studio",
+      "Amazon Seller Central and marketplace tools",
+    ],
+    teamShape: "2-8 specialists across marketing and revenue ops",
+    ramp: "Live in 2-3 weeks",
   },
 ];
 
@@ -428,6 +498,34 @@ export const faqs = [
   {
     q: "Is there a minimum commitment?",
     a: "Engagements typically start with a three-month initial term so training investment pays back, then continue month to month.",
+  },
+  {
+    q: "Where are your teams based, and what hours can they cover?",
+    a: "We staff from delivery centres across the Americas, EMEA and APAC, which lets us build shifts around your customers rather than ours. Most engagements start with a single shift aligned to your business hours; extended, overnight and follow-the-sun coverage is a question of headcount, not feasibility.",
+  },
+  {
+    q: "What languages do your teams support?",
+    a: "Customer-facing English on every engagement, with Spanish, Portuguese, French, German, Arabic and Tagalog available depending on the role and volume. Language is assessed during recruitment against the channel — written-only roles and voice roles are screened to different standards.",
+  },
+  {
+    q: "Do we get to interview and approve candidates?",
+    a: "Yes. We screen for domain, language and tooling fit, then present a shortlist with scorecards. You interview whoever you want and approve every hire before they start — nobody joins your account without your sign-off.",
+  },
+  {
+    q: "Do teams work from an office or from home?",
+    a: "Both models are available. Regulated or data-sensitive work runs from a controlled office floor with clean-desk policy, restricted media and supervised access. Lower-risk roles can run remote on managed devices. We agree the model during scoping and it forms part of the contract.",
+  },
+  {
+    q: "What does onboarding require from our team?",
+    a: "Roughly four to six hours across the first two weeks: a kickoff to walk through the work, tool and system access, and two or three review sessions during the ramp. We write the SOPs from those sessions, after which your involvement drops to a weekly check-in.",
+  },
+  {
+    q: "What if we need to scale down or exit?",
+    a: "Seats can be reduced on 30 days notice once the initial term is complete. On exit you keep everything we built — SOPs, macros, templates, dashboards and process documentation — because it lives in your systems and is documented as your property from day one.",
+  },
+  {
+    q: "When is outsourcing not the right answer?",
+    a: "When the process is still changing week to week, when nobody internally owns quality, or when the work depends on in-person context that cannot be documented. Outsourcing amplifies whatever process you hand over. If that is where you are, we will say so on the call rather than staff a team that will underperform.",
   },
 ];
 

@@ -57,6 +57,20 @@ function ServicesPage() {
                   </li>
                 ))}
               </ul>
+              <dl className="mt-6 grid gap-3 border-t border-border pt-5 text-sm sm:grid-cols-2">
+                <div>
+                  <dt className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                    Team shape
+                  </dt>
+                  <dd className="mt-1 text-charcoal">{s.teamShape}</dd>
+                </div>
+                <div>
+                  <dt className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                    Time to live
+                  </dt>
+                  <dd className="mt-1 text-charcoal">{s.ramp}</dd>
+                </div>
+              </dl>
               <div className="mt-8">
                 <Button variant="charcoal" asChild>
                   <Link to="/services/$slug" params={{ slug: s.slug }}>

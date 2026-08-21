@@ -1,9 +1,9 @@
-import { useEffect, useState, type ReactNode } from "react";
-import { Clock, Globe, Video } from "lucide-react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
+import { Clock, Globe, LoaderCircle, Video } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { site } from "@/lib/site-data";
 
-function CalendlyInline({ open }: { open: boolean }) {
+function CalendlyInline({ open, onReady }: { open: boolean; onReady: () => void }) {
   const [timezone, setTimezone] = useState("");
 
   useEffect(() => {
@@ -25,6 +25,24 @@ function CalendlyInline({ open }: { open: boolean }) {
     document.body.appendChild(script);
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+
+    let frame: HTMLIFrameElement | null = null;
+    const watchForFrame = () => {
+      const nextFrame = document.querySelector<HTMLIFrameElement>(".calendly-inline-widget iframe");
+      if (!nextFrame || nextFrame === frame) return;
+      frame = nextFrame;
+      frame.addEventListener("load", onReady, { once: true });
+    };
+
+    watchForFrame();
+    const observer = new MutationObserver(watchForFrame);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+  }, [onReady, open]);
+
   return (
     <div
       className="calendly-inline-widget h-[520px] w-full"
@@ -36,9 +54,15 @@ function CalendlyInline({ open }: { open: boolean }) {
 
 export function BookingDialog({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const handleOpenChange = (nextOpen: boolean) => {
+    setOpen(nextOpen);
+    if (nextOpen) setIsLoading(true);
+  };
+  const handleReady = useCallback(() => setIsLoading(false), []);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-[95vw] gap-0 overflow-hidden border-border bg-background p-0 sm:max-w-4xl">
         <DialogTitle className="sr-only">Book a discovery call</DialogTitle>
@@ -67,7 +91,17 @@ export function BookingDialog({ children }: { children: ReactNode }) {
               </li>
             </ul>
           </aside>
-          <div className="bg-background">{open ? <CalendlyInline open={open} /> : null}</div>
+          <div className="relative bg-background">
+            {isLoading && open && (
+              <div className="absolute inset-0 z-10 grid place-items-center bg-background">
+                <div className="flex flex-col items-center gap-3 text-center">
+                  <LoaderCircle className="size-7 animate-spin text-marigold" aria-hidden="true" />
+                  <p className="text-sm font-medium text-charcoal">Loading available times…</p>
+                </div>
+              </div>
+            )}
+            {open ? <CalendlyInline open={open} onReady={handleReady} /> : null}
+          </div>
         </div>
       </DialogContent>
     </Dialog>

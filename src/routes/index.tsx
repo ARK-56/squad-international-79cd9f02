@@ -10,6 +10,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import heroImage from "@/assets/hero-operations.jpg";
+import teamImage from "@/assets/team-about.jpg";
 import { Button } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
 import { CtaBand } from "@/components/cta-band";
@@ -159,22 +160,58 @@ function Home() {
             </Link>
           ))}
         </div>
+
+        <div className="mt-8 grid gap-5 md:grid-cols-2">
+          <figure className="group relative h-64 overflow-hidden rounded-xl md:h-72">
+            <img
+              src={heroImage}
+              alt="Support specialists collaborating in an operations centre"
+              loading="lazy"
+              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-charcoal/90 to-transparent px-6 pb-6 pt-16 text-sm font-medium text-offwhite">
+              Teams trained in your tools and workflows
+            </figcaption>
+          </figure>
+          <figure className="group relative h-64 overflow-hidden rounded-xl md:h-72">
+            <img
+              src={teamImage}
+              alt="Dedicated team members collaborating on client work"
+              loading="lazy"
+              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-charcoal/90 to-transparent px-6 pb-6 pt-16 text-sm font-medium text-offwhite">
+              Named specialists accountable to your outcomes
+            </figcaption>
+          </figure>
+        </div>
       </section>
 
       <section className="surface-dark py-20 md:py-28">
         <div className="container-page">
-          <SectionHeading
-            eyebrow="Why Squad"
-            title="Outsourcing without the usual trade-offs"
-            description="The reason teams stay with us is boring and deliberate: documented process, named ownership and reporting that holds up."
-            tone="light"
-          />
+          <div className="grid items-end gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+            <SectionHeading
+              eyebrow="Why Squad"
+              title="Outsourcing without the usual trade-offs"
+              description="The reason teams stay with us is boring and deliberate: documented process, named ownership and reporting that holds up."
+              tone="light"
+            />
+            <figure className="relative h-56 overflow-hidden rounded-xl border border-offwhite/10 md:h-72">
+              <img
+                src={heroImage}
+                alt="Operations team working together across shared systems"
+                loading="lazy"
+                className="h-full w-full object-cover opacity-70"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-charcoal/80 via-charcoal/20 to-transparent" />
+              <figcaption className="absolute bottom-6 left-6 max-w-xs text-lg leading-snug text-offwhite">
+                Clear ownership, visible quality and reporting that holds up.
+              </figcaption>
+            </figure>
+          </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {differentiators.map((d) => (
-              <div
-                key={d.title}
-                className="rounded-lg border border-offwhite/10 bg-offwhite/[0.04] p-7"
-              >
+              <div key={d.title} className="rounded-lg border border-offwhite/10 bg-offwhite/[0.04] p-7">
                 <d.icon className="size-7 text-marigold" />
                 <h3 className="mt-5 text-lg text-offwhite">{d.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-offwhite/65">{d.body}</p>
@@ -250,11 +287,22 @@ function Home() {
       <ClientSpotlight />
 
       <section className="container-page py-20 md:py-28">
-        <SectionHeading
-          eyebrow="Industries"
-          title="Operating knowledge, not generic scripts"
-          description="We staff and train against the realities of your sector."
-        />
+        <div className="grid items-end gap-10 lg:grid-cols-[1fr_0.85fr]">
+          <SectionHeading
+            eyebrow="Industries"
+            title="Operating knowledge, not generic scripts"
+            description="We staff and train against the realities of your sector."
+          />
+          <figure className="relative h-48 overflow-hidden rounded-xl md:h-56">
+            <img
+              src={teamImage}
+              alt="Support team working together to solve client needs"
+              loading="lazy"
+              className="h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-charcoal/35" />
+          </figure>
+        </div>
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {industries.map((i) => (
             <Link

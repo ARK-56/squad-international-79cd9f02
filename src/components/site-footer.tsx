@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { services, industries, site } from "@/lib/site-data";
-import logo from "@/assets/squad-logo.png.asset.json";
+import logo from "@/assets/squad-logo-black.png";
 
 export function SiteFooter() {
   return (
@@ -11,9 +11,9 @@ export function SiteFooter() {
         <div>
           <div className="flex items-center gap-2.5">
             <img
-              src={logo.url}
+              src={logo}
               alt={`${site.name} logo`}
-              className="h-8 w-auto brightness-0 invert"
+              className="h-8 w-auto brightness-0 invert mix-blend-screen"
             />
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-offwhite/65">
@@ -31,6 +31,19 @@ export function SiteFooter() {
               <MapPin className="mt-0.5 size-4 shrink-0 text-marigold" /> {site.address}
             </li>
           </ul>
+          <nav aria-label="Social media" className="mt-6 flex flex-wrap gap-x-4 gap-y-2">
+            {site.socials.map((social) => (
+              <a
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm text-offwhite/65 transition-colors hover:text-marigold"
+              >
+                {social.name}
+              </a>
+            ))}
+          </nav>
         </div>
 
         <FooterCol title="Services">
