@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { PageHero } from "@/components/page-hero";
 import { services, site } from "@/lib/site-data";
+import { sendEnquiry } from "@/lib/send-enquiry";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -32,17 +33,42 @@ export const Route = createFileRoute("/contact")({
 function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitting(true);
     const form = e.currentTarget;
-    setTimeout(() => {
-      setSubmitting(false);
-      form.reset();
-      toast.success("Enquiry received", {
-        description: "We'll reply within one working day. For anything urgent, use WhatsApp.",
+    const values = new FormData(form);
+    const read = (field: string) => String(values.get(field) ?? "");
+
+    setSubmitting(true);
+    try {
+      const result = await sendEnquiry({
+        data: {
+          name: read("name"),
+          company: read("company"),
+          email: read("email"),
+          phone: read("phone"),
+          service: read("service"),
+          message: read("message"),
+          company_website: read("company_website"),
+        },
       });
-    }, 600);
+
+      if (result.ok) {
+        form.reset();
+        toast.success("Enquiry received", {
+          description: "We'll reply within one working day. For anything urgent, use WhatsApp.",
+        });
+      } else {
+        toast.error("Enquiry not sent", { description: result.message });
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Enquiry not sent", {
+        description: `Please email ${site.email} or message us on WhatsApp and we'll pick it up.`,
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -108,10 +134,22 @@ function ContactPage() {
                 id="message"
                 name="message"
                 required
+                minLength={10}
                 rows={5}
                 placeholder="Volumes, hours of coverage, tools you use, timelines…"
               />
             </div>
+          </div>
+
+          {/* Honeypot: hidden from people, irresistible to bots. */}
+          <div className="hidden" aria-hidden="true">
+            <label htmlFor="company_website">Company website</label>
+            <input
+              id="company_website"
+              name="company_website"
+              tabIndex={-1}
+              autoComplete="off"
+            />
           </div>
 
           <Button type="submit" variant="marigold" size="lg" className="mt-8" disabled={submitting}>
