@@ -30,13 +30,16 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Squad International builds dedicated offshore teams for customer support, virtual assistance, lead generation and operational delivery. Book a discovery call today.",
+          "Scale your business with dedicated offshore teams for customer support, lead generation, virtual assistance and back-office ops. Trusted since 2019.",
       },
-      { property: "og:title", content: "Squad International | Dedicated Offshore Teams" },
+      {
+        property: "og:title",
+        content: "Squad International | Dedicated Offshore Teams & BPO",
+      },
       {
         property: "og:description",
         content:
-          "Customer support, virtual assistance, lead generation and managed operations pods — trained, supervised and measured.",
+          "Scale your business with dedicated offshore teams for customer support, lead generation, virtual assistance and back-office ops. Trusted since 2019.",
       },
     ],
   }),
