@@ -15,7 +15,7 @@ import teamImage from "@/assets/team-about.jpg";
 import { Button } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
 import { CtaBand } from "@/components/cta-band";
-import { Testimonials } from "@/components/testimonials";
+import { GoogleReviews } from "@/components/google-reviews";
 import { ClientSpotlight } from "@/components/client-spotlight";
 import { FeatureSplit, FlowMedia, OrbitMedia } from "@/components/feature-split";
 
@@ -393,7 +393,7 @@ function Home() {
         </div>
       </section>
 
-      <Testimonials />
+      <GoogleReviews />
 
       <CtaBand />
     </>

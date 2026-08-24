@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useEffect, useState, type ReactNode } from "react";
+import { ArrowLeft, ArrowRight, Star } from "lucide-react";
 import { testimonials } from "@/lib/site-data";
 import {
   Carousel,
@@ -16,14 +16,44 @@ function initials(name: string) {
     .join("");
 }
 
+export type TestimonialItem = {
+  quote: string;
+  author: string;
+  role: string;
+  /** 1-5. Renders a star row when present. */
+  rating?: number;
+  photoUrl?: string | null;
+  /** Links the card back to its source, e.g. the review on Google. */
+  sourceUrl?: string | null;
+};
+
+function Stars({ rating }: { rating: number }) {
+  const rounded = Math.round(rating);
+  return (
+    <span className="flex items-center gap-0.5" aria-label={`${rating} out of 5 stars`}>
+      {Array.from({ length: 5 }, (_, i) => (
+        <Star
+          key={i}
+          aria-hidden
+          className={i < rounded ? "size-4 fill-marigold text-marigold" : "size-4 text-offwhite/25"}
+        />
+      ))}
+    </span>
+  );
+}
+
 export function Testimonials({
   eyebrow = "Testimonials",
   title = "Real teams, real results",
   description = "Hear directly from operations, revenue and support leaders about what changed after their pod went live.",
+  items = testimonials,
+  footer,
 }: {
   eyebrow?: string;
   title?: string;
   description?: string;
+  items?: TestimonialItem[];
+  footer?: ReactNode;
 }) {
   const [api, setApi] = useState<CarouselApi>();
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -41,6 +71,8 @@ export function Testimonials({
       api.off("reInit", updateSelectedIndex);
     };
   }, [api]);
+
+  if (items.length === 0) return null;
 
   return (
     <section className="surface-dark overflow-hidden py-20 md:py-28">
@@ -63,20 +95,47 @@ export function Testimonials({
       >
         <div className="border-y border-dashed border-offwhite/20 py-6">
           <CarouselContent className="ml-0">
-            {testimonials.map((t) => (
-              <CarouselItem key={t.author} className="basis-full pl-0">
+            {items.map((t, index) => (
+              <CarouselItem key={`${t.author}-${index}`} className="basis-full pl-0">
                 <figure className="mx-auto flex min-h-[300px] max-w-3xl flex-col justify-between rounded-lg border border-offwhite/10 bg-offwhite/[0.04] p-8 sm:p-10">
-                  <blockquote className="text-2xl leading-snug text-offwhite md:text-[1.75rem]">
-                    &ldquo;{t.quote}&rdquo;
-                  </blockquote>
+                  <div>
+                    {typeof t.rating === "number" && (
+                      <div className="mb-5 flex justify-center">
+                        <Stars rating={t.rating} />
+                      </div>
+                    )}
+                    <blockquote className="text-2xl leading-snug text-offwhite md:text-[1.75rem]">
+                      &ldquo;{t.quote}&rdquo;
+                    </blockquote>
+                  </div>
                   <figcaption className="mt-10 flex items-center gap-4 border-t border-offwhite/10 pt-6">
-                    <span className="grid size-11 shrink-0 place-items-center rounded-full bg-marigold text-sm font-semibold text-charcoal">
-                      {initials(t.author)}
-                    </span>
+                    {t.photoUrl ? (
+                      <img
+                        src={t.photoUrl}
+                        alt=""
+                        loading="lazy"
+                        referrerPolicy="no-referrer"
+                        className="size-11 shrink-0 rounded-full object-cover"
+                      />
+                    ) : (
+                      <span className="grid size-11 shrink-0 place-items-center rounded-full bg-marigold text-sm font-semibold text-charcoal">
+                        {initials(t.author)}
+                      </span>
+                    )}
                     <span className="text-left">
                       <span className="block text-sm font-semibold text-offwhite">{t.author}</span>
                       <span className="block text-sm text-offwhite/60">{t.role}</span>
                     </span>
+                    {t.sourceUrl && (
+                      <a
+                        href={t.sourceUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="ml-auto shrink-0 text-sm font-medium text-marigold hover:underline"
+                      >
+                        Read on Google
+                      </a>
+                    )}
                   </figcaption>
                 </figure>
               </CarouselItem>
@@ -86,15 +145,17 @@ export function Testimonials({
 
         <div className="mt-6 flex items-center justify-between gap-4">
           <div className="flex items-center gap-2" aria-label="Choose a review">
-            {testimonials.map((t, index) => (
+            {items.map((t, index) => (
               <button
-                key={t.author}
+                key={`${t.author}-${index}`}
                 type="button"
                 onClick={() => api?.scrollTo(index)}
                 aria-label={`Show review ${index + 1} by ${t.author}`}
                 aria-current={selectedIndex === index ? "true" : undefined}
                 className={`h-2 rounded-full transition-all ${
-                  selectedIndex === index ? "w-7 bg-marigold" : "w-2 bg-offwhite/30 hover:bg-offwhite/60"
+                  selectedIndex === index
+                    ? "w-7 bg-marigold"
+                    : "w-2 bg-offwhite/30 hover:bg-offwhite/60"
                 }`}
               />
             ))}
@@ -124,6 +185,8 @@ export function Testimonials({
         <span className="pointer-events-none absolute -bottom-2 -left-1.5 text-marigold">+</span>
         <span className="pointer-events-none absolute -bottom-2 -right-1.5 text-marigold">+</span>
       </Carousel>
+
+      {footer && <div className="container-page mt-10 text-center">{footer}</div>}
     </section>
   );
 }

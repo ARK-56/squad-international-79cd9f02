@@ -2,9 +2,15 @@ export const site = {
   name: "Squad International",
   tagline: "Dedicated offshore teams that run your operations",
   calendly: "https://calendly.com/squadinternational/30min",
-  whatsapp: "https://wa.me/10000000000",
+  whatsapp: "https://wa.me/12018206889",
   email: "inquire@squadinternational.net",
-  phone: "+1 (000) 000-0000",
+  phone: "+1 (201) 820-6889",
+  phoneHref: "tel:+12018206889",
+  // Google Business Profile: "Squad International", BPO company, PECHS Karachi.
+  // cid form is stable and needs no API key.
+  googleReviewsUrl: "https://www.google.com/maps?cid=18065864380427141787",
+  googleRating: 4.9,
+  googleReviewCount: 33,
   address: "276 Holten Ave, Staten Island, NY 10309-4028, United States",
   socials: [
     { name: "LinkedIn", url: "https://www.linkedin.com/company/squadinternational" },
@@ -599,29 +605,34 @@ export const stats = [
   { value: "60%", label: "Average cost saving" },
 ];
 
-export type Testimonial = { quote: string; author: string; role: string };
+export type Testimonial = {
+  quote: string;
+  author: string;
+  role: string;
+  rating?: number;
+  sourceUrl?: string | null;
+};
 
+/**
+ * Real reviews transcribed from the Google Business Profile (see site.googleReviewsUrl).
+ * Once GOOGLE_PLACES_API_KEY and GOOGLE_PLACE_ID are set, src/lib/google-reviews.ts
+ * serves live reviews instead and these become the offline fallback.
+ */
 export const testimonials: Testimonial[] = [
   {
-    quote: "They absorbed our worst quarter without us hiring a single person locally.",
-    author: "Dana Whitfield",
-    role: "Head of Customer Experience, D2C home goods brand",
+    quote:
+      "My company started to work with squad international more than a year ago. We are very happy with their services, transparency and result driven approach. Professional team with personal/tailored approach. Really recommend!",
+    author: "Vania Tariq",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
   },
   {
     quote:
-      "The pod produces more qualified meetings than our previous in-house team, at a third of the cost.",
-    author: "Marcus Reyes",
-    role: "VP Revenue, B2B workflow software",
-  },
-  {
-    quote: "Nothing waits for morning anymore. That single change paid for the whole engagement.",
-    author: "Priya Nandakumar",
-    role: "Director of Operations, freight forwarding group",
-  },
-  {
-    quote:
-      "Onboarding took two weeks, not two quarters. The documentation they built is better than ours.",
-    author: "Elena Cardoso",
-    role: "COO, healthcare services group",
+      "Had a great experience working with this business line. Would give them a 10/10 for their services. Always does their work on time. Will look forward working with them again.",
+    author: "Tabish Zaman",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
   },
 ];
