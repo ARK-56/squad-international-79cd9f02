@@ -615,15 +615,50 @@ export type Testimonial = {
 };
 
 /**
- * Real reviews transcribed from the Google Business Profile (see site.googleReviewsUrl).
- * Once GOOGLE_PLACES_API_KEY and GOOGLE_PLACE_ID are set, src/lib/google-reviews.ts
- * serves live reviews instead and these become the offline fallback.
+ * Real reviews transcribed from the Google Business Profile (see site.googleReviewsUrl),
+ * all five stars. Client reviews only — the listing's remaining five-star review is from a
+ * former employee, which belongs on the careers page rather than in a client carousel.
+ *
+ * Once GOOGLE_PLACES_API_KEY and GOOGLE_PLACE_ID are set, src/lib/google-reviews.ts serves
+ * live reviews instead and these become the offline fallback.
  */
 export const testimonials: Testimonial[] = [
   {
     quote:
       "My company started to work with squad international more than a year ago. We are very happy with their services, transparency and result driven approach. Professional team with personal/tailored approach. Really recommend!",
     author: "Vania Tariq",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
+  },
+  {
+    quote:
+      "Squad International is one of the best companies I have ever worked with, they provide the best services. I approached them on behalf of my company at the start of this year. And I have been in business with them since. I would highly recommend working with them.",
+    author: "Ahmed Abdullah",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
+  },
+  {
+    quote:
+      "They are the best in handling the marketing. I am totally satisfied with their service. They have the professionals who are the best in their field. Definitely gonna recommend you.",
+    author: "Hishmat Malhani",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
+  },
+  {
+    quote:
+      "They showed professionalism and handled the tasks as per the given instructions. The instructions were followed to a T. Definitely recommended if you need good service.",
+    author: "Muhammad Ali Rahmani",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
+  },
+  {
+    quote:
+      "Very attractive organization. Would recommend anyone to pursue them for their services. Always does their work on time with great professionalism.",
+    author: "Mahad Pervaiz",
     role: "Google review",
     rating: 5,
     sourceUrl: site.googleReviewsUrl,
