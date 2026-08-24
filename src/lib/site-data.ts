@@ -2,7 +2,8 @@ export const site = {
   name: "Squad International",
   tagline: "Dedicated offshore teams that run your operations",
   calendly: "https://calendly.com/squadinternational/30min",
-  whatsapp: "https://wa.me/12018206889",
+  // wa.me needs the country code with no "+" and no leading zero: +92 313 297 2974.
+  whatsapp: "https://wa.me/923132972974",
   email: "inquire@squadinternational.net",
   phone: "+1 (201) 820-6889",
   phoneHref: "tel:+12018206889",
