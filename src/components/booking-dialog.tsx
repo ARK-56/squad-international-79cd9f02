@@ -1,55 +1,116 @@
-import { useCallback, useEffect, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { Clock, Globe, LoaderCircle, Video } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { site } from "@/lib/site-data";
 
-function CalendlyInline({ open, onReady }: { open: boolean; onReady: () => void }) {
-  const [timezone, setTimezone] = useState("");
-
-  useEffect(() => {
-    setTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
-  }, []);
-
-  useEffect(() => {
-    if (!open) return;
-    const src = "https://assets.calendly.com/assets/external/widget.js";
-    const existing = document.querySelector<HTMLScriptElement>(`script[src="${src}"]`);
-    if (existing) {
-      // @ts-expect-error Calendly global injected by the widget script
-      window.Calendly?.initInlineWidgets?.();
-      return;
-    }
-    const script = document.createElement("script");
-    script.src = src;
-    script.async = true;
-    document.body.appendChild(script);
-  }, [open]);
-
-  useEffect(() => {
-    if (!open) return;
-
-    let frame: HTMLIFrameElement | null = null;
-    const watchForFrame = () => {
-      const nextFrame = document.querySelector<HTMLIFrameElement>(".calendly-inline-widget iframe");
-      if (!nextFrame || nextFrame === frame) return;
-      frame = nextFrame;
-      frame.addEventListener("load", onReady, { once: true });
+declare global {
+  interface Window {
+    Calendly?: {
+      initInlineWidget: (options: { url: string; parentElement: HTMLElement }) => void;
     };
+  }
+}
 
-    watchForFrame();
-    const observer = new MutationObserver(watchForFrame);
-    observer.observe(document.body, { childList: true, subtree: true });
+const CALENDLY_SRC = "https://assets.calendly.com/assets/external/widget.js";
 
-    return () => observer.disconnect();
-  }, [onReady, open]);
+/** Shared across dialog instances so widget.js is only ever fetched once. */
+let loader: Promise<void> | null = null;
 
-  return (
-    <div
-      className="calendly-inline-widget h-[520px] w-full"
-      data-url={`${site.calendly}?hide_gdpr_banner=1&background_color=ffffff&text_color=2b2f36&primary_color=e0a33a`}
-      data-timezone={timezone}
-    />
-  );
+function loadCalendly(): Promise<void> {
+  if (window.Calendly) return Promise.resolve();
+  if (loader) return loader;
+
+  loader = new Promise<void>((resolve, reject) => {
+    const existing = document.querySelector<HTMLScriptElement>(`script[src="${CALENDLY_SRC}"]`);
+    const script = existing ?? document.createElement("script");
+
+    script.addEventListener(
+      "load",
+      () =>
+        window.Calendly
+          ? resolve()
+          : reject(new Error("Calendly widget.js loaded without exposing window.Calendly")),
+      { once: true },
+    );
+    script.addEventListener("error", () => reject(new Error("Calendly widget.js failed to load")), {
+      once: true,
+    });
+
+    if (!existing) {
+      script.src = CALENDLY_SRC;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  });
+
+  // A failed load shouldn't poison every later attempt.
+  loader.catch(() => {
+    loader = null;
+  });
+
+  return loader;
+}
+
+function CalendlyInline({ onReady }: { onReady: () => void }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    let cancelled = false;
+
+    const params = new URLSearchParams({
+      hide_gdpr_banner: "1",
+      background_color: "ffffff",
+      text_color: "2b2f36",
+      primary_color: "e0a33a",
+    });
+    // Resolved here rather than via state: a render round-trip landed after the
+    // widget had already initialised, so the timezone never reached it.
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (timezone) params.set("timezone", timezone);
+
+    loadCalendly()
+      .then(() => {
+        if (cancelled || !containerRef.current) return;
+        // initInlineWidget targets an explicit element, so it works no matter when
+        // the container mounts. The previous code called initInlineWidgets() — a
+        // method this script does not expose — so every reopen silently did nothing
+        // and only the very first open worked, via widget.js's initial page scan.
+        window.Calendly?.initInlineWidget({
+          url: `${site.calendly}?${params.toString()}`,
+          parentElement: containerRef.current,
+        });
+        containerRef.current
+          .querySelector("iframe")
+          ?.addEventListener("load", onReady, { once: true });
+      })
+      .catch((error: unknown) => {
+        console.error(error);
+        // Drop the spinner so the dialog isn't stuck loading forever.
+        if (!cancelled) onReady();
+      });
+
+    return () => {
+      cancelled = true;
+      // Radix keeps the node mounted through the close animation; emptying it means
+      // the next open starts from a clean container instead of a stale widget.
+      container.replaceChildren();
+    };
+  }, [onReady]);
+
+  useEffect(() => {
+    // Calendly's own "the scheduler is live" signal, and the only one that fires
+    // reliably once the embedded app has booted.
+    const onMessage = (event: MessageEvent) => {
+      const name = (event.data as { event?: unknown } | null)?.event;
+      if (typeof name === "string" && name.startsWith("calendly.")) onReady();
+    };
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, [onReady]);
+
+  return <div ref={containerRef} className="h-[520px] w-full" />;
 }
 
 export function BookingDialog({ children }: { children: ReactNode }) {
@@ -75,8 +136,8 @@ export function BookingDialog({ children }: { children: ReactNode }) {
               Discovery Call
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              A 30-minute call to scope your roles, volumes and timelines — and show you exactly
-              how a dedicated pod would run.
+              A 30-minute call to scope your roles, volumes and timelines — and show you exactly how
+              a dedicated pod would run.
             </p>
             <span className="mt-5 block h-1 w-12 bg-marigold" />
             <ul className="mt-5 space-y-3 text-sm text-charcoal">
@@ -100,7 +161,7 @@ export function BookingDialog({ children }: { children: ReactNode }) {
                 </div>
               </div>
             )}
-            {open ? <CalendlyInline open={open} onReady={handleReady} /> : null}
+            {open ? <CalendlyInline onReady={handleReady} /> : null}
           </div>
         </div>
       </DialogContent>
