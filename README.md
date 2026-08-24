@@ -1,26 +1,64 @@
 # Squad International
 
-Lets create a site for this
+Marketing site for Squad International — a BPO providing dedicated offshore teams for
+customer support, virtual assistance, lead generation and operational delivery.
 
-This project was built with [Lovable](https://lovable.dev).
+## Stack
 
-**Live app**: https://squad-international.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/14d7c040-f166-40b7-af24-75e436cfbd61).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+- [TanStack Start](https://tanstack.com/start) (SSR) with file-based routing via TanStack Router
+- React 19, TypeScript, Vite
+- Tailwind CSS v4 with [shadcn/ui](https://ui.shadcn.com) components
+- Nitro for the production server build (Cloudflare by default; the target is
+  auto-detected, so a Vercel or Netlify build selects its own preset)
 
 ## Development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+Requires Node.js. Bun is the package manager — `bun.lock` is the source of truth.
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+bun install
+bun run dev
+```
+
+npm works too (`npm i && npm run dev`). Available scripts:
+
+| Script | Purpose |
+| --- | --- |
+| `dev` | Vite dev server |
+| `build` | Production build |
+| `build:dev` | Production build in development mode |
+| `preview` | Serve the production build locally |
+| `lint` | ESLint, including Prettier as a rule |
+| `format` | Rewrite files with Prettier |
+
+## Content
+
+Nearly all copy lives in [`src/lib/site-data.ts`](src/lib/site-data.ts) — services,
+industries, case studies, FAQs, blog posts, stats, testimonials and the shared `site`
+object (contact details, social links, Google Business Profile). Pages read from it, so
+editing that one file updates the whole site.
+
+## Environment variables
+
+All optional; the site renders correctly without them.
+
+| Variable | Purpose |
+| --- | --- |
+| `GOOGLE_PLACES_API_KEY` | Places API (New) key. Server-only — never prefix with `VITE_`. |
+| `GOOGLE_PLACE_ID` | Place ID for the Google Business Profile. |
+| `VITE_ASSET_CDN_BASE` | Overrides the CDN base used to resolve hosted media. |
+
+With the first two set, the homepage reviews section serves live Google reviews; without
+them it falls back to the reviews transcribed in `site-data.ts`. See
+[`src/lib/google-reviews.ts`](src/lib/google-reviews.ts).
+
+## Project structure
+
+```
+src/
+  assets/      images and hosted-media descriptors
+  components/  shared components; ui/ holds shadcn primitives
+  lib/         site content, Google reviews, asset URL resolution, error plumbing
+  routes/      file-based routes; __root.tsx holds the shell, head tags and boundaries
+  styles.css   design tokens (charcoal / gunmetal / off-white / marigold) and Tailwind theme
 ```
