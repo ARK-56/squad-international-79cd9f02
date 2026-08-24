@@ -1,14 +1,19 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, CalendarDays, MessageCircle } from "lucide-react";
+import { Menu, X, CalendarDays, MessageCircle, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
-import { site } from "@/lib/site-data";
+import { site, services } from "@/lib/site-data";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import logoAsset from "@/assets/squad-logo.png.asset.json";
 const logo = logoAsset.url;
 
 const nav = [
-  { to: "/services", label: "Services" },
   { to: "/industries", label: "Industries" },
   { to: "/case-studies", label: "Case Studies" },
   { to: "/about", label: "About" },
@@ -19,6 +24,7 @@ const nav = [
 
 export function SiteHeader({ variant = "default" }: { variant?: "default" | "overlay" }) {
   const [open, setOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const isOverlay = variant === "overlay";
 
   return (
@@ -35,6 +41,31 @@ export function SiteHeader({ variant = "default" }: { variant?: "default" | "ove
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                type="button"
+                className="group flex items-center gap-1 text-sm font-medium text-muted-foreground transition-colors hover:text-charcoal data-[state=open]:text-charcoal"
+              >
+                Services
+                <ChevronDown className="size-4 transition-transform group-data-[state=open]:rotate-180" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="w-64 rounded-xl border-border bg-background p-2 shadow-lg">
+              <DropdownMenuItem asChild className="cursor-pointer rounded-lg px-3 py-2 text-sm font-medium text-charcoal hover:bg-muted focus:bg-muted">
+                <Link to="/services">All Services</Link>
+              </DropdownMenuItem>
+              <div className="my-1 h-px bg-border" />
+              {services.map((s) => (
+                <DropdownMenuItem key={s.slug} asChild className="cursor-pointer rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-charcoal focus:bg-muted focus:text-charcoal">
+                  <Link to="/services/$slug" params={{ slug: s.slug }}>
+                    {s.title}
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           {nav.map((item) => (
             <Link
               key={item.to}
@@ -72,6 +103,36 @@ export function SiteHeader({ variant = "default" }: { variant?: "default" | "ove
       {open && (
         <div className="mx-auto mt-2 w-full max-w-[84rem] rounded-3xl border border-border bg-background p-4 shadow-sm lg:hidden">
           <div className="flex flex-col gap-1">
+            <button
+              type="button"
+              onClick={() => setServicesOpen((v) => !v)}
+              className="flex items-center justify-between rounded-full px-4 py-2.5 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-charcoal"
+            >
+              Services
+              <ChevronDown className={`size-4 transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
+            </button>
+            {servicesOpen && (
+              <div className="ml-4 flex flex-col gap-1 border-l border-border pl-2">
+                <Link
+                  to="/services"
+                  onClick={() => setOpen(false)}
+                  className="rounded-full px-4 py-2 text-sm font-medium text-charcoal hover:bg-muted"
+                >
+                  All Services
+                </Link>
+                {services.map((s) => (
+                  <Link
+                    key={s.slug}
+                    to="/services/$slug"
+                    params={{ slug: s.slug }}
+                    onClick={() => setOpen(false)}
+                    className="rounded-full px-4 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-charcoal"
+                  >
+                    {s.title}
+                  </Link>
+                ))}
+              </div>
+            )}
             {nav.map((item) => (
               <Link
                 key={item.to}
