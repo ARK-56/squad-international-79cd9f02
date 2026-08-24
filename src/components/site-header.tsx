@@ -30,7 +30,7 @@ export function SiteHeader({ variant = "default" }: { variant?: "default" | "ove
           <img
             src={logo}
             alt={`${site.name} logo`}
-            className={`h-8 w-auto transition duration-300 ${isOverlay ? "brightness-0 invert" : ""}`}
+            className="h-8 w-auto transition duration-300"
           />
         </Link>
 
