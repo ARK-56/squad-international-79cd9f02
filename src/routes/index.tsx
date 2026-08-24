@@ -26,7 +26,7 @@ import { services, industries, caseStudies, stats, faqs, site } from "@/lib/site
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Squad International | Dedicated Offshore Teams & Business Support" },
+      { title: "Squad International | Dedicated Offshore Teams & BPO" },
       {
         name: "description",
         content:
@@ -91,7 +91,7 @@ function Home() {
           <div className="mb-6 flex items-center justify-center gap-4">
             <div className="h-px w-8 bg-marigold" />
             <span className="text-xs font-semibold uppercase tracking-[0.4em] text-marigold">
-              {site.name}
+              {site.tagline}
             </span>
             <div className="h-px w-8 bg-marigold" />
           </div>

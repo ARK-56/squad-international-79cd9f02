@@ -1,6 +1,6 @@
 export const site = {
   name: "Squad International",
-  tagline: "Dedicated offshore teams that run your operations",
+  tagline: "Your Business Companion",
   calendly: "https://calendly.com/squadinternational/30min",
   // wa.me needs the country code with no "+" and no leading zero: +92 313 297 2974.
   whatsapp: "https://wa.me/923132972974",
@@ -603,7 +603,7 @@ export const stats = [
   { value: "500+", label: "Trained specialists" },
   { value: "24/7", label: "Coverage models" },
   { value: "98%", label: "Client retention" },
-  { value: "60%", label: "Average cost saving" },
+  { value: "60%", label: "Average cost savings" },
 ];
 
 export type Testimonial = {
