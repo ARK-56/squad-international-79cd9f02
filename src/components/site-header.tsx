@@ -10,8 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import logoAsset from "@/assets/squad-logo.png.asset.json";
-const logo = logoAsset.url;
+import logo from "@/assets/squad-logo.png";
 
 const nav = [
   { to: "/industries", label: "Industries" },

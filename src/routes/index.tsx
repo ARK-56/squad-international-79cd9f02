@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import heroImage from "@/assets/hero-operations.jpg";
 import heroVideo from "@/assets/hero-video.mp4.asset.json";
+import { assetUrl } from "@/lib/asset-url";
 import teamImage from "@/assets/team-about.jpg";
 import { Button } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
@@ -72,7 +73,7 @@ function Home() {
         {/* Full-bleed background image */}
         <div className="absolute inset-0 z-0">
           <video
-            src={heroVideo.url}
+            src={assetUrl(heroVideo)}
             poster={heroImage}
             autoPlay
             muted

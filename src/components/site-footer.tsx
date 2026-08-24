@@ -1,8 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { services, industries, site } from "@/lib/site-data";
-import logoAsset from "@/assets/squad-logo.png.asset.json";
-const logo = logoAsset.url;
+import logo from "@/assets/squad-logo.png";
 
 export function SiteFooter() {
   return (
@@ -14,7 +13,7 @@ export function SiteFooter() {
             <img
               src={logo}
               alt={`${site.name} logo`}
-              className="h-8 w-auto brightness-0 invert mix-blend-screen"
+              className="h-8 w-auto brightness-0 invert"
             />
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-offwhite/65">
