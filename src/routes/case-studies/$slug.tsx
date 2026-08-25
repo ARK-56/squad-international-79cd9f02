@@ -34,7 +34,7 @@ function CaseStudyDetail() {
   return (
     <>
       <section className="surface-dark">
-        <div className="container-page py-20 md:py-24">
+        <div className="container-page pb-20 pt-36 md:pb-24 md:pt-40">
           <Breadcrumbs parent="/case-studies" parentLabel="Case Studies" current={study.client} />
           <h1 className="mt-5 max-w-4xl text-4xl md:text-6xl">{study.client}</h1>
           <p className="mt-4 text-sm uppercase tracking-wider text-offwhite/55">

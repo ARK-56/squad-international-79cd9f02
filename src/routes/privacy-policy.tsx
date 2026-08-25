@@ -56,7 +56,7 @@ const sections = [
 function PrivacyPage() {
   return (
     <article className="bg-charcoal text-offwhite">
-      <div className="container-page max-w-3xl py-24 md:py-32">
+      <div className="container-page max-w-3xl pb-24 pt-40 md:pb-32 md:pt-48">
         <h1 className="text-4xl md:text-5xl text-offwhite">Privacy Policy</h1>
         <p className="mt-3 text-sm text-offwhite/50">Last updated: 20 August 2026</p>
 

@@ -139,10 +139,11 @@ function RootComponent() {
       <div className="flex min-h-screen flex-col">
         <SiteHeader />
         {/*
-          The header is fixed, so it is out of the flow. The home hero paints behind
-          it deliberately; every other page needs clearance for the bar.
+          The header is fixed, so it is out of the flow. Clearance for it lives in the
+          top padding of each page's first section rather than here — padding on main
+          paints the page background, which showed as a pale band above dark heroes.
         */}
-        <main className={`flex-1 ${isHome ? "" : "pt-16"}`}>
+        <main className="flex-1">
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
         </main>

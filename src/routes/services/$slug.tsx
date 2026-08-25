@@ -36,7 +36,7 @@ function ServiceDetail() {
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-0 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-marigold/15 blur-3xl"
         />
-        <div className="container-page relative flex flex-col items-center py-24 text-center md:py-28">
+        <div className="container-page relative flex flex-col items-center pb-24 pt-40 text-center md:pb-28 md:pt-44">
           <Breadcrumbs
             parent="/services"
             parentLabel="Services"

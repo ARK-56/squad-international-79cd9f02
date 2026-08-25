@@ -31,7 +31,7 @@ function BlogPost() {
   return (
     <>
       <section className="surface-dark">
-        <div className="container-page max-w-3xl py-20 md:py-24">
+        <div className="container-page max-w-3xl pb-20 pt-36 md:pb-24 md:pt-40">
           <Breadcrumbs parent="/blog" parentLabel="Blog" current={post.category} />
           <h1 className="mt-5 text-4xl md:text-5xl">{post.title}</h1>
           <p className="mt-5 text-xs uppercase tracking-wider text-offwhite/55">

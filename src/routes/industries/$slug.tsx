@@ -32,7 +32,7 @@ function IndustryDetail() {
   return (
     <>
       <section className="surface-dark">
-        <div className="container-page py-20 md:py-24">
+        <div className="container-page pb-20 pt-36 md:pb-24 md:pt-40">
           <Breadcrumbs parent="/industries" parentLabel="Industries" current={industry.name} />
           <h1 className="mt-5 max-w-4xl text-4xl md:text-6xl">{industry.name}</h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-offwhite/70 md:text-lg">

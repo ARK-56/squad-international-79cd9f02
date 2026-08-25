@@ -17,7 +17,7 @@ export function PageHero({
         aria-hidden
         className="pointer-events-none absolute left-1/2 top-0 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-marigold/15 blur-3xl"
       />
-      <div className="container-page relative flex flex-col items-center py-20 text-center md:py-24">
+      <div className="container-page relative flex flex-col items-center pb-20 pt-36 text-center md:pb-24 md:pt-40">
         <span className="eyebrow justify-center text-marigold">
           <span className="h-px w-8 bg-marigold" />
           {eyebrow}
