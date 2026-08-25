@@ -8,6 +8,8 @@ import {
   Users,
   LineChart,
   CheckCircle2,
+  Workflow,
+  TrendingUp,
 } from "lucide-react";
 import heroImage from "@/assets/hero-operations.jpg";
 import heroVideo from "@/assets/hero-video.mp4.asset.json";
@@ -50,7 +52,7 @@ const differentiators = [
   {
     icon: Users,
     title: "Dedicated, not shared",
-    body: "Your team works exclusively on your account, in your tools, under a named team lead.",
+    body: "Your team works exclusively on your account, in your tools, under a named team lead. We structure dedicated resources around your specific business functions, so you can expand capacity without building every role in-house.",
   },
   {
     icon: ShieldCheck,
@@ -66,6 +68,16 @@ const differentiators = [
     icon: LineChart,
     title: "Measured on outcomes",
     body: "SLAs agreed before launch, reported weekly, reviewed in a monthly business review.",
+  },
+  {
+    icon: Workflow,
+    title: "Customer & operational support",
+    body: "We help manage the repetitive, process-driven work that consumes valuable internal time — while maintaining consistency and accountability.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Growth support",
+    body: "From prospecting and lead generation to follow-ups and appointment setting, our teams support the activities that keep your pipeline moving.",
   },
 ];
 
@@ -220,7 +232,7 @@ function Home() {
               </figcaption>
             </figure>
           </div>
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {differentiators.map((d) => (
               <div key={d.title} className="rounded-lg border border-offwhite/10 bg-offwhite/[0.04] p-7">
                 <d.icon className="size-7 text-marigold" />
@@ -237,9 +249,9 @@ function Home() {
         title="Stand up a team in weeks, not quarters"
         description="We document your process, hire against it, train in your tools and go live under an agreed SLA — with a named team lead accountable from day one."
         bullets={[
-          "Discovery call and scope in the first week",
+          "A named team lead accountable from day one",
           "Recruitment and vetting against your role profile",
-          "Shadowing, certification and a staged go-live",
+          "Go live under an agreed SLA, reviewed weekly",
         ]}
         actions={
           <BookingDialog>
@@ -250,12 +262,13 @@ function Home() {
         }
         media={
           <FlowMedia
-            badge="Live in 10–14 days"
+            badge="Live in 10–14 days · Managed pod 3–5 weeks"
             steps={[
-              { label: "Week 1", value: "Discovery, process mapping and role scoping" },
-              { label: "Week 2", value: "Recruit, vet and assign your named team lead" },
-              { label: "Week 3", value: "Tool access, shadowing and QA calibration" },
-              { label: "Go live", value: "SLA reporting and weekly performance review" },
+              { label: "Discover", value: "Discovery call, process mapping and role scoping" },
+              { label: "Design", value: "Role profile, tool access and reporting cadence defined" },
+              { label: "Deploy", value: "Recruit, vet, then shadowing and QA calibration" },
+              { label: "Deliver", value: "Go live under an agreed SLA with weekly reporting" },
+              { label: "Scale", value: "Grow or shrink the team as volume moves" },
             ]}
           />
         }

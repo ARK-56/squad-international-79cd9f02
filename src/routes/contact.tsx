@@ -144,12 +144,7 @@ function ContactPage() {
           {/* Honeypot: hidden from people, irresistible to bots. */}
           <div className="hidden" aria-hidden="true">
             <label htmlFor="company_website">Company website</label>
-            <input
-              id="company_website"
-              name="company_website"
-              tabIndex={-1}
-              autoComplete="off"
-            />
+            <input id="company_website" name="company_website" tabIndex={-1} autoComplete="off" />
           </div>
 
           <Button type="submit" variant="marigold" size="lg" className="mt-8" disabled={submitting}>
