@@ -453,7 +453,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "logistics-24-7-desk",
     client: "Freight forwarding group",
     industry: "Logistics & Supply Chain",
-    service: "Operational Management",
+    service: "Customer & Operational Management",
     challenge:
       "Shipment exceptions raised overnight sat untouched until morning, creating detention charges and customer churn.",
     approach: [

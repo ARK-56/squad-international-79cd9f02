@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, CalendarDays, MessageCircle, CheckCircle2, Users, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { BookingDialog } from "@/components/booking-dialog";
 import { CtaBand } from "@/components/cta-band";
 import { services, site } from "@/lib/site-data";
@@ -36,9 +37,13 @@ function ServiceDetail() {
           className="pointer-events-none absolute left-1/2 top-0 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-marigold/15 blur-3xl"
         />
         <div className="container-page relative flex flex-col items-center py-24 text-center md:py-28">
-          <Link to="/services" className="eyebrow justify-center text-marigold hover:opacity-80">
-            <span className="h-px w-8 bg-marigold" /> Services
-          </Link>
+          <Breadcrumbs
+            parent="/services"
+            parentLabel="Services"
+            current={service.title}
+            tone="light"
+            center
+          />
           <h1 className="mt-6 max-w-4xl text-5xl leading-[0.92] tracking-tight text-charcoal md:text-7xl">
             {service.title}
           </h1>

@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { CalendarDays, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { BookingDialog } from "@/components/booking-dialog";
 import { CtaBand } from "@/components/cta-band";
 import { industries, services, caseStudies, site } from "@/lib/site-data";
@@ -32,9 +33,7 @@ function IndustryDetail() {
     <>
       <section className="surface-dark">
         <div className="container-page py-20 md:py-24">
-          <Link to="/industries" className="eyebrow hover:opacity-80">
-            <span className="h-px w-8 bg-marigold" /> Industries
-          </Link>
+          <Breadcrumbs parent="/industries" parentLabel="Industries" current={industry.name} />
           <h1 className="mt-5 max-w-4xl text-4xl md:text-6xl">{industry.name}</h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-offwhite/70 md:text-lg">
             {industry.short}
@@ -100,7 +99,7 @@ function IndustryDetail() {
       <section className="container-page py-20 md:py-24">
         <h2 className="text-2xl text-charcoal">Services commonly deployed here</h2>
         <div className="mt-8 flex flex-wrap gap-3">
-          {services.slice(0, 5).map((s) => (
+          {services.map((s) => (
             <Link
               key={s.slug}
               to="/services/$slug"

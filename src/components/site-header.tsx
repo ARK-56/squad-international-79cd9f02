@@ -19,6 +19,7 @@ const nav = [
   { to: "/blog", label: "Blog" },
   { to: "/faqs", label: "FAQs" },
   { to: "/careers", label: "Careers" },
+  { to: "/contact", label: "Contact" },
 ];
 
 export function SiteHeader({ variant = "default" }: { variant?: "default" | "overlay" }) {
@@ -142,13 +143,6 @@ export function SiteHeader({ variant = "default" }: { variant?: "default" | "ove
                 {item.label}
               </Link>
             ))}
-            <Link
-              to="/contact"
-              onClick={() => setOpen(false)}
-              className="rounded-full px-4 py-2.5 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-charcoal"
-            >
-              Contact
-            </Link>
             <div className="mt-3 flex flex-col gap-2">
               <BookingDialog>
                 <Button variant="charcoal" className="rounded-full">

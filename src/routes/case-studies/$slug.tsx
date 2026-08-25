@@ -1,12 +1,19 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { CtaBand } from "@/components/cta-band";
-import { caseStudies } from "@/lib/site-data";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { caseStudies, industries, services } from "@/lib/site-data";
 
 export const Route = createFileRoute("/case-studies/$slug")({
   loader: ({ params }) => {
     const study = caseStudies.find((c) => c.slug === params.slug);
     if (!study) throw notFound();
-    return study;
+    // The industry and service are stored as display labels, so resolve them to
+    // slugs here and let the page link out only when a match actually exists.
+    return {
+      ...study,
+      industrySlug: industries.find((i) => i.name === study.industry)?.slug ?? null,
+      serviceSlug: services.find((s) => s.title === study.service)?.slug ?? null,
+    };
   },
   head: ({ loaderData }) => ({
     meta: loaderData
@@ -28,12 +35,32 @@ function CaseStudyDetail() {
     <>
       <section className="surface-dark">
         <div className="container-page py-20 md:py-24">
-          <Link to="/case-studies" className="eyebrow hover:opacity-80">
-            <span className="h-px w-8 bg-marigold" /> Case Study
-          </Link>
+          <Breadcrumbs parent="/case-studies" parentLabel="Case Studies" current={study.client} />
           <h1 className="mt-5 max-w-4xl text-4xl md:text-6xl">{study.client}</h1>
           <p className="mt-4 text-sm uppercase tracking-wider text-offwhite/55">
-            {study.industry} · {study.service}
+            {study.industrySlug ? (
+              <Link
+                to="/industries/$slug"
+                params={{ slug: study.industrySlug }}
+                className="transition-colors hover:text-marigold"
+              >
+                {study.industry}
+              </Link>
+            ) : (
+              study.industry
+            )}
+            {" · "}
+            {study.serviceSlug ? (
+              <Link
+                to="/services/$slug"
+                params={{ slug: study.serviceSlug }}
+                className="transition-colors hover:text-marigold"
+              >
+                {study.service}
+              </Link>
+            ) : (
+              study.service
+            )}
           </p>
           <div className="mt-10 grid gap-6 sm:grid-cols-3">
             {study.results.map((r) => (

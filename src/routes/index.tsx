@@ -116,9 +116,9 @@ function Home() {
               </Button>
             </BookingDialog>
             <Button variant="outlineLight" size="xl" asChild className="uppercase tracking-widest">
-              <a href={site.whatsapp} target="_blank" rel="noreferrer">
-                <MessageCircle /> Explore Services
-              </a>
+              <Link to="/services">
+                Explore Services <ArrowRight />
+              </Link>
             </Button>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { CtaBand } from "@/components/cta-band";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { posts } from "@/lib/site-data";
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -31,9 +32,7 @@ function BlogPost() {
     <>
       <section className="surface-dark">
         <div className="container-page max-w-3xl py-20 md:py-24">
-          <Link to="/blog" className="eyebrow hover:opacity-80">
-            <span className="h-px w-8 bg-marigold" /> {post.category}
-          </Link>
+          <Breadcrumbs parent="/blog" parentLabel="Blog" current={post.category} />
           <h1 className="mt-5 text-4xl md:text-5xl">{post.title}</h1>
           <p className="mt-5 text-xs uppercase tracking-wider text-offwhite/55">
             {new Date(post.date).toLocaleDateString("en-GB", {
