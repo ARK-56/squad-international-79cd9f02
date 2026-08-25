@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowRight, CalendarDays, MessageCircle, CheckCircle2, Users, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/breadcrumbs";
@@ -6,10 +6,24 @@ import { BookingDialog } from "@/components/booking-dialog";
 import { CtaBand } from "@/components/cta-band";
 import { services, site } from "@/lib/site-data";
 
+/**
+ * Service lines retired when the six delivery lines were renamed. Their URLs were
+ * live, so they redirect to the services index rather than 404 — none of the
+ * current six is a close enough match to send a visitor to directly.
+ */
+const RETIRED_SLUGS = new Set([
+  "dedicated-team-support",
+  "operational-management",
+  "growth-support",
+]);
+
 export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
     const service = services.find((s) => s.slug === params.slug);
-    if (!service) throw notFound();
+    if (!service) {
+      if (RETIRED_SLUGS.has(params.slug)) throw redirect({ to: "/services" });
+      throw notFound();
+    }
     return service;
   },
   head: ({ loaderData }) => ({
