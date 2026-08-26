@@ -13,13 +13,13 @@ import {
 import logo from "@/assets/squad-logo.png";
 
 /**
- * Careers, FAQs and Contact live in the footer rather than here, so the primary
- * nav stays short. Services and Industries are both dropdowns.
+ * Careers, FAQs and Blog are reachable from the footer rather than here, so the
+ * primary nav stays short. Services and Industries are both dropdowns.
  */
 const nav = [
   { to: "/case-studies", label: "Case Studies" },
   { to: "/about", label: "About" },
-  { to: "/blog", label: "Blog" },
+  { to: "/contact", label: "Contact" },
 ];
 
 const triggerClass =
