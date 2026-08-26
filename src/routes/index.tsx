@@ -124,9 +124,8 @@ function Home() {
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <BookingDialog>
-              <Button variant="marigold" size="xl" className="group relative uppercase tracking-widest">
+              <Button variant="marigold" size="xl" className="uppercase tracking-widest">
                 <CalendarDays /> Start Scaling
-                <div className="absolute -bottom-1 -right-1 size-3 bg-offwhite" />
               </Button>
             </BookingDialog>
             <Button variant="outlineLight" size="xl" asChild className="uppercase tracking-widest">
