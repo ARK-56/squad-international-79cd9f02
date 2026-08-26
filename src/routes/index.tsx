@@ -117,7 +117,9 @@ function Home() {
 
           <p className="mx-auto mt-8 max-w-2xl text-lg font-light leading-relaxed text-offwhite/70 md:text-xl">
             Scale your business with high-performing remote teams integrated seamlessly into your
-            workflow. Expert talent, managed for you.
+            workflow.{" "}
+            {/* Block so the second sentence always starts its own line, without a hard <br>. */}
+            <span className="block">Expert talent, managed for you.</span>
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
