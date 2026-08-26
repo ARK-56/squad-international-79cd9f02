@@ -10,26 +10,28 @@ export function ClientSpotlight() {
       <div className="container-page grid items-center gap-14 lg:grid-cols-2">
         <div>
           <span className="eyebrow">
-            <span className="h-px w-8 bg-marigold" /> For professional services
+            <span className="h-px w-8 bg-marigold" /> An extension of your team
           </span>
           <h2 className="mt-4 font-display text-4xl leading-[0.95] tracking-tight text-charcoal md:text-5xl">
-            Best-in-class service
+            Support that works
             <br />
-            for your clients
+            like part of your business
           </h2>
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">
-            Improve the client experience — from first contact through follow-up — and free your
-            team to focus on the work that actually moves accounts forward.
+            Add dependable capacity across customer support, sales, administration and day-to-day
+            operations — while your internal team stays focused on higher-value work. We build the
+            support around your requirements, processes and workload so outsourcing feels like
+            adding capacity rather than adding another problem to manage.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <BookingDialog>
               <Button variant="marigold" size="lg">
-                <CalendarDays /> Book a Meeting
+                <CalendarDays /> Book a Free Consultation
               </Button>
             </BookingDialog>
             <Button variant="outlineDark" size="lg" asChild>
               <a href={site.whatsapp} target="_blank" rel="noreferrer">
-                <MessageCircle /> Chat With Us
+                <MessageCircle /> WhatsApp Us
               </a>
             </Button>
           </div>

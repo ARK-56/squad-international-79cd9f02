@@ -155,7 +155,7 @@ export function SiteFooter() {
           <p>
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
-          <p>Business process outsourcing · Dedicated teams · Global delivery</p>
+          <p>Business Process Outsourcing · Dedicated Teams · Business Support</p>
         </div>
       </div>
       </div>

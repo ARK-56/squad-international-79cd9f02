@@ -50,7 +50,8 @@ export const services: Service[] = [
   {
     slug: "customer-support",
     title: "Customer Support Outsourcing",
-    short: "Inbound calls, live chat + email, and ticket management.",
+    short:
+      "Reliable customer support that helps you increase service capacity without continuously expanding your internal team.",
     summary:
       "Trained support agents handling voice, email, chat and ticketing on your brand and your tooling — with the QA, coverage planning and escalation paths of an in-house function.",
     outcomes: [
@@ -90,7 +91,8 @@ export const services: Service[] = [
   {
     slug: "lead-generation",
     title: "Lead Generation & Appointment Setting",
-    short: "Cold calling, lead qualification, and appointment setting.",
+    short:
+      "Dedicated prospecting support to help keep your sales pipeline active and your internal team focused on qualified opportunities.",
     summary:
       "Research, list building, multichannel outreach and appointment setting run by SDR pods that report on pipeline, not activity vanity metrics.",
     outcomes: [
@@ -130,7 +132,8 @@ export const services: Service[] = [
   {
     slug: "virtual-business-assistance",
     title: "Virtual Assistant & Desk Support",
-    short: "Data entry & admin support, research, and CRM & order processing.",
+    short:
+      "Move recurring administrative and desk work to dedicated resources built around your existing workflow.",
     summary:
       "Dedicated assistants who absorb the administrative load slowing your business down — calendar and inbox management, CRM hygiene, reporting, research, documentation and day-to-day coordination.",
     outcomes: [
@@ -170,7 +173,8 @@ export const services: Service[] = [
   {
     slug: "medical-billing-healthcare",
     title: "Medical Billing & Healthcare",
-    short: "Eligibility verification, medical billing & claims support, and AR follow-up.",
+    short:
+      "Dedicated support for process-driven healthcare billing and administrative functions.",
     summary:
       "Billing and administrative support for practices and healthcare services — eligibility checks, charge entry, claim submission, denial handling and accounts-receivable follow-up, run to documented process with audit sampling.",
     outcomes: [
@@ -210,7 +214,8 @@ export const services: Service[] = [
   {
     slug: "ecommerce-customer-support",
     title: "E-commerce Customer Support",
-    short: "Shopify & Amazon support, orders + returns, and customer service.",
+    short:
+      "Support your customers and day-to-day e-commerce operations without continuously increasing internal headcount.",
     summary:
       "Support teams for online retail — pre-sale questions, order and delivery enquiries, returns and refunds — working inside your storefront and helpdesk across the hours your customers actually shop.",
     outcomes: [
@@ -250,7 +255,8 @@ export const services: Service[] = [
   {
     slug: "accounting-bookkeeping",
     title: "Accounting & Bookkeeping",
-    short: "QuickBooks, Xero & AP/AR, reconciliation, and monthly reporting.",
+    short:
+      "Reliable support for recurring financial administration and bookkeeping processes.",
     summary:
       "Day-to-day bookkeeping and finance operations — transaction coding, accounts payable and receivable, reconciliations and month-end reporting — delivered on your ledger against an agreed close calendar.",
     outcomes: [
@@ -295,6 +301,8 @@ export type Industry = {
   short: string;
   /** Deck's per-industry headline, shown above the body copy. */
   headline: string;
+  /** One-liner for the homepage industry cards, where `short` is too long. */
+  tagline: string;
   /** The deck's "Key Focus" triple. */
   keyFocus: string[];
   challenges: string[];
@@ -309,6 +317,7 @@ export const industries: Industry[] = [
     short:
       "Customer expectations stay high whether you're handling everyday orders or seasonal peaks. We help e-commerce and retail businesses manage recurring customer and operational workloads without continuously expanding internal headcount.",
     headline: "Support That Scales With Customer Demand",
+    tagline: "Support that scales with customer demand.",
     keyFocus: ["Customer Experience", "Order Workflows", "Flexible Capacity"],
     challenges: [
       "Volume spikes around promotions and holidays",
@@ -332,6 +341,7 @@ export const industries: Industry[] = [
     short:
       "As technology businesses grow, so do customer conversations, administrative workloads and sales activity. Dedicated outsourced support gives your internal team more capacity to focus on product, customers and growth.",
     headline: "Support Your Growth Without Adding Unnecessary Overhead",
+    tagline: "More capacity for growing customer, sales and administrative workloads.",
     keyFocus: ["Customer Experience", "Pipeline Support", "Scalable Capacity"],
     challenges: [
       "Engineers pulled into tier-1 support tickets",
@@ -355,6 +365,7 @@ export const industries: Industry[] = [
     short:
       "Billing, claims and administrative workloads can consume valuable internal time. We help healthcare and wellness businesses add dependable back-office capacity while maintaining consistent processes and accountability.",
     headline: "Reliable Support for Process-Driven Healthcare Operations",
+    tagline: "Reliable support for process-driven healthcare and administrative operations.",
     keyFocus: ["Billing Support", "Administrative Workflows", "Consistent Execution"],
     challenges: [
       "Administrative burden on clinical staff",
@@ -378,6 +389,7 @@ export const industries: Industry[] = [
     short:
       "Logistics businesses depend on consistent communication, accurate processing and reliable day-to-day support. We help manage recurring operational and administrative workloads so internal teams can stay focused on moving the business forward.",
     headline: "Keep Everyday Operations Moving",
+    tagline: "Keep recurring customer, administrative and operational work moving.",
     keyFocus: ["Customer Communication", "Order Processing", "Back-Office Support"],
     challenges: [
       "24/7 shipment exception handling",
@@ -401,6 +413,7 @@ export const industries: Industry[] = [
     short:
       "Financial and professional service businesses depend on accurate, consistent administrative and financial processes. Dedicated outsourced support helps keep recurring work moving without requiring every function to be built internally.",
     headline: "More Back-Office Capacity. Less Internal Overhead.",
+    tagline: "Add dependable back-office capacity without unnecessary internal overhead.",
     keyFocus: ["Financial Administration", "Client Support", "Operational Efficiency"],
     challenges: [
       "Regulated processes requiring consistent execution",
@@ -424,6 +437,8 @@ export const industries: Industry[] = [
     short:
       "Lead follow-ups, appointments, CRM updates and administrative work can quickly take time away from clients and deals. We help real estate and property businesses manage recurring support work with dedicated resources built around their workflow.",
     headline: "Keep Opportunities Moving While Your Team Stays Focused",
+    tagline:
+      "Keep lead follow-ups, appointments and recurring administration moving while your team focuses on clients and opportunities.",
     keyFocus: ["Lead Follow-Up", "Appointment Support", "CRM & Administration"],
     challenges: [
       "Inbound leads going cold outside office hours",
@@ -713,7 +728,7 @@ export const aboutStats = [
 
 export const stats = [
   { value: "500+", label: "Trained specialists" },
-  { value: "24/7", label: "Coverage models" },
+  { value: "24/7", label: "Coverage available" },
   { value: "98%", label: "Client retention" },
   { value: "60%", label: "Average cost savings" },
 ];

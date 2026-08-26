@@ -42,8 +42,8 @@ export function GoogleReviews() {
 
   return (
     <Testimonials
-      eyebrow="Google Reviews"
-      title="What clients say on Google"
+      eyebrow="Client feedback"
+      title="What our clients say"
       description={`Rated ${rating} out of 5 from ${total} reviews on our Google Business Profile.`}
       items={items}
       footer={

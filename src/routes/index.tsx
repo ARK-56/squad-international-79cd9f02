@@ -3,13 +3,15 @@ import {
   ArrowRight,
   CalendarDays,
   MessageCircle,
-  ShieldCheck,
-  Clock,
   Users,
   LineChart,
-  CheckCircle2,
   Workflow,
   TrendingUp,
+  Wallet,
+  Gauge,
+  Layers,
+  Handshake,
+  Headset,
 } from "lucide-react";
 import heroImage from "@/assets/hero-operations.jpg";
 import heroVideo from "@/assets/hero-video.mp4.asset.json";
@@ -48,36 +50,61 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
+/**
+ * Flip to true once genuine, verified client results replace the placeholder
+ * figures the copy deck flagged (11-minute response, 93% CSAT, $2.4M pipeline
+ * and the rest).
+ */
+const SHOW_CASE_STUDIES = false;
+
+const bpoBenefits = [
+  {
+    icon: Wallet,
+    title: "Lower operating costs",
+    body: "Add support without carrying the full overhead of building every function in-house.",
+  },
+  {
+    icon: Gauge,
+    title: "Greater efficiency",
+    body: "Move repetitive and process-driven work away from your core team so they can focus on higher-value priorities.",
+  },
+  {
+    icon: Layers,
+    title: "More capacity",
+    body: "Add dedicated resources as your workload, customer base and business requirements grow.",
+  },
+];
+
 const differentiators = [
   {
-    icon: Users,
-    title: "Dedicated, not shared",
-    body: "Your team works exclusively on your account, in your tools, under a named team lead. We structure dedicated resources around your specific business functions, so you can expand capacity without building every role in-house.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Quality you can audit",
-    body: "Weekly QA sampling, calibrated scorecards and coaching plans you can review any time.",
-  },
-  {
-    icon: Clock,
-    title: "Coverage that fits",
-    body: "Business hours, extended hours or full follow-the-sun shifts across three regions.",
-  },
-  {
-    icon: LineChart,
-    title: "Measured on outcomes",
-    body: "SLAs agreed before launch, reported weekly, reviewed in a monthly business review.",
-  },
-  {
     icon: Workflow,
-    title: "Customer & operational support",
-    body: "We help manage the repetitive, process-driven work that consumes valuable internal time — while maintaining consistency and accountability.",
+    title: "Built around your business",
+    body: "We tailor teams, workflows and responsibilities to your needs, giving you support that fits the way your business already operates.",
   },
   {
     icon: TrendingUp,
+    title: "Flexible scaling",
+    body: "Start with the support you need today and scale your team as your workload, customer base and requirements grow.",
+  },
+  {
+    icon: Users,
+    title: "Dedicated & reliable teams",
+    body: "Your work is handled by dedicated people who understand your processes, follow your standards and deliver consistent support.",
+  },
+  {
+    icon: Handshake,
+    title: "Partnership mindset",
+    body: "We work as an extension of your team, supporting your goals and helping keep the business moving forward.",
+  },
+  {
+    icon: Headset,
+    title: "Customer & operational support",
+    body: "We help manage repetitive, process-driven work that can consume valuable internal time while maintaining consistency and accountability.",
+  },
+  {
+    icon: LineChart,
     title: "Growth support",
-    body: "From prospecting and lead generation to follow-ups and appointment setting, our teams support the activities that keep your pipeline moving.",
+    body: "From prospecting and lead generation to follow-ups and appointment setting, our teams help keep your sales pipeline moving.",
   },
 ];
 
@@ -112,26 +139,25 @@ function Home() {
           </div>
 
           <h1 className="font-display text-5xl uppercase leading-none tracking-tight text-offwhite md:text-7xl lg:text-9xl">
-            Dedicated <br /> <span className="text-marigold">Offshore</span> Teams
+            Dedicated Teams. <br /> Built Around <span className="text-marigold">Your Business</span>.
           </h1>
 
           <p className="mx-auto mt-8 max-w-2xl text-lg font-light leading-relaxed text-offwhite/70 md:text-xl">
-            Scale your business with high-performing remote teams integrated seamlessly into your
-            workflow.{" "}
-            {/* Block so the second sentence always starts its own line, without a hard <br>. */}
-            <span className="block">Expert talent, managed for you.</span>
+            Scale your business with reliable outsourced support built around your workflow —
+            helping you increase capacity, reduce operating costs and keep your internal team
+            focused.
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <BookingDialog>
               <Button variant="marigold" size="xl" className="uppercase tracking-widest">
-                <CalendarDays /> Start Scaling
+                <CalendarDays /> Book a Free Consultation
               </Button>
             </BookingDialog>
             <Button variant="outlineLight" size="xl" asChild className="uppercase tracking-widest">
-              <Link to="/services">
-                Explore Services <ArrowRight />
-              </Link>
+              <a href={site.whatsapp} target="_blank" rel="noreferrer">
+                <MessageCircle /> WhatsApp Us
+              </a>
             </Button>
           </div>
         </div>
@@ -155,11 +181,39 @@ function Home() {
       </section>
 
       <section className="container-page py-20 md:py-28">
+        <SectionHeading
+          eyebrow="Why businesses choose BPO"
+          title="Lower costs. Greater efficiency. More capacity."
+        />
+        <div className="mt-8 max-w-3xl space-y-4 text-sm leading-relaxed text-muted-foreground md:text-base">
+          <p>
+            Building every business function internally can quickly increase payroll, management
+            workload and operating costs. Outsourcing gives businesses a more flexible way to add
+            the people and support they need while keeping internal overhead under control.
+          </p>
+          <p>
+            Squad International helps you move suitable customer-facing, administrative and
+            operational work to dedicated resources — without losing consistency, accountability or
+            visibility.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
+          {bpoBenefits.map((b) => (
+            <div key={b.title} className="rounded-lg border border-border bg-card p-7">
+              <b.icon className="size-7 text-marigold" />
+              <h3 className="mt-5 text-lg text-charcoal">{b.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{b.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="container-page py-20 md:py-28">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
-            eyebrow="Services"
-            title="Capability you can switch on"
-            description="Six delivery lines, staffed and supervised by us, working inside your systems."
+            eyebrow="What we do"
+            title="Capabilities you can switch on"
+            description="Six service lines built around the way your business works."
           />
           <Button variant="outlineDark" asChild>
             <Link to="/services">
@@ -177,9 +231,19 @@ function Home() {
               className="group flex flex-col rounded-lg border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-marigold hover:shadow-[var(--shadow-elevated)]"
             >
               <h3 className="text-xl text-charcoal">{s.title}</h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{s.short}</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.short}</p>
+              <ul className="mt-5 flex flex-1 flex-wrap content-start gap-2">
+                {s.highlights.map((h) => (
+                  <li
+                    key={h}
+                    className="rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-charcoal"
+                  >
+                    {h}
+                  </li>
+                ))}
+              </ul>
               <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-charcoal group-hover:text-marigold">
-                Explore service <ArrowRight className="size-4" />
+                View service <ArrowRight className="size-4" />
               </span>
             </Link>
           ))}
@@ -217,7 +281,7 @@ function Home() {
             <SectionHeading
               eyebrow="Why Squad"
               title="Outsourcing without the usual trade-offs"
-              description="The reason teams stay with us is boring and deliberate: documented process, named ownership and reporting that holds up."
+              description="The reason clients stay with us is simple and deliberate: dependable people, clear responsibilities and consistent execution. We build support around your business instead of forcing your business into a fixed outsourcing model."
               tone="light"
             />
             <figure className="relative h-56 overflow-hidden rounded-xl border border-offwhite/10 md:h-72">
@@ -246,14 +310,9 @@ function Home() {
       </section>
 
       <FeatureSplit
-        eyebrow="How it works"
-        title="Stand up a team in weeks, not quarters"
-        description="We document your process, hire against it, train in your tools and go live under an agreed SLA — with a named team lead accountable from day one."
-        bullets={[
-          "A named team lead accountable from day one",
-          "Recruitment and vetting against your role profile",
-          "Go live under an agreed SLA, reviewed weekly",
-        ]}
+        eyebrow="Our process"
+        title="From business needs to business impact"
+        description="A simple, structured process designed to make outsourcing easy."
         actions={
           <BookingDialog>
             <Button variant="marigold" size="lg">
@@ -263,13 +322,12 @@ function Home() {
         }
         media={
           <FlowMedia
-            badge="Live in 10–14 days · Managed pod 3–5 weeks"
             steps={[
-              { label: "Discover", value: "Discovery call, process mapping and role scoping" },
-              { label: "Design", value: "Role profile, tool access and reporting cadence defined" },
-              { label: "Deploy", value: "Recruit, vet, then shadowing and QA calibration" },
-              { label: "Deliver", value: "Go live under an agreed SLA with weekly reporting" },
-              { label: "Scale", value: "Grow or shrink the team as volume moves" },
+              { label: "01 — Discover", value: "Understand your needs" },
+              { label: "02 — Design", value: "Build your solution" },
+              { label: "03 — Deploy", value: "Build your team" },
+              { label: "04 — Deliver", value: "Execute & manage" },
+              { label: "05 — Scale", value: "Grow with your business" },
             ]}
           />
         }
@@ -278,13 +336,13 @@ function Home() {
       <FeatureSplit
         tone="muted"
         reverse
-        eyebrow="Your pod"
-        title="One dedicated pod, every role covered"
-        description="Instead of shared agents on a ticket queue, you get a defined pod: specialists for each workstream, a supervisor who owns quality, and reporting you can audit."
+        eyebrow="Built around you"
+        title="A dedicated team built around your workflow"
+        description="We structure dedicated resources around the functions your business needs — giving you additional capacity without having to build every role internally."
         bullets={[
-          "Exclusive to your account, in your systems",
-          "Supervisor-led QA sampling every week",
-          "Scale the pod up or down as volume moves",
+          "Dedicated resources — built around your specific business requirements",
+          "Your processes — your team works around your workflows, tools and standards",
+          "Flexible scaling — add or adjust support as your requirements change",
         ]}
         actions={
           <Button variant="outlineDark" size="lg" asChild>
@@ -295,7 +353,7 @@ function Home() {
         }
         media={
           <OrbitMedia
-            center="Your pod"
+            center="Example Team Structure"
             roles={[
               "Support Agent",
               "Team Lead",
@@ -316,7 +374,7 @@ function Home() {
           <SectionHeading
             eyebrow="Industries"
             title="Operating knowledge, not generic scripts"
-            description="We staff and train against the realities of your sector."
+            description="Every industry has different workflows, customer expectations and operational demands. We build support around the realities of your industry while adapting the team to the way your business works."
           />
           <figure className="relative h-48 overflow-hidden rounded-xl md:h-56">
             <img
@@ -337,60 +395,77 @@ function Home() {
               className="group rounded-lg border border-border bg-card p-7 transition-colors hover:border-marigold"
             >
               <h3 className="text-lg text-charcoal group-hover:text-marigold">{i.name}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{i.short}</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{i.tagline}</p>
             </Link>
           ))}
         </div>
-      </section>
-
-      <section className="bg-card py-20 md:py-28">
-        <div className="container-page">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <SectionHeading
-              eyebrow="Proof"
-              title="Results our clients can point at"
-              description="Three engagements, three very different problems."
-            />
-            <Button variant="outlineDark" asChild>
-              <Link to="/case-studies">
-                All case studies <ArrowRight />
-              </Link>
-            </Button>
-          </div>
-          <div className="mt-12 grid gap-5 lg:grid-cols-3">
-            {caseStudies.map((c) => (
-              <Link
-                key={c.slug}
-                to="/case-studies/$slug"
-                params={{ slug: c.slug }}
-                className="group flex flex-col rounded-lg border border-border bg-background p-7 transition-all hover:-translate-y-1 hover:border-marigold"
-              >
-                <span className="eyebrow">{c.industry}</span>
-                <h3 className="mt-3 text-lg text-charcoal">{c.client}</h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
-                  {c.challenge}
-                </p>
-                <div className="mt-6 grid grid-cols-3 gap-3 border-t border-border pt-5">
-                  {c.results.map((r) => (
-                    <div key={r.label}>
-                      <p className="font-display text-xl text-marigold">{r.value}</p>
-                      <p className="mt-1 text-[11px] leading-tight text-muted-foreground">
-                        {r.label}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </Link>
-            ))}
-          </div>
+        <div className="mt-10">
+          <Button variant="outlineDark" asChild>
+            <Link to="/industries">
+              Explore industries <ArrowRight />
+            </Link>
+          </Button>
         </div>
       </section>
+
+      {/*
+        Case studies are hidden per the landing page copy deck, which names the exact
+        figures and says not to publish them: "Remove or temporarily hide the
+        case-study cards until verified Squad International client results are
+        provided." The data still lives in site-data and /case-studies still renders
+        it, so restoring this section is a matter of deleting this guard once the
+        results are verified.
+      */}
+      {SHOW_CASE_STUDIES && (
+        <section className="bg-card py-20 md:py-28">
+          <div className="container-page">
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <SectionHeading
+                eyebrow="Proof"
+                title="Results our clients can point at"
+                description="Three engagements, three very different problems."
+              />
+              <Button variant="outlineDark" asChild>
+                <Link to="/case-studies">
+                  All case studies <ArrowRight />
+                </Link>
+              </Button>
+            </div>
+            <div className="mt-12 grid gap-5 lg:grid-cols-3">
+              {caseStudies.map((c) => (
+                <Link
+                  key={c.slug}
+                  to="/case-studies/$slug"
+                  params={{ slug: c.slug }}
+                  className="group flex flex-col rounded-lg border border-border bg-background p-7 transition-all hover:-translate-y-1 hover:border-marigold"
+                >
+                  <span className="eyebrow">{c.industry}</span>
+                  <h3 className="mt-3 text-lg text-charcoal">{c.client}</h3>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                    {c.challenge}
+                  </p>
+                  <div className="mt-6 grid grid-cols-3 gap-3 border-t border-border pt-5">
+                    {c.results.map((r) => (
+                      <div key={r.label}>
+                        <p className="font-display text-xl text-marigold">{r.value}</p>
+                        <p className="mt-1 text-[11px] leading-tight text-muted-foreground">
+                          {r.label}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="container-page py-20 md:py-28">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <SectionHeading
             eyebrow="FAQs"
-            title="The questions buyers ask first"
+            title="Questions before you outsource?"
             description="If yours isn't here, the FAQ page goes deeper — or just ask us directly."
           />
           <div className="divide-y divide-border border-y border-border">
@@ -403,7 +478,7 @@ function Home() {
             <div className="py-6">
               <Button variant="outlineDark" asChild>
                 <Link to="/faqs">
-                  Read all FAQs <ArrowRight />
+                  View all FAQs <ArrowRight />
                 </Link>
               </Button>
             </div>
@@ -413,7 +488,10 @@ function Home() {
 
       <GoogleReviews />
 
-      <CtaBand />
+      <CtaBand
+        title="Ready to add capacity without adding the overhead?"
+        description="Tell us where your business needs support. Book a 30-minute discovery call or message us on WhatsApp to discuss your workload, current challenges and where outsourcing could make the biggest difference."
+      />
     </>
   );
 }
