@@ -396,7 +396,7 @@ function Home() {
             {faqs.slice(0, 4).map((f) => (
               <div key={f.q} className="py-6">
                 <h3 className="text-base text-charcoal">{f.q}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.a[0]}</p>
               </div>
             ))}
             <div className="py-6">

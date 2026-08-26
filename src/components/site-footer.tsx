@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Globe } from "lucide-react";
 import { services, industries, site } from "@/lib/site-data";
 import logo from "@/assets/squad-logo.png";
 
@@ -17,8 +17,7 @@ export function SiteFooter() {
             />
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-offwhite/65">
-            Dedicated offshore teams for customer support, business assistance, lead generation and
-            operational delivery.
+            {site.boilerplate}
           </p>
           <ul className="mt-5 space-y-2 text-sm text-offwhite/65">
             <li className="flex items-center gap-2">
@@ -28,6 +27,17 @@ export function SiteFooter() {
               <Phone className="size-4 text-marigold" />
               <a href={site.phoneHref} className="hover:text-marigold">
                 {site.phone}
+              </a>
+            </li>
+            <li className="flex items-center gap-2">
+              <Globe className="size-4 text-marigold" />
+              <a
+                href={`https://${site.website}`}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-marigold"
+              >
+                {site.website}
               </a>
             </li>
             <li className="flex items-start gap-2">

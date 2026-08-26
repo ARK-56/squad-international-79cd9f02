@@ -143,18 +143,18 @@ function ServiceDetail() {
               <Users className="mt-0.5 size-4 shrink-0 text-marigold" />
               <div>
                 <dt className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                  Team shape
+                  Support model
                 </dt>
-                <dd className="mt-1 text-sm text-charcoal">{service.teamShape}</dd>
+                <dd className="mt-1 text-sm text-charcoal">{service.supportModel}</dd>
               </div>
             </div>
             <div className="flex gap-3">
               <Clock className="mt-0.5 size-4 shrink-0 text-marigold" />
               <div>
                 <dt className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                  Time to live
+                  Scaling
                 </dt>
-                <dd className="mt-1 text-sm text-charcoal">{service.ramp}</dd>
+                <dd className="mt-1 text-sm text-charcoal">{service.scaling}</dd>
               </div>
             </div>
           </dl>

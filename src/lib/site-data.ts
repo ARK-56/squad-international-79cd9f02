@@ -5,14 +5,18 @@ export const site = {
   // wa.me needs the country code with no "+" and no leading zero: +92 313 297 2974.
   whatsapp: "https://wa.me/923132972974",
   email: "inquire@squadinternational.net",
-  phone: "+1 (201) 820-6889",
-  phoneHref: "tel:+12018206889",
+  // One number for both, per the site copy deck: "Phone / WhatsApp".
+  phone: "+92 313 2972974",
+  phoneHref: "tel:+923132972974",
   // Google Business Profile: "Squad International", BPO company, PECHS Karachi.
   // cid form is stable and needs no API key.
   googleReviewsUrl: "https://www.google.com/maps?cid=18065864380427141787",
   googleRating: 4.9,
   googleReviewCount: 33,
-  address: "276 Holten Ave, Staten Island, NY 10309-4028, United States",
+  address: "428 Southwest 80th Avenue, North Lauderdale, Florida 33068, US",
+  website: "www.squadinternational.net",
+  boilerplate:
+    "Squad International provides reliable outsourcing and business support solutions designed to help businesses reduce costs, increase capacity and keep day-to-day operations moving.",
   socials: [
     { name: "LinkedIn", url: "https://www.linkedin.com/company/squadinternational" },
     { name: "Instagram", url: "https://www.instagram.com/thesquadinternational" },
@@ -32,8 +36,12 @@ export type Service = {
   process: { step: string; detail: string }[];
   idealFor: string[];
   tools: string[];
-  teamShape: string;
-  ramp: string;
+  /** Longer positioning line used on the services page card. */
+  pitch: string;
+  /** Capability chips shown under the pitch. */
+  highlights: string[];
+  supportModel: string;
+  scaling: string;
 };
 
 export const services: Service[] = [
@@ -71,8 +79,11 @@ export const services: Service[] = [
       "Front and Help Scout",
       "Your knowledge base and macro library",
     ],
-    teamShape: "3-15 agents with a supervisor and QA analyst",
-    ramp: "Supervised pilot in 3-4 weeks",
+    pitch:
+      "Expand your customer support capacity with dedicated resources that work around your processes — helping you serve customers consistently without carrying the cost of building every support role internally.",
+    highlights: ["Inbound Calls", "Live Chat + Email", "Ticket Management"],
+    supportModel: "Dedicated & Reliable",
+    scaling: "Flexible to Your Needs",
   },
   {
     slug: "lead-generation",
@@ -108,8 +119,11 @@ export const services: Service[] = [
       "Clay and Dropcontact enrichment",
       "Aircall and power dialers",
     ],
-    teamShape: "SDR pod: 2-6 reps, a researcher and a lead",
-    ramp: "First booked meetings in 4-6 weeks",
+    pitch:
+      "Keep your sales pipeline moving with dedicated prospecting support — without increasing the internal overhead required to manage every stage of outreach and qualification.",
+    highlights: ["Cold Calling", "Lead Qualification", "Appointment Setting"],
+    supportModel: "Dedicated & Reliable",
+    scaling: "Flexible to Your Needs",
   },
   {
     slug: "virtual-business-assistance",
@@ -145,8 +159,11 @@ export const services: Service[] = [
       "Asana, ClickUp and Monday.com",
       "DocuSign and PandaDoc",
     ],
-    teamShape: "1-3 dedicated assistants sharing a team lead",
-    ramp: "Live in 10-14 days",
+    pitch:
+      "Move recurring administrative and desk work to dedicated support so your internal team can spend more time on the work that drives the business forward.",
+    highlights: ["Data Entry & Admin Support", "Research", "CRM & Order Processing"],
+    supportModel: "Dedicated & Reliable",
+    scaling: "Flexible to Your Needs",
   },
   {
     slug: "medical-billing-healthcare",
@@ -182,8 +199,11 @@ export const services: Service[] = [
       "Clearinghouses such as Office Ally",
       "Your practice management system",
     ],
-    teamShape: "2-10 billers with a dedicated QA reviewer",
-    ramp: "Live in 3-4 weeks once access is granted",
+    pitch:
+      "Support routine healthcare billing and administrative processes with dedicated outsourced resources — adding back-office capacity without having to build every function internally.",
+    highlights: ["Eligibility Verification", "Medical Billing & Claims Support", "AR Follow-Up"],
+    supportModel: "Dedicated & Reliable",
+    scaling: "Flexible to Your Needs",
   },
   {
     slug: "ecommerce-customer-support",
@@ -219,8 +239,11 @@ export const services: Service[] = [
       "ShipStation and AfterShip",
       "Klaviyo and your CRM",
     ],
-    teamShape: "2-12 agents with a supervisor",
-    ramp: "Supervised pilot in 2-3 weeks",
+    pitch:
+      "Give your customers dependable support across their buying journey while adding the capacity to manage orders, returns and customer service without continuously increasing internal headcount.",
+    highlights: ["Shopify & Amazon Support", "Orders + Returns", "Customer Service"],
+    supportModel: "Dedicated & Reliable",
+    scaling: "Flexible to Your Needs",
   },
   {
     slug: "accounting-bookkeeping",
@@ -256,8 +279,11 @@ export const services: Service[] = [
       "Excel, Sheets and Power BI",
       "Your payroll platform",
     ],
-    teamShape: "1-6 bookkeepers with a reviewer",
-    ramp: "First supported close in 3-4 weeks",
+    pitch:
+      "Keep recurring financial administration organized and moving with dedicated bookkeeping support built around your business processes and reporting requirements.",
+    highlights: ["QuickBooks", "Xero & AP/AR", "Reconciliation", "Monthly Reporting"],
+    supportModel: "Dedicated & Reliable",
+    scaling: "Flexible to Your Needs",
   },
 ];
 
@@ -265,6 +291,10 @@ export type Industry = {
   slug: string;
   name: string;
   short: string;
+  /** Deck's per-industry headline, shown above the body copy. */
+  headline: string;
+  /** The deck's "Key Focus" triple. */
+  keyFocus: string[];
   challenges: string[];
   solutions: string[];
   metrics: { label: string; value: string }[];
@@ -274,7 +304,10 @@ export const industries: Industry[] = [
   {
     slug: "ecommerce-retail",
     name: "E-commerce & Retail",
-    short: "Peak-season support, order operations and marketplace management.",
+    short:
+      "Customer expectations stay high whether you're handling everyday orders or seasonal peaks. We help e-commerce and retail businesses manage recurring customer and operational workloads without continuously expanding internal headcount.",
+    headline: "Support That Scales With Customer Demand",
+    keyFocus: ["Customer Experience", "Order Workflows", "Flexible Capacity"],
     challenges: [
       "Volume spikes around promotions and holidays",
       "Order, refund and WISMO enquiries dominating support",
@@ -294,7 +327,10 @@ export const industries: Industry[] = [
   {
     slug: "saas-technology",
     name: "SaaS & Technology",
-    short: "Tier-1 technical support, onboarding and SDR pipeline generation.",
+    short:
+      "As technology businesses grow, so do customer conversations, administrative workloads and sales activity. Dedicated outsourced support gives your internal team more capacity to focus on product, customers and growth.",
+    headline: "Support Your Growth Without Adding Unnecessary Overhead",
+    keyFocus: ["Customer Experience", "Pipeline Support", "Scalable Capacity"],
     challenges: [
       "Engineers pulled into tier-1 support tickets",
       "Onboarding backlog slowing time-to-value",
@@ -314,7 +350,10 @@ export const industries: Industry[] = [
   {
     slug: "healthcare",
     name: "Healthcare & Wellness",
-    short: "Patient coordination, admin support and claims processing.",
+    short:
+      "Billing, claims and administrative workloads can consume valuable internal time. We help healthcare and wellness businesses add dependable back-office capacity while maintaining consistent processes and accountability.",
+    headline: "Reliable Support for Process-Driven Healthcare Operations",
+    keyFocus: ["Billing Support", "Administrative Workflows", "Consistent Execution"],
     challenges: [
       "Administrative burden on clinical staff",
       "Appointment no-shows and scheduling churn",
@@ -334,7 +373,10 @@ export const industries: Industry[] = [
   {
     slug: "logistics",
     name: "Logistics & Supply Chain",
-    short: "Track-and-trace, carrier coordination and exception handling.",
+    short:
+      "Logistics businesses depend on consistent communication, accurate processing and reliable day-to-day support. We help manage recurring operational and administrative workloads so internal teams can stay focused on moving the business forward.",
+    headline: "Keep Everyday Operations Moving",
+    keyFocus: ["Customer Communication", "Order Processing", "Back-Office Support"],
     challenges: [
       "24/7 shipment exception handling",
       "Manual carrier and vendor coordination",
@@ -354,7 +396,10 @@ export const industries: Industry[] = [
   {
     slug: "financial-services",
     name: "Financial & Professional Services",
-    short: "KYC support, client servicing and back-office processing.",
+    short:
+      "Financial and professional service businesses depend on accurate, consistent administrative and financial processes. Dedicated outsourced support helps keep recurring work moving without requiring every function to be built internally.",
+    headline: "More Back-Office Capacity. Less Internal Overhead.",
+    keyFocus: ["Financial Administration", "Client Support", "Operational Efficiency"],
     challenges: [
       "Regulated processes requiring consistent execution",
       "Client servicing volumes outpacing headcount",
@@ -374,7 +419,10 @@ export const industries: Industry[] = [
   {
     slug: "real-estate",
     name: "Real Estate & Property",
-    short: "Lead qualification, listing management and tenant support.",
+    short:
+      "Lead follow-ups, appointments, CRM updates and administrative work can quickly take time away from clients and deals. We help real estate and property businesses manage recurring support work with dedicated resources built around their workflow.",
+    headline: "Keep Opportunities Moving While Your Team Stays Focused",
+    keyFocus: ["Lead Follow-Up", "Appointment Support", "CRM & Administration"],
     challenges: [
       "Inbound leads going cold outside office hours",
       "Listing and CRM data drifting out of date",
@@ -473,66 +521,120 @@ export const caseStudies: CaseStudy[] = [
   },
 ];
 
-export const faqs = [
+/**
+ * Answers are paragraph arrays: the site copy deck writes several of these as two
+ * or three short paragraphs, and joining them into one block loses the breaks.
+ */
+export const faqs: { q: string; a: string[] }[] = [
   {
     q: "How quickly can a team be up and running?",
-    a: "A single assistant or agent typically goes live in 10-14 days. A managed pod with a team lead and QA analyst takes three to five weeks, depending on training depth and compliance requirements.",
+    a: [
+      "The timeline depends on the service, team size, training requirements and complexity of your workflow.",
+      "We start by understanding your requirements, designing the right support structure and preparing the team around your processes and tools. A clear onboarding timeline is agreed before deployment begins.",
+    ],
   },
   {
     q: "How is pricing structured?",
-    a: "We price per dedicated seat per month, with rates set by role seniority, language requirements and shift coverage. There are no per-ticket or per-minute surprises, and scope changes are agreed in writing before they take effect.",
+    a: [
+      "Pricing is built around your specific requirements rather than a fixed package.",
+      "Factors such as the type of work, number of resources, responsibilities, working hours and overall scope can affect pricing.",
+      "For pricing, book a free consultation or WhatsApp us to discuss your requirements.",
+    ],
   },
   {
     q: "Who manages the team day to day?",
-    a: "Every engagement has a named team lead accountable for delivery, plus QA sampling and reporting. You set priorities; we handle scheduling, coaching, cover and performance management.",
+    a: [
+      "Squad International works as an extension of your business.",
+      "We structure dedicated resources around agreed responsibilities and workflows, while maintaining communication, consistency and accountability throughout the engagement.",
+      "Your priorities and standards remain clear; we help keep the day-to-day work moving.",
+    ],
   },
   {
     q: "How do you protect our data?",
-    a: "Work happens on controlled devices with restricted access, signed NDAs, role-based permissions in your systems and documented offboarding. We can align to your security policy and support region-specific requirements.",
+    a: [
+      "Data access and security requirements are discussed during the setup process based on the systems, tools and type of work involved.",
+      "We work with clients to understand their access requirements and establish an appropriate working structure before delivery begins.",
+    ],
   },
   {
-    q: "What happens if an agent underperforms or leaves?",
-    a: "SOPs and cross-training mean cover is available immediately, and replacements are recruited and trained at our cost. Continuity is our responsibility, not yours.",
+    q: "What happens if a team member is not performing as expected?",
+    a: [
+      "Reliable delivery and accountability are important parts of how we work.",
+      "If there is a performance or resource issue, our team works with you to address it and make the necessary adjustments so the agreed responsibilities continue to be handled effectively.",
+    ],
   },
   {
-    q: "Can you work in our tools and time zone?",
-    a: "Yes. We operate inside your helpdesk, CRM and communication stack, and staff shifts to your customers' hours — including overnight and weekend coverage.",
+    q: "Can you work with our existing tools and working hours?",
+    a: [
+      "Our support is designed around the way your business already works.",
+      "During the discovery and design stages, we review your workflows, systems, responsibilities and required working hours so the team can be structured around your operational needs.",
+    ],
   },
   {
-    q: "How do we measure whether it is working?",
-    a: "We agree the metrics before launch — response times, quality scores, turnaround, meetings booked — and report against them weekly, with a monthly business review.",
+    q: "How do we know whether outsourcing is working?",
+    a: [
+      "Before delivery begins, we make sure responsibilities, expectations and business priorities are clearly understood.",
+      "Performance can then be reviewed against the outcomes that matter to your business — whether that means customer support quality, completed work, response times, appointments, operational capacity or another agreed priority.",
+    ],
   },
   {
     q: "Is there a minimum commitment?",
-    a: "Engagements typically start with a three-month initial term so training investment pays back, then continue month to month.",
+    a: [
+      "Engagement requirements can vary depending on the service, team structure and scope of work.",
+      "Any commitment, commercial terms and engagement requirements are discussed clearly before you begin. Contact us to discuss the right setup for your business.",
+    ],
   },
   {
     q: "Where are your teams based, and what hours can they cover?",
-    a: "We staff from delivery centres across the Americas, EMEA and APAC, which lets us build shifts around your customers rather than ours. Most engagements start with a single shift aligned to your business hours; extended, overnight and follow-the-sun coverage is a question of headcount, not feasibility.",
+    a: [
+      "Squad International supports businesses across different markets and works with clients based on their operational requirements.",
+      "Working hours and coverage are determined during the setup process based on your customers, workload and the type of support required.",
+    ],
   },
   {
     q: "What languages do your teams support?",
-    a: "Customer-facing English on every engagement, with Spanish, Portuguese, French, German, Arabic and Tagalog available depending on the role and volume. Language is assessed during recruitment against the channel — written-only roles and voice roles are screened to different standards.",
+    a: [
+      "Language requirements depend on the service, role and team being built.",
+      "If your business requires support in a specific language, let us know during the discovery call so we can assess the requirement as part of your proposed solution.",
+    ],
   },
   {
-    q: "Do we get to interview and approve candidates?",
-    a: "Yes. We screen for domain, language and tooling fit, then present a shortlist with scorecards. You interview whoever you want and approve every hire before they start — nobody joins your account without your sign-off.",
+    q: "Can the team be built around our specific requirements?",
+    a: [
+      "Yes. That is a core part of our approach.",
+      "We tailor teams, workflows and responsibilities around your business rather than forcing you into a fixed outsourcing model. The goal is to give you the support you actually need.",
+    ],
   },
   {
-    q: "Do teams work from an office or from home?",
-    a: "Both models are available. Regulated or data-sensitive work runs from a controlled office floor with clean-desk policy, restricted media and supervised access. Lower-risk roles can run remote on managed devices. We agree the model during scoping and it forms part of the contract.",
+    q: "Do teams work from an office or remotely?",
+    a: [
+      "The delivery setup can depend on the role, workflow and requirements of the engagement.",
+      "We discuss the appropriate working model during the discovery and design process so the structure fits the work being handled.",
+    ],
   },
   {
     q: "What does onboarding require from our team?",
-    a: "Roughly four to six hours across the first two weeks: a kickoff to walk through the work, tool and system access, and two or three review sessions during the ramp. We write the SOPs from those sessions, after which your involvement drops to a weekly check-in.",
+    a: [
+      "We need enough information to understand how the work should be done.",
+      "That typically means helping us understand your existing workflow, responsibilities, tools, standards and expectations during the discovery and setup stages.",
+      "From there, we structure the solution and prepare the team around your requirements.",
+    ],
   },
   {
-    q: "What if we need to scale down or exit?",
-    a: "Seats can be reduced on 30 days notice once the initial term is complete. On exit you keep everything we built — SOPs, macros, templates, dashboards and process documentation — because it lives in your systems and is documented as your property from day one.",
+    q: "What if our support requirements change later?",
+    a: [
+      "Your outsourcing setup should be able to change with your business.",
+      "You can start with the support you need today and adjust your team as your workload, customer base and business requirements evolve.",
+      "Specific commercial or contractual changes are agreed according to the engagement.",
+    ],
   },
   {
-    q: "When is outsourcing not the right answer?",
-    a: "When the process is still changing week to week, when nobody internally owns quality, or when the work depends on in-person context that cannot be documented. Outsourcing amplifies whatever process you hand over. If that is where you are, we will say so on the call rather than staff a team that will underperform.",
+    q: "When is outsourcing not the right solution?",
+    a: [
+      "Outsourcing works best when there is a clear business function, responsibility or process that can be handed over effectively.",
+      "If a process is constantly changing, cannot yet be clearly defined or depends heavily on information that cannot be transferred to another team, it may be better to structure the process first.",
+      "Our goal is to build support that works — not simply add resources where they will not create value.",
+    ],
   },
 ];
 
@@ -597,6 +699,14 @@ export const posts = [
       "Then coach on patterns rather than incidents. One low score is noise; three in the same rubric category is a training gap worth a session.",
     ],
   },
+];
+
+/** The about page uses Global Clients where the homepage uses Coverage Models. */
+export const aboutStats = [
+  { value: "500+", label: "Trained specialists" },
+  { value: "300+", label: "Global clients" },
+  { value: "98%", label: "Client retention" },
+  { value: "60%", label: "Average cost savings" },
 ];
 
 export const stats = [

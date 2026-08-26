@@ -4,9 +4,11 @@ import { BookingDialog } from "@/components/booking-dialog";
 import { site } from "@/lib/site-data";
 
 export function CtaBand({
+  eyebrow = "Next step",
   title = "Need a little help? We've got you covered!",
   description = "Book a 30-minute discovery call, or message us on WhatsApp — we reply the same working day.",
 }: {
+  eyebrow?: string;
   title?: string;
   description?: string;
 }) {
@@ -14,7 +16,7 @@ export function CtaBand({
     <section className="border-y border-border bg-offwhite">
       <div className="container-page flex flex-col items-center py-20 text-center md:py-28">
         <span className="eyebrow">
-          <span className="h-px w-8 bg-marigold" /> Next step
+          <span className="h-px w-8 bg-marigold" /> {eyebrow}
         </span>
         <h2 className="font-display mt-5 max-w-4xl text-balance text-4xl uppercase leading-[0.95] tracking-tight text-charcoal sm:text-5xl md:text-6xl lg:text-7xl">
           {title}

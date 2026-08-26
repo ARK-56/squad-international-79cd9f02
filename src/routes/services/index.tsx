@@ -1,24 +1,24 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, CalendarDays } from "lucide-react";
+import { ArrowRight, CalendarDays, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
 import { PageHero } from "@/components/page-hero";
-import { CtaBand } from "@/components/cta-band";
+import { SectionHeading } from "@/components/section-heading";
 import { services, site } from "@/lib/site-data";
 
 export const Route = createFileRoute("/services/")({
   head: () => ({
     meta: [
-      { title: "BPO Services | Support, Assistance & Lead Generation" },
+      { title: "Outsourcing Services | Squad International" },
       {
         name: "description",
         content:
-          "Explore Squad International services: customer support, virtual and business assistance, lead generation, dedicated pods, operational management and growth support.",
+          "Customer support outsourcing, lead generation, virtual assistant and desk support, medical billing, e-commerce support and bookkeeping — built around the way your business works.",
       },
-      { property: "og:title", content: "BPO Services | Squad International" },
+      { property: "og:title", content: "Outsourcing Services | Squad International" },
       {
         property: "og:description",
-        content: "Six delivery lines staffed, trained and supervised by Squad International.",
+        content: "Flexible support, built around your business.",
       },
     ],
   }),
@@ -30,45 +30,50 @@ function ServicesPage() {
     <>
       <PageHero
         eyebrow="Services"
-        title="Delivery capability, staffed and supervised"
-        description="Every service line comes with trained specialists, documented process, quality sampling and reporting against agreed SLAs."
+        title="Flexible support. Built around your business."
+        description="From customer support and lead generation to healthcare, e-commerce and bookkeeping, we provide outsourced support built around the way your business works — helping you reduce operating costs, improve efficiency and add capacity without building every role in-house."
       >
         <BookingDialog>
           <Button variant="marigold" size="lg">
-            <CalendarDays /> Book a Meeting
+            <CalendarDays /> Book a Free Consultation
           </Button>
         </BookingDialog>
       </PageHero>
 
       <section className="container-page py-20 md:py-24">
         <div className="grid gap-6 md:grid-cols-2">
-          {services.map((s) => (
+          {services.map((s, index) => (
             <article
               key={s.slug}
               className="flex flex-col rounded-lg border border-border bg-card p-8 transition-all hover:-translate-y-1 hover:border-marigold"
             >
-              <h2 className="text-2xl text-charcoal">{s.title}</h2>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{s.summary}</p>
-              <ul className="mt-6 space-y-2">
-                {s.outcomes.map((o) => (
-                  <li key={o} className="flex gap-2 text-sm text-charcoal">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-marigold" />
-                    {o}
+              <span className="text-xs uppercase tracking-[0.18em] text-marigold">
+                Service {String(index + 1).padStart(2, "0")}
+              </span>
+              <h2 className="mt-3 text-2xl text-charcoal">{s.title}</h2>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{s.pitch}</p>
+              <ul className="mt-6 flex flex-wrap gap-2">
+                {s.highlights.map((h) => (
+                  <li
+                    key={h}
+                    className="rounded-full border border-border bg-background px-3.5 py-1.5 text-xs font-medium text-charcoal"
+                  >
+                    {h}
                   </li>
                 ))}
               </ul>
-              <dl className="mt-6 grid gap-3 border-t border-border pt-5 text-sm sm:grid-cols-2">
+              <dl className="mt-6 grid flex-1 gap-3 border-t border-border pt-5 text-sm sm:grid-cols-2">
                 <div>
                   <dt className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                    Team shape
+                    Support model
                   </dt>
-                  <dd className="mt-1 text-charcoal">{s.teamShape}</dd>
+                  <dd className="mt-1 text-charcoal">{s.supportModel}</dd>
                 </div>
                 <div>
                   <dt className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                    Time to live
+                    Scaling
                   </dt>
-                  <dd className="mt-1 text-charcoal">{s.ramp}</dd>
+                  <dd className="mt-1 text-charcoal">{s.scaling}</dd>
                 </div>
               </dl>
               <div className="mt-8">
@@ -83,7 +88,28 @@ function ServicesPage() {
         </div>
       </section>
 
-      <CtaBand />
+      <section className="surface-dark py-20 md:py-24">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="Next step"
+            title="You stay focused on the business. We help keep the work moving."
+            description="Tell us where your business needs support. We'll help you build the right outsourced team around your workflow — giving you more capacity while keeping operating costs under control."
+            tone="light"
+          />
+          <div className="mt-10 flex flex-wrap gap-3">
+            <BookingDialog>
+              <Button variant="marigold" size="lg">
+                <CalendarDays /> Book a Free Consultation
+              </Button>
+            </BookingDialog>
+            <Button variant="outlineLight" size="lg" asChild>
+              <a href={site.whatsapp} target="_blank" rel="noreferrer">
+                <MessageCircle /> WhatsApp Us
+              </a>
+            </Button>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

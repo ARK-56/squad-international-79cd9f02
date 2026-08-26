@@ -33,7 +33,7 @@ export const Route = createFileRoute("/faqs")({
           mainEntity: faqs.map((f) => ({
             "@type": "Question",
             name: f.q,
-            acceptedAnswer: { "@type": "Answer", text: f.a },
+            acceptedAnswer: { "@type": "Answer", text: f.a.join(" ") },
           })),
         }),
       },
@@ -47,8 +47,8 @@ function FaqPage() {
     <>
       <PageHero
         eyebrow="FAQs"
-        title="Straight answers to the usual objections"
-        description="Pricing, onboarding, quality, security and continuity — what buyers ask before signing."
+        title="Straight answers before you outsource"
+        description="From pricing and onboarding to team management, scaling and day-to-day delivery — here are answers to the questions businesses commonly ask before working with Squad International."
       />
 
       <section className="bg-card py-20 md:py-24">
@@ -59,8 +59,10 @@ function FaqPage() {
               <AccordionTrigger className="text-left text-base text-charcoal hover:text-marigold">
                 {f.q}
               </AccordionTrigger>
-              <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
-                {f.a}
+              <AccordionContent className="space-y-3 text-sm leading-relaxed text-muted-foreground">
+                {f.a.map((para) => (
+                  <p key={para}>{para}</p>
+                ))}
               </AccordionContent>
             </AccordionItem>
           ))}
@@ -68,7 +70,11 @@ function FaqPage() {
         </div>
       </section>
 
-      <CtaBand title="Still have a question we haven't answered?" />
+      <CtaBand
+        eyebrow="Still have a question?"
+        title="Let's talk about your business."
+        description="Every outsourcing requirement is different. Book a 30-minute discovery call or message us on WhatsApp to discuss your workload, current challenges and where additional support could make the biggest difference."
+      />
     </>
   );
 }

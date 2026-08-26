@@ -1,55 +1,76 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { CalendarDays, MessageCircle } from "lucide-react";
 import teamImage from "@/assets/team-about.jpg";
+import { Button } from "@/components/ui/button";
+import { BookingDialog } from "@/components/booking-dialog";
 import { PageHero } from "@/components/page-hero";
-import { CtaBand } from "@/components/cta-band";
 import { SectionHeading } from "@/components/section-heading";
-import { stats } from "@/lib/site-data";
+import { aboutStats, site } from "@/lib/site-data";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Squad International | Operational Support Partner" },
+      { title: "About Squad International | Your Business Companion" },
       {
         name: "description",
         content:
-          "Squad International is an outsourcing partner providing dedicated teams, customer and operational management, and growth support for scaling businesses.",
+          "Since 2019, Squad International has helped businesses reduce operational pressure, increase capacity and keep important work moving through reliable outsourcing and business support.",
       },
       { property: "og:title", content: "About Squad International" },
       {
         property: "og:description",
-        content: "Who we are, how we operate, and the principles behind every engagement.",
+        content: "Your business companion for smarter outsourcing.",
       },
     ],
   }),
   component: AboutPage,
 });
 
-const values = [
+const approach = [
   {
-    title: "Ownership",
-    body: "Every engagement has a named lead who is accountable for delivery, not a shared inbox.",
+    title: "Built around your business",
+    body: "We tailor teams, workflows and responsibilities around your needs, giving you support that fits the way your business already works.",
   },
   {
-    title: "Documentation",
-    body: "If it is not written down, it is not a process. SOPs are owned, versioned and reviewed.",
+    title: "Flexible scaling",
+    body: "Start with the support you need today and scale your team as your workload, customer base and business requirements grow.",
   },
   {
-    title: "Measurement",
-    body: "We agree the metrics before launch and report against them, including when they slip.",
+    title: "Dedicated & reliable teams",
+    body: "Your work is handled by dedicated people who understand your processes, follow your standards and deliver consistent support you can rely on.",
   },
   {
-    title: "Restraint",
-    body: "We say no to work we cannot deliver well. Overselling costs both sides more than it earns.",
+    title: "Partnership mindset",
+    body: "We aim to become a dependable extension of your team, working closely with you to support your goals and keep your business moving forward.",
   },
 ];
 
-const milestones = [
-  { phase: "Discovery", detail: "Objectives, audience, services and conversion goals confirmed." },
-  { phase: "Design", detail: "Operating model, roles, SLAs and reporting agreed in writing." },
-  { phase: "Build", detail: "Recruit, train and certify the team against your standards." },
-  { phase: "Transition", detail: "Phased handover with parallel running and QA safeguards." },
-  { phase: "Run", detail: "Weekly reporting, QA sampling and coaching cadence." },
-  { phase: "Improve", detail: "Quarterly reviews for scope, automation and cost efficiency." },
+const process = [
+  {
+    step: "Discover",
+    lead: "Understand your needs",
+    body: "We start by understanding your business, current processes, workload and the areas where additional support can create the most value.",
+  },
+  {
+    step: "Design",
+    lead: "Build your solution",
+    body: "We define the responsibilities, workflows and support structure around your business requirements.",
+  },
+  {
+    step: "Deploy",
+    lead: "Build your team",
+    body: "The right resources are selected and prepared around your processes, tools and expectations.",
+  },
+  {
+    step: "Deliver",
+    lead: "Execute & manage",
+    body: "Your dedicated team begins handling the agreed responsibilities with ongoing communication, consistency and accountability.",
+  },
+  {
+    step: "Scale",
+    lead: "Grow with your business",
+    body: "As your workload and requirements change, your support can grow and adapt with your business.",
+  },
 ];
 
 function AboutPage() {
@@ -57,84 +78,137 @@ function AboutPage() {
     <>
       <PageHero
         eyebrow="About Us"
-        title="An outsourcing partner built around accountability"
-        description="We provide dedicated teams and business support functions — combining operational execution, customer management, lead generation and growth support under one delivery model."
+        title="Your business companion for smarter outsourcing"
+        description="Since 2019, Squad International has been helping businesses reduce operational pressure, increase capacity and keep important work moving through reliable outsourcing and business support solutions. We work as an extension of your team — giving you the support you need without the cost and complexity of building every function in-house."
       />
 
       <section className="container-page grid items-center gap-14 py-20 lg:grid-cols-2 md:py-24">
-        <div className="overflow-hidden rounded-lg border border-border">
-          <img
-            src={teamImage}
-            alt="Squad International delivery team in a planning session"
-            width={1400}
-            height={900}
-            loading="lazy"
-            className="h-full w-full object-cover"
-          />
-        </div>
         <div>
           <SectionHeading
             eyebrow="Who we are"
-            title="Operations people, not a staffing broker"
-            description="We do not hand you a CV and disappear. We design the operating model, hire against it, train the team, run quality control and report on performance — the same way an internal operations leader would."
+            title="Built to support the way your business works"
           />
-          <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-            That model works because it removes the two things that make outsourcing fail: unclear
-            ownership and undocumented process. Our clients keep control of priorities and standards;
-            we take responsibility for capacity, continuity and quality.
-          </p>
-          <div className="mt-10 grid grid-cols-2 gap-6">
-            {stats.map((s) => (
-              <div key={s.label}>
-                <p className="font-display text-3xl text-charcoal">{s.value}</p>
-                <p className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
-                  {s.label}
-                </p>
-              </div>
-            ))}
+          <div className="mt-8 space-y-4 text-sm leading-relaxed text-muted-foreground">
+            <p>
+              Squad International started in 2019 with a focus on telemarketing and business
+              support. Since then, we have grown into a broader BPO partner supporting businesses
+              across customer service, lead generation, virtual assistance, healthcare operations,
+              e-commerce and bookkeeping.
+            </p>
+            <p>
+              Today, we are trusted by businesses across different markets and industries to provide
+              dependable people, consistent execution and flexible support.
+            </p>
+            <p>
+              Our role is simple: understand what your business needs, build support around your
+              workflow and help your internal team stay focused on the work that drives growth.
+            </p>
           </div>
+        </div>
+        <figure className="overflow-hidden rounded-xl border border-border">
+          <img
+            src={teamImage}
+            alt="Squad International team working together"
+            loading="lazy"
+            className="h-full w-full object-cover"
+          />
+        </figure>
+      </section>
+
+      <section className="border-y border-border bg-card">
+        <div className="container-page grid grid-cols-2 gap-8 py-10 lg:grid-cols-4">
+          {aboutStats.map((s) => (
+            <div key={s.label}>
+              <p className="font-display text-4xl text-charcoal">{s.value}</p>
+              <p className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
+                {s.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="container-page py-20 md:py-24">
+        <SectionHeading
+          eyebrow="Our approach"
+          title="Support built around your business"
+          description="Every business operates differently. That is why we focus on flexible support, dedicated resources and long-term working relationships instead of forcing clients into a fixed outsourcing model."
+        />
+        <div className="mt-12 grid gap-5 sm:grid-cols-2">
+          {approach.map((a) => (
+            <div key={a.title} className="rounded-lg border border-border bg-card p-7">
+              <h3 className="text-lg text-charcoal">{a.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{a.body}</p>
+            </div>
+          ))}
         </div>
       </section>
 
       <section className="surface-dark py-20 md:py-24">
         <div className="container-page">
           <SectionHeading
-            eyebrow="Principles"
-            title="How we work"
+            eyebrow="How we get started"
+            title="From business needs to business impact"
+            description="A simple, structured process designed to make outsourcing easy."
             tone="light"
-            description="Four commitments that shape every engagement."
           />
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {values.map((v) => (
-              <div key={v.title} className="rounded-lg border border-offwhite/10 bg-offwhite/[0.04] p-7">
-                <h3 className="text-lg text-offwhite">{v.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-offwhite/65">{v.body}</p>
-              </div>
+          <ol className="mt-12 space-y-5">
+            {process.map((p, idx) => (
+              <li
+                key={p.step}
+                className="flex gap-5 rounded-lg border border-offwhite/10 bg-offwhite/[0.04] p-7"
+              >
+                <span className="font-display text-2xl text-marigold">
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 className="text-lg uppercase tracking-wide text-offwhite">
+                    {p.step} — {p.lead}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-offwhite/65">{p.body}</p>
+                </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
       <section className="container-page py-20 md:py-24">
-        <SectionHeading
-          eyebrow="Engagement path"
-          title="From first call to steady state"
-          description="A predictable sequence, so you always know what happens next."
-        />
-        <ol className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {milestones.map((m, idx) => (
-            <li key={m.phase} className="rounded-lg border border-border bg-card p-7">
-              <span className="font-display text-3xl text-marigold">
-                {String(idx + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mt-3 text-lg text-charcoal">{m.phase}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{m.detail}</p>
-            </li>
-          ))}
-        </ol>
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="font-display text-3xl uppercase leading-tight tracking-tight text-charcoal md:text-4xl">
+            You stay focused on the business. We help keep the work moving.
+          </h2>
+          <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+            Outsourcing should give your business more capacity — not another problem to manage.
+            Whether you need one dedicated resource or support across multiple business functions,
+            Squad International helps you build the right team around your workflow while keeping
+            operating costs under control.
+          </p>
+        </div>
       </section>
 
-      <CtaBand />
+      <section className="surface-dark py-20 md:py-24">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="Next step"
+            title="Ready to add capacity without adding the overhead?"
+            description="Tell us where your business needs support. We'll help you understand what can be outsourced and build a solution around the way your business works."
+            tone="light"
+          />
+          <div className="mt-10 flex flex-wrap gap-3">
+            <BookingDialog>
+              <Button variant="marigold" size="lg">
+                <CalendarDays /> Book a Free Consultation
+              </Button>
+            </BookingDialog>
+            <Button variant="outlineLight" size="lg" asChild>
+              <a href={site.whatsapp} target="_blank" rel="noreferrer">
+                <MessageCircle /> WhatsApp Us
+              </a>
+            </Button>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
