@@ -13,10 +13,12 @@ export const site = {
   googleReviewsUrl: "https://www.google.com/maps?cid=18065864380427141787",
   googleRating: 4.9,
   googleReviewCount: 33,
-  address: "428 Southwest 80th Avenue, North Lauderdale, Florida 33068, US",
-  website: "www.squadinternational.net",
-  boilerplate:
-    "Squad International provides reliable outsourcing and business support solutions designed to help businesses reduce costs, increase capacity and keep day-to-day operations moving.",
+  // Kept as explicit lines so the footer renders exactly two rather than wrapping
+  // to three in a narrow column. The contact page joins them.
+  // First line keeps its comma so the two blocks do not read as "AveNorth" when
+  // the text is extracted, and so joining them needs only a space.
+  addressLines: ["428 Southwest 80th Ave,", "North Lauderdale, FL 33068, US"],
+  boilerplate: "High-performing offshore teams and managed business support built to scale.",
   socials: [
     { name: "LinkedIn", url: "https://www.linkedin.com/company/squadinternational" },
     { name: "Instagram", url: "https://www.instagram.com/thesquadinternational" },

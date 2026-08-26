@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, Phone, MapPin, Globe } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { SubscribeForm } from "@/components/subscribe-form";
 import { services, industries, site } from "@/lib/site-data";
 import logo from "@/assets/squad-logo.png";
@@ -61,19 +61,15 @@ export function SiteFooter() {
                 {site.phone}
               </a>
             </li>
-            <li className="flex items-center gap-2">
-              <Globe className="size-4 text-marigold" />
-              <a
-                href={`https://${site.website}`}
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-marigold"
-              >
-                {site.website}
-              </a>
-            </li>
             <li className="flex items-start gap-2">
-              <MapPin className="mt-0.5 size-4 shrink-0 text-marigold" /> {site.address}
+              <MapPin className="mt-0.5 size-4 shrink-0 text-marigold" />
+              <span>
+                {site.addressLines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </span>
             </li>
           </ul>
           <nav aria-label="Social media" className="mt-6 flex flex-wrap gap-2">
