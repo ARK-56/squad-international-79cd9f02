@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Menu, X, CalendarDays, MessageCircle, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
@@ -35,6 +35,113 @@ const mobileLinkClass =
 const mobileSubLinkClass =
   "rounded-full px-4 py-2 text-sm text-offwhite/60 hover:bg-offwhite/10 hover:text-offwhite";
 
+/**
+ * Nav dropdown that opens on hover, while keeping click and keyboard working.
+ *
+ * Radix's DropdownMenu is click-driven by design, so the open state is lifted here
+ * and driven by pointer events. Three details matter:
+ *   - modal={false}: a modal menu locks page scroll, which is wrong for something
+ *     that opens just by passing the cursor over it.
+ *   - a short close delay, so crossing the gap between trigger and menu does not
+ *     dismiss it.
+ *
+ * Radix focuses the menu on open and there is no public prop to skip that, so a
+ * hover also moves focus into the menu. It is returned to the trigger on close.
+ */
+function HoverDropdown({ label, children }: { label: string; children: ReactNode }) {
+  const [open, setOpen] = useState(false);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+
+  const clearTimer = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  };
+
+  // Hover only where there is a real pointer. Touch keeps tap-to-open, and small
+  // screens use the separate accordion menu anyway.
+  const canHover = () =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  const handleEnter = () => {
+    if (!canHover()) return;
+    clearTimer();
+    setOpen(true);
+  };
+
+  /**
+   * Closing is driven by the pointer's position rather than a mouseleave handler.
+   * The menu is portaled to the body and sits a few pixels below the trigger, so
+   * leave events fire while the cursor is still travelling between the two; testing
+   * whether the pointer is inside either box is unambiguous and covers the gap.
+   */
+  useEffect(() => {
+    if (!open || !canHover()) return;
+
+    const onMove = (e: PointerEvent) => {
+      const boxes = [triggerRef.current, contentRef.current]
+        .filter((el) => el !== null)
+        .map((el) => el.getBoundingClientRect());
+      // Pad so the gap between trigger and menu still counts as "inside".
+      const pad = 16;
+      const inside = boxes.some(
+        (b) =>
+          e.clientX >= b.left - pad &&
+          e.clientX <= b.right + pad &&
+          e.clientY >= b.top - pad &&
+          e.clientY <= b.bottom + pad,
+      );
+      if (inside) {
+        clearTimer();
+      } else if (!closeTimer.current) {
+        closeTimer.current = setTimeout(() => {
+          closeTimer.current = null;
+          setOpen(false);
+        }, 120);
+      }
+    };
+
+    document.addEventListener("pointermove", onMove);
+    return () => {
+      document.removeEventListener("pointermove", onMove);
+      clearTimer();
+    };
+  }, [open]);
+
+  useEffect(() => clearTimer, []);
+
+  return (
+    <DropdownMenu
+      open={open}
+      onOpenChange={(next) => {
+        clearTimer();
+        setOpen(next);
+      }}
+      modal={false}
+    >
+      <DropdownMenuTrigger asChild onPointerEnter={handleEnter}>
+        <button ref={triggerRef} type="button" className={triggerClass}>
+          {label}
+          <ChevronDown className={chevronClass} />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        ref={contentRef}
+        align="start"
+        sideOffset={10}
+        className={menuClass}
+        onPointerEnter={handleEnter}
+      >
+        {children}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -68,49 +175,33 @@ export function SiteHeader() {
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button type="button" className={triggerClass}>
-                Services
-                <ChevronDown className={chevronClass} />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className={menuClass}>
-              <DropdownMenuItem asChild className={menuLeadClass}>
-                <Link to="/services">All Services</Link>
+          <HoverDropdown label="Services">
+            <DropdownMenuItem asChild className={menuLeadClass}>
+              <Link to="/services">All Services</Link>
+            </DropdownMenuItem>
+            <div className="my-1 h-px bg-border" />
+            {services.map((s) => (
+              <DropdownMenuItem key={s.slug} asChild className={menuItemClass}>
+                <Link to="/services/$slug" params={{ slug: s.slug }}>
+                  {s.title}
+                </Link>
               </DropdownMenuItem>
-              <div className="my-1 h-px bg-border" />
-              {services.map((s) => (
-                <DropdownMenuItem key={s.slug} asChild className={menuItemClass}>
-                  <Link to="/services/$slug" params={{ slug: s.slug }}>
-                    {s.title}
-                  </Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+            ))}
+          </HoverDropdown>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button type="button" className={triggerClass}>
-                Industries
-                <ChevronDown className={chevronClass} />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className={menuClass}>
-              <DropdownMenuItem asChild className={menuLeadClass}>
-                <Link to="/industries">All Industries</Link>
+          <HoverDropdown label="Industries">
+            <DropdownMenuItem asChild className={menuLeadClass}>
+              <Link to="/industries">All Industries</Link>
+            </DropdownMenuItem>
+            <div className="my-1 h-px bg-border" />
+            {industries.map((i) => (
+              <DropdownMenuItem key={i.slug} asChild className={menuItemClass}>
+                <Link to="/industries/$slug" params={{ slug: i.slug }}>
+                  {i.name}
+                </Link>
               </DropdownMenuItem>
-              <div className="my-1 h-px bg-border" />
-              {industries.map((i) => (
-                <DropdownMenuItem key={i.slug} asChild className={menuItemClass}>
-                  <Link to="/industries/$slug" params={{ slug: i.slug }}>
-                    {i.name}
-                  </Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+            ))}
+          </HoverDropdown>
 
           {nav.map((item) => (
             <Link
