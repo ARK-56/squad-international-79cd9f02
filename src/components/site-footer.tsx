@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin, Globe } from "lucide-react";
+import { SubscribeForm } from "@/components/subscribe-form";
 import { services, industries, site } from "@/lib/site-data";
 import logo from "@/assets/squad-logo.png";
 
@@ -49,7 +50,10 @@ export function SiteFooter() {
           </p>
           <ul className="mt-5 space-y-2 text-sm text-offwhite/65">
             <li className="flex items-center gap-2">
-              <Mail className="size-4 text-marigold" /> {site.email}
+              <Mail className="size-4 text-marigold" />
+              <a href={`mailto:${site.email}`} className="hover:text-marigold">
+                {site.email}
+              </a>
             </li>
             <li className="flex items-center gap-2">
               <Phone className="size-4 text-marigold" />
@@ -95,6 +99,8 @@ export function SiteFooter() {
               );
             })}
           </nav>
+
+          <SubscribeForm />
         </div>
 
         <FooterCol title="Services">
