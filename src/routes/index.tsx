@@ -128,7 +128,7 @@ function Home() {
         </div>
 
         {/* Hero content */}
-        <div className="relative z-10 max-w-5xl px-6 pb-20 pt-32 text-center md:pt-36">
+        <div className="relative z-10 max-w-6xl px-6 pb-20 pt-32 text-center md:pt-36">
           <div className="mb-6 flex items-center justify-center gap-4">
             <div className="h-px w-8 bg-marigold" />
             <span className="text-xs font-semibold uppercase tracking-[0.4em] text-marigold">
@@ -137,8 +137,15 @@ function Home() {
             <div className="h-px w-8 bg-marigold" />
           </div>
 
-          <h1 className="font-display text-5xl uppercase leading-none tracking-tight text-offwhite md:text-7xl lg:text-9xl">
-            Dedicated Teams. <br /> Built Around <span className="text-marigold">Your Business</span>.
+          {/*
+            "Built Around Your Business." is kept on one line from md up, which caps
+            the type size: at 128px the line needs 1340px and no viewport can give it
+            that, so the steps below are the largest that still fit their breakpoint.
+            Phones are too narrow for it at any readable size and wrap as before.
+          */}
+          <h1 className="font-display text-5xl uppercase leading-none tracking-tight text-offwhite md:text-6xl lg:text-7xl xl:text-8xl">
+            Dedicated Teams. <br /> Built Around{" "}
+            <span className="text-marigold">Your Business</span>.
           </h1>
 
           <p className="mx-auto mt-8 max-w-2xl text-lg font-light leading-relaxed text-offwhite/70 md:text-xl">
