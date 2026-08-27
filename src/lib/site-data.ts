@@ -92,7 +92,7 @@ export const services: Service[] = [
     slug: "lead-generation",
     title: "Lead Generation & Appointment Setting",
     short:
-      "Dedicated prospecting support to help keep your sales pipeline active and your internal team focused on qualified opportunities.",
+      "Dedicated prospecting support that keeps your sales pipeline active and your internal team focused on qualified leads.",
     summary:
       "Research, list building, multichannel outreach and appointment setting run by SDR pods that report on pipeline, not activity vanity metrics.",
     outcomes: [
@@ -133,7 +133,7 @@ export const services: Service[] = [
     slug: "virtual-business-assistance",
     title: "Virtual Assistant & Desk Support",
     short:
-      "Move recurring administrative and desk work to dedicated resources built around your existing workflow.",
+      "Move recurring administrative and desk work to dedicated resources built around your existing tools and workflow.",
     summary:
       "Dedicated assistants who absorb the administrative load slowing your business down — calendar and inbox management, CRM hygiene, reporting, research, documentation and day-to-day coordination.",
     outcomes: [
@@ -174,7 +174,7 @@ export const services: Service[] = [
     slug: "medical-billing-healthcare",
     title: "Medical Billing & Healthcare",
     short:
-      "Dedicated support for process-driven healthcare billing and administrative functions.",
+      "Dedicated support for process-driven healthcare billing and the administrative work that sits behind every claim.",
     summary:
       "Billing and administrative support for practices and healthcare services — eligibility checks, charge entry, claim submission, denial handling and accounts-receivable follow-up, run to documented process with audit sampling.",
     outcomes: [
@@ -207,7 +207,7 @@ export const services: Service[] = [
     ],
     pitch:
       "Support routine healthcare billing and administrative processes with dedicated outsourced resources — adding back-office capacity without having to build every function internally.",
-    highlights: ["Eligibility Verification", "Medical Billing & Claims Support", "AR Follow-Up"],
+    highlights: ["Eligibility Checks", "Billing & Claims", "AR Follow-Up"],
     supportModel: "Dedicated & Reliable",
     scaling: "Flexible to Your Needs",
   },
@@ -215,7 +215,7 @@ export const services: Service[] = [
     slug: "ecommerce-customer-support",
     title: "E-commerce Customer Support",
     short:
-      "Support your customers and day-to-day e-commerce operations without continuously increasing internal headcount.",
+      "Support your customers and your day-to-day e-commerce operations without continuously increasing internal headcount.",
     summary:
       "Support teams for online retail — pre-sale questions, order and delivery enquiries, returns and refunds — working inside your storefront and helpdesk across the hours your customers actually shop.",
     outcomes: [
@@ -256,7 +256,7 @@ export const services: Service[] = [
     slug: "accounting-bookkeeping",
     title: "Accounting & Bookkeeping",
     short:
-      "Reliable support for recurring financial administration and bookkeeping processes.",
+      "Reliable support for recurring bookkeeping, reconciliation and month-end reporting, delivered on your own ledger.",
     summary:
       "Day-to-day bookkeeping and finance operations — transaction coding, accounts payable and receivable, reconciliations and month-end reporting — delivered on your ledger against an agreed close calendar.",
     outcomes: [
@@ -289,7 +289,7 @@ export const services: Service[] = [
     ],
     pitch:
       "Keep recurring financial administration organized and moving with dedicated bookkeeping support built around your business processes and reporting requirements.",
-    highlights: ["QuickBooks", "Xero & AP/AR", "Reconciliation", "Monthly Reporting"],
+    highlights: ["QuickBooks & Xero", "AP/AR", "Month-End Reporting"],
     supportModel: "Dedicated & Reliable",
     scaling: "Flexible to Your Needs",
   },
@@ -317,7 +317,7 @@ export const industries: Industry[] = [
     short:
       "Customer expectations stay high whether you're handling everyday orders or seasonal peaks. We help e-commerce and retail businesses manage recurring customer and operational workloads without continuously expanding internal headcount.",
     headline: "Support That Scales With Customer Demand",
-    tagline: "Support that scales with customer demand.",
+    tagline: "Support that scales with customer demand through every peak season.",
     keyFocus: ["Customer Experience", "Order Workflows", "Flexible Capacity"],
     challenges: [
       "Volume spikes around promotions and holidays",
@@ -365,7 +365,7 @@ export const industries: Industry[] = [
     short:
       "Billing, claims and administrative workloads can consume valuable internal time. We help healthcare and wellness businesses add dependable back-office capacity while maintaining consistent processes and accountability.",
     headline: "Reliable Support for Process-Driven Healthcare Operations",
-    tagline: "Reliable support for process-driven healthcare and administrative operations.",
+    tagline: "Reliable support for process-driven healthcare and admin operations.",
     keyFocus: ["Billing Support", "Administrative Workflows", "Consistent Execution"],
     challenges: [
       "Administrative burden on clinical staff",
@@ -413,7 +413,7 @@ export const industries: Industry[] = [
     short:
       "Financial and professional service businesses depend on accurate, consistent administrative and financial processes. Dedicated outsourced support helps keep recurring work moving without requiring every function to be built internally.",
     headline: "More Back-Office Capacity. Less Internal Overhead.",
-    tagline: "Add dependable back-office capacity without unnecessary internal overhead.",
+    tagline: "Add dependable back-office capacity without added internal overhead.",
     keyFocus: ["Financial Administration", "Client Support", "Operational Efficiency"],
     challenges: [
       "Regulated processes requiring consistent execution",
@@ -437,8 +437,7 @@ export const industries: Industry[] = [
     short:
       "Lead follow-ups, appointments, CRM updates and administrative work can quickly take time away from clients and deals. We help real estate and property businesses manage recurring support work with dedicated resources built around their workflow.",
     headline: "Keep Opportunities Moving While Your Team Stays Focused",
-    tagline:
-      "Keep lead follow-ups, appointments and recurring administration moving while your team focuses on clients and opportunities.",
+    tagline: "Keep lead follow-ups, appointments and routine administration moving.",
     keyFocus: ["Lead Follow-Up", "Appointment Support", "CRM & Administration"],
     challenges: [
       "Inbound leads going cold outside office hours",
@@ -553,7 +552,7 @@ export const faqs: { q: string; a: string[] }[] = [
   {
     q: "How is pricing structured?",
     a: [
-      "Pricing is built around your specific requirements rather than a fixed package.",
+      "Pricing is built around your specific requirements rather than a fixed package or per-seat rate.",
       "Factors such as the type of work, number of resources, responsibilities, working hours and overall scope can affect pricing.",
       "For pricing, book a free consultation or WhatsApp us to discuss your requirements.",
     ],
@@ -561,7 +560,7 @@ export const faqs: { q: string; a: string[] }[] = [
   {
     q: "Who manages the team day to day?",
     a: [
-      "Squad International works as an extension of your business.",
+      "Squad International works as an extension of your business rather than a separate outsourced supplier.",
       "We structure dedicated resources around agreed responsibilities and workflows, while maintaining communication, consistency and accountability throughout the engagement.",
       "Your priorities and standards remain clear; we help keep the day-to-day work moving.",
     ],
@@ -569,7 +568,7 @@ export const faqs: { q: string; a: string[] }[] = [
   {
     q: "How do you protect our data?",
     a: [
-      "Data access and security requirements are discussed during the setup process based on the systems, tools and type of work involved.",
+      "Data access and security are agreed during setup, based on the systems, tools and type of work involved.",
       "We work with clients to understand their access requirements and establish an appropriate working structure before delivery begins.",
     ],
   },

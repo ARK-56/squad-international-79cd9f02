@@ -19,7 +19,7 @@ export function ClientSpotlight() {
           </h2>
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">
             Add dependable capacity across customer support, sales, administration and day-to-day
-            operations — while your internal team stays focused on higher-value work. We build the
+            operations, while your internal team stays focused on higher-value work. We build the
             support around your requirements, processes and workload so outsourcing feels like
             adding capacity rather than adding another problem to manage.
           </p>

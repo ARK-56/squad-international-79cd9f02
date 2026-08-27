@@ -65,7 +65,7 @@ const bpoBenefits = [
   {
     icon: Gauge,
     title: "Greater efficiency",
-    body: "Move repetitive and process-driven work away from your core team so they can focus on higher-value priorities.",
+    body: "Move repetitive, process-driven work off your core team so they can focus on priorities.",
   },
   {
     icon: Layers,
@@ -78,7 +78,7 @@ const differentiators = [
   {
     icon: Workflow,
     title: "Built around your business",
-    body: "We tailor teams, workflows and responsibilities to your needs, giving you support that fits the way your business already operates.",
+    body: "We tailor teams, workflows and responsibilities so your support fits the way the business already runs day to day.",
   },
   {
     icon: TrendingUp,
@@ -93,17 +93,17 @@ const differentiators = [
   {
     icon: Handshake,
     title: "Partnership mindset",
-    body: "We work as an extension of your team, supporting your goals and helping keep the business moving forward.",
+    body: "We work as an extension of your team, taking on your priorities and helping keep the whole business moving forward.",
   },
   {
     icon: Headset,
     title: "Customer & operational support",
-    body: "We help manage repetitive, process-driven work that can consume valuable internal time while maintaining consistency and accountability.",
+    body: "We take on repetitive, process-driven work that consumes internal time, while holding consistency and accountability.",
   },
   {
     icon: LineChart,
     title: "Growth support",
-    body: "From prospecting and lead generation to follow-ups and appointment setting, our teams help keep your sales pipeline moving.",
+    body: "From prospecting and lead generation to follow-ups and appointment setting, our teams keep your pipeline moving.",
   },
 ];
 
@@ -149,9 +149,8 @@ function Home() {
           </h1>
 
           <p className="mx-auto mt-8 max-w-2xl text-lg font-light leading-relaxed text-offwhite/70 md:text-xl">
-            Scale your business with reliable outsourced support built around your workflow —
-            helping you increase capacity, reduce operating costs and keep your internal team
-            focused.
+            Scale your business with reliable outsourced support built around your workflow, so you
+            can increase capacity, reduce operating costs and keep your internal team focused.
           </p>
 
           <div className="mt-10 flex justify-center">
@@ -175,7 +174,9 @@ function Home() {
           {stats.map((s) => (
             <div key={s.label}>
               <p className="font-display text-4xl text-charcoal">{s.value}</p>
-              <p className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">{s.label}</p>
+              <p className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
+                {s.label}
+              </p>
             </div>
           ))}
         </div>
@@ -194,7 +195,7 @@ function Home() {
           </p>
           <p>
             Squad International helps you move suitable customer-facing, administrative and
-            operational work to dedicated resources — without losing consistency, accountability or
+            operational work to dedicated resources, without losing consistency, accountability or
             visibility.
           </p>
         </div>
@@ -231,8 +232,18 @@ function Home() {
               params={{ slug: s.slug }}
               className="group flex flex-col rounded-lg border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-marigold hover:shadow-[var(--shadow-elevated)]"
             >
-              <h3 className="text-xl text-charcoal">{s.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.short}</p>
+              {/*
+                Reserve the tallest wrap the two- and three-column layouts produce,
+                a two-line title over four lines of copy, so every row is the same
+                height wherever each string happens to break. Character counts alone
+                cannot do this: two of these summaries are the same length and still
+                wrap differently. From xl the container stops growing and every card
+                settles at one title line over three, which is what these reset to.
+              */}
+              <h3 className="text-xl text-charcoal md:min-h-14 xl:min-h-7">{s.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:min-h-[calc(4*1.625em)] xl:min-h-[calc(3*1.625em)]">
+                {s.short}
+              </p>
               <ul className="mt-5 flex flex-1 flex-wrap content-start gap-2">
                 {s.highlights.map((h) => (
                   <li
@@ -300,7 +311,10 @@ function Home() {
           </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {differentiators.map((d) => (
-              <div key={d.title} className="rounded-lg border border-offwhite/10 bg-offwhite/[0.04] p-7">
+              <div
+                key={d.title}
+                className="rounded-lg border border-offwhite/10 bg-offwhite/[0.04] p-7"
+              >
                 <d.icon className="size-7 text-marigold" />
                 <h3 className="mt-5 text-lg text-offwhite">{d.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-offwhite/65">{d.body}</p>
@@ -324,11 +338,11 @@ function Home() {
         media={
           <FlowMedia
             steps={[
-              { label: "01 — Discover", value: "Understand your needs" },
-              { label: "02 — Design", value: "Build your solution" },
-              { label: "03 — Deploy", value: "Build your team" },
-              { label: "04 — Deliver", value: "Execute & manage" },
-              { label: "05 — Scale", value: "Grow with your business" },
+              { label: "01 Discover", value: "Understand your needs" },
+              { label: "02 Design", value: "Build your solution" },
+              { label: "03 Deploy", value: "Build your team" },
+              { label: "04 Deliver", value: "Execute & manage" },
+              { label: "05 Scale", value: "Grow with your business" },
             ]}
           />
         }
@@ -339,11 +353,11 @@ function Home() {
         reverse
         eyebrow="Built around you"
         title="A dedicated team built around your workflow"
-        description="We structure dedicated resources around the functions your business needs — giving you additional capacity without having to build every role internally."
+        description="We structure dedicated resources around the functions your business needs, giving you additional capacity without having to build every role internally."
         bullets={[
-          "Dedicated resources — built around your specific business requirements",
-          "Your processes — your team works around your workflows, tools and standards",
-          "Flexible scaling — add or adjust support as your requirements change",
+          "Dedicated resources: built around your specific business requirements",
+          "Your processes: your team works around your workflows, tools and standards",
+          "Flexible scaling: add or adjust support as your requirements change",
         ]}
         actions={
           <Button variant="outlineDark" size="lg" asChild>
@@ -366,7 +380,6 @@ function Home() {
           />
         }
       />
-
 
       <ClientSpotlight />
 
@@ -467,7 +480,7 @@ function Home() {
           <SectionHeading
             eyebrow="FAQs"
             title="Questions before you outsource?"
-            description="If yours isn't here, the FAQ page goes deeper — or just ask us directly."
+            description="If yours isn't here, the FAQ page goes deeper, or just ask us directly."
           />
           <div className="divide-y divide-border border-y border-border">
             {faqs.slice(0, 4).map((f) => (
