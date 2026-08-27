@@ -43,20 +43,17 @@ export function SubscribeForm() {
 
   return (
     <form onSubmit={onSubmit}>
-      <label
-        htmlFor="subscribe-email"
-        className="text-xs uppercase tracking-[0.18em] text-offwhite/50"
-      >
-        Subscribe for insights
-      </label>
-      <div className="mt-3 flex gap-2">
+      <div className="flex gap-2">
         <input
           id="subscribe-email"
           name="email"
           type="email"
           required
           autoComplete="email"
-          placeholder="you@company.com"
+          placeholder="Subscribe for insights"
+          // The visible label is gone, so the field needs its name from here — a
+          // placeholder is not an accessible name and disappears once typing starts.
+          aria-label="Email address to subscribe for insights"
           className="min-w-0 flex-1 rounded-full border border-offwhite/20 bg-offwhite/[0.06] px-4 py-2 text-sm text-offwhite placeholder:text-offwhite/35 focus-visible:border-marigold focus-visible:outline-none"
         />
         <button

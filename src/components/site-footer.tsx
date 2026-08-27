@@ -36,7 +36,9 @@ export function SiteFooter() {
   return (
     <footer className="bg-offwhite px-4 pb-6 pt-10 md:px-6">
       <div className="mx-auto w-full max-w-[84rem] overflow-hidden rounded-[2rem] bg-charcoal text-offwhite">
-      <div className="grid gap-10 px-8 py-16 md:grid-cols-2 md:px-12 lg:grid-cols-4">
+      {/* Tighter row gap than column gap: the socials/signup row sat too far below
+          the link columns with a uniform 40px. */}
+      <div className="grid gap-x-10 gap-y-6 px-8 py-16 md:grid-cols-2 md:px-12 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-2.5">
             <img
