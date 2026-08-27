@@ -17,7 +17,7 @@ export const site = {
   // to three in a narrow column. The contact page joins them.
   // First line keeps its comma so the two blocks do not read as "AveNorth" when
   // the text is extracted, and so joining them needs only a space.
-  addressLines: ["428 Southwest 80th Ave,", "North Lauderdale, FL 33068, US"],
+  addressLines: ["276 Holten Ave,", "Staten Island, NY 10309-4028, US"],
   boilerplate: "High-performing offshore teams and managed business support built to scale.",
   socials: [
     { name: "LinkedIn", url: "https://www.linkedin.com/company/squadinternational" },
