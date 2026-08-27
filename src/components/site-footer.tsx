@@ -72,31 +72,7 @@ export function SiteFooter() {
               </span>
             </li>
           </ul>
-          <nav aria-label="Social media" className="mt-6 flex flex-wrap gap-2">
-            {site.socials.map((social) => {
-              const path = BRAND_PATHS[social.name];
-              return (
-                <a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  // The icon is decorative, so the link carries the accessible name.
-                  aria-label={social.name}
-                  title={social.name}
-                  className="grid size-9 place-items-center rounded-full border border-offwhite/15 text-offwhite/65 transition-colors hover:border-marigold hover:text-marigold"
-                >
-                  {path ? (
-                    <BrandIcon path={path} className="size-4" />
-                  ) : (
-                    <span className="text-[10px] font-medium">{social.name.slice(0, 2)}</span>
-                  )}
-                </a>
-              );
-            })}
-          </nav>
 
-          <SubscribeForm />
         </div>
 
         <FooterCol title="Services">
@@ -148,6 +124,39 @@ export function SiteFooter() {
             </li>
           ))}
         </FooterCol>
+
+        {/*
+          Second grid row: socials sit under the brand column and the signup spans
+          the Services and Industries columns, so the two sit side by side and the
+          field lines up with those headings.
+        */}
+        <nav aria-label="Social media" className="flex flex-wrap gap-2">
+          {site.socials.map((social) => {
+            const path = BRAND_PATHS[social.name];
+            return (
+              <a
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                rel="noreferrer"
+                // The icon is decorative, so the link carries the accessible name.
+                aria-label={social.name}
+                title={social.name}
+                className="grid size-9 place-items-center rounded-full border border-offwhite/15 text-offwhite/65 transition-colors hover:border-marigold hover:text-marigold"
+              >
+                {path ? (
+                  <BrandIcon path={path} className="size-4" />
+                ) : (
+                  <span className="text-[10px] font-medium">{social.name.slice(0, 2)}</span>
+                )}
+              </a>
+            );
+          })}
+        </nav>
+
+        <div className="md:col-span-2">
+          <SubscribeForm />
+        </div>
       </div>
 
       <div className="border-t border-offwhite/10">

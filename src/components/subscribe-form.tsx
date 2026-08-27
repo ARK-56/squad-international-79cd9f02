@@ -42,7 +42,7 @@ export function SubscribeForm() {
   };
 
   return (
-    <form onSubmit={onSubmit} className="mt-8">
+    <form onSubmit={onSubmit}>
       <label
         htmlFor="subscribe-email"
         className="text-xs uppercase tracking-[0.18em] text-offwhite/50"
