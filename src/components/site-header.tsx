@@ -25,11 +25,26 @@ const nav = [
 const triggerClass =
   "group flex items-center gap-1 text-sm font-medium text-offwhite/70 transition-colors hover:text-offwhite data-[state=open]:text-offwhite";
 const chevronClass = "size-4 transition-transform group-data-[state=open]:rotate-180";
-const menuClass = "w-64 rounded-xl border-border bg-background p-2 shadow-lg";
+// Wide enough for two columns of title + description, but never wider than the
+// viewport on a small laptop.
+const menuClass =
+  "w-[min(44rem,calc(100vw-3rem))] rounded-xl border-border bg-background p-3 shadow-lg";
 const menuLeadClass =
-  "cursor-pointer rounded-lg px-3 py-2 text-sm font-medium text-charcoal hover:bg-muted focus:bg-muted";
+  "cursor-pointer rounded-lg px-3 py-2 text-sm font-semibold text-charcoal hover:bg-muted focus:bg-muted";
+// flex-col/items-start override the primitive's single-line centring so the
+// description can sit under the title.
 const menuItemClass =
-  "cursor-pointer rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-charcoal focus:bg-muted focus:text-charcoal";
+  "cursor-pointer flex-col items-start gap-0 whitespace-normal rounded-lg px-3 py-2.5 hover:bg-muted focus:bg-muted";
+
+/** Title over description, matching the two-line treatment used on the page cards. */
+function MenuItemText({ title, description }: { title: string; description: string }) {
+  return (
+    <>
+      <span className="text-sm font-semibold text-charcoal">{title}</span>
+      <span className="mt-1 text-xs leading-relaxed text-muted-foreground">{description}</span>
+    </>
+  );
+}
 const mobileLinkClass =
   "rounded-full px-4 py-2.5 text-sm font-medium text-offwhite/70 hover:bg-offwhite/10 hover:text-offwhite";
 const mobileSubLinkClass =
@@ -133,6 +148,9 @@ function HoverDropdown({ label, children }: { label: string; children: ReactNode
         ref={contentRef}
         align="start"
         sideOffset={10}
+        // The panel is wide enough that a start-aligned menu on the right-hand
+        // triggers runs past the viewport at 1024px; this lets Radix shift it back.
+        collisionPadding={16}
         className={menuClass}
         onPointerEnter={handleEnter}
       >
@@ -177,30 +195,34 @@ export function SiteHeader() {
         <nav className="hidden items-center gap-7 lg:flex">
           <HoverDropdown label="Services">
             <DropdownMenuItem asChild className={menuLeadClass}>
-              <Link to="/services">All Services</Link>
+              <Link to="/services">All Services →</Link>
             </DropdownMenuItem>
             <div className="my-1 h-px bg-border" />
-            {services.map((s) => (
-              <DropdownMenuItem key={s.slug} asChild className={menuItemClass}>
-                <Link to="/services/$slug" params={{ slug: s.slug }}>
-                  {s.title}
-                </Link>
-              </DropdownMenuItem>
-            ))}
+            <div className="grid gap-0.5 sm:grid-cols-2">
+              {services.map((s) => (
+                <DropdownMenuItem key={s.slug} asChild className={menuItemClass}>
+                  <Link to="/services/$slug" params={{ slug: s.slug }}>
+                    <MenuItemText title={s.title} description={s.short} />
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+            </div>
           </HoverDropdown>
 
           <HoverDropdown label="Industries">
             <DropdownMenuItem asChild className={menuLeadClass}>
-              <Link to="/industries">All Industries</Link>
+              <Link to="/industries">All Industries →</Link>
             </DropdownMenuItem>
             <div className="my-1 h-px bg-border" />
-            {industries.map((i) => (
-              <DropdownMenuItem key={i.slug} asChild className={menuItemClass}>
-                <Link to="/industries/$slug" params={{ slug: i.slug }}>
-                  {i.name}
-                </Link>
-              </DropdownMenuItem>
-            ))}
+            <div className="grid gap-0.5 sm:grid-cols-2">
+              {industries.map((i) => (
+                <DropdownMenuItem key={i.slug} asChild className={menuItemClass}>
+                  <Link to="/industries/$slug" params={{ slug: i.slug }}>
+                    <MenuItemText title={i.name} description={i.tagline} />
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+            </div>
           </HoverDropdown>
 
           {nav.map((item) => (
