@@ -105,7 +105,9 @@ export function SiteFooter() {
           ))}
         </FooterCol>
 
-        <FooterCol title="Company">
+        {/* Eight links against six elsewhere made this the tallest column, and the
+            row it set left a blank band above the socials/signup row below it. */}
+        <FooterCol title="Company" listClassName="grid grid-cols-2 gap-x-4 gap-y-2.5">
           {[
             { to: "/about", label: "About" },
             { to: "/case-studies", label: "Case Studies" },
@@ -174,11 +176,20 @@ export function SiteFooter() {
   );
 }
 
-function FooterCol({ title, children }: { title: string; children: React.ReactNode }) {
+function FooterCol({
+  title,
+  children,
+  listClassName = "space-y-2.5",
+}: {
+  title: string;
+  children: React.ReactNode;
+  /** Lets a longer list run in two sub-columns so it does not stretch the row. */
+  listClassName?: string;
+}) {
   return (
     <div>
       <h3 className="text-sm tracking-[0.18em] text-marigold">{title}</h3>
-      <ul className="mt-4 space-y-2.5">{children}</ul>
+      <ul className={`mt-4 ${listClassName}`}>{children}</ul>
     </div>
   );
 }
