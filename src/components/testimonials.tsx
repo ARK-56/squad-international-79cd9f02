@@ -94,46 +94,67 @@ export function Testimonials({
         className="container-page relative mt-14"
       >
         <div className="border-y border-dashed border-offwhite/20 py-6">
-          <CarouselContent className="ml-0">
+          {/*
+            Two and a half cards in view on desktop, so the clipped third signals
+            there is more to scroll. Narrower cards need smaller type and padding
+            than the old single full-width card carried. Phones get one card plus a
+            sliver and tablets two, since a third of a 375px screen is unreadable.
+
+            Every item sits on one flex line, so they all stretch to the tallest
+            quote; h-full passes that height down to the card itself, which keeps
+            the cards level now that more than one is visible at a time.
+
+            The basis subtracts its share of the gutter because CarouselContent's
+            -ml-5 makes the track 20px wider than the visible window, so a flat 40%
+            measures against the wrong width and lands at 2.46 cards. 40% - 8px
+            (0.4 x 20px) resolves to exactly two fifths of the window at any size.
+          */}
+          <CarouselContent className="-ml-5">
             {items.map((t, index) => (
-              <CarouselItem key={`${t.author}-${index}`} className="basis-full pl-0">
-                <figure className="mx-auto flex min-h-[300px] max-w-3xl flex-col justify-between rounded-lg border border-offwhite/10 bg-offwhite/[0.04] p-8 sm:p-10">
+              <CarouselItem
+                key={`${t.author}-${index}`}
+                className="basis-[86%] pl-5 md:basis-[calc(50%-0.625rem)] lg:basis-[calc(40%-0.5rem)]"
+              >
+                <figure className="flex h-full flex-col justify-between rounded-lg border border-offwhite/10 bg-offwhite/[0.04] p-6 sm:p-7">
                   <div>
                     {typeof t.rating === "number" && (
-                      <div className="mb-5 flex justify-center">
+                      <div className="mb-4 flex">
                         <Stars rating={t.rating} />
                       </div>
                     )}
-                    <blockquote className="text-2xl leading-snug text-offwhite md:text-[1.75rem]">
+                    <blockquote className="text-base leading-relaxed text-offwhite md:text-lg">
                       &ldquo;{t.quote}&rdquo;
                     </blockquote>
                   </div>
-                  <figcaption className="mt-10 flex items-center gap-4 border-t border-offwhite/10 pt-6">
+                  <figcaption className="mt-6 flex items-center gap-3 border-t border-offwhite/10 pt-5">
                     {t.photoUrl ? (
                       <img
                         src={t.photoUrl}
                         alt=""
                         loading="lazy"
                         referrerPolicy="no-referrer"
-                        className="size-11 shrink-0 rounded-full object-cover"
+                        className="size-10 shrink-0 rounded-full object-cover"
                       />
                     ) : (
-                      <span className="grid size-11 shrink-0 place-items-center rounded-full bg-marigold text-sm font-semibold text-charcoal">
+                      <span className="grid size-10 shrink-0 place-items-center rounded-full bg-marigold text-sm font-semibold text-charcoal">
                         {initials(t.author)}
                       </span>
                     )}
-                    <span className="text-left">
-                      <span className="block text-sm font-semibold text-offwhite">{t.author}</span>
-                      <span className="block text-sm text-offwhite/60">{t.role}</span>
+                    {/* min-w-0 lets the two lines truncate instead of pushing the link out. */}
+                    <span className="min-w-0 text-left">
+                      <span className="block truncate text-sm font-semibold text-offwhite">
+                        {t.author}
+                      </span>
+                      <span className="block truncate text-xs text-offwhite/60">{t.role}</span>
                     </span>
                     {t.sourceUrl && (
                       <a
                         href={t.sourceUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="ml-auto shrink-0 text-sm font-medium text-marigold hover:underline"
+                        className="ml-auto shrink-0 text-xs font-medium text-marigold hover:underline"
                       >
-                        Read on Google
+                        Google
                       </a>
                     )}
                   </figcaption>
