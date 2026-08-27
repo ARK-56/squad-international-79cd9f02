@@ -5,9 +5,10 @@ export const site = {
   // wa.me needs the country code with no "+" and no leading zero: +92 313 297 2974.
   whatsapp: "https://wa.me/923132972974",
   email: "inquire@squadinternational.net",
-  // One number for both, per the site copy deck: "Phone / WhatsApp".
-  phone: "+92 313 2972974",
-  phoneHref: "tel:+923132972974",
+  // Calls go to the US line; WhatsApp stays on the +92 number above, so these two
+  // are deliberately different and phoneHref must not be derived from `whatsapp`.
+  phone: "+1 (201) 820-6889",
+  phoneHref: "tel:+12018206889",
   // Google Business Profile: "Squad International", BPO company, PECHS Karachi.
   // cid form is stable and needs no API key.
   googleReviewsUrl: "https://www.google.com/maps?cid=18065864380427141787",
