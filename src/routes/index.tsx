@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   CalendarDays,
-  MessageCircle,
   Users,
   LineChart,
   Workflow,
@@ -148,17 +147,12 @@ function Home() {
             focused.
           </p>
 
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-10 flex justify-center">
             <BookingDialog>
               <Button variant="marigold" size="xl" className="uppercase tracking-widest">
                 <CalendarDays /> Book a Free Consultation
               </Button>
             </BookingDialog>
-            <Button variant="outlineLight" size="xl" asChild className="uppercase tracking-widest">
-              <a href={site.whatsapp} target="_blank" rel="noreferrer">
-                <MessageCircle /> WhatsApp Us
-              </a>
-            </Button>
           </div>
         </div>
 
