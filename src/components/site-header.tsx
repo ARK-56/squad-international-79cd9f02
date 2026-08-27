@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { Menu, X, CalendarDays, MessageCircle, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
@@ -50,21 +50,52 @@ const mobileLinkClass =
 const mobileSubLinkClass =
   "rounded-full px-4 py-2 text-sm text-offwhite/60 hover:bg-offwhite/10 hover:text-offwhite";
 
+/** Only one nav dropdown is open at a time, so the header tracks which. */
+type NavMenu = "services" | "industries";
+
 /**
- * Nav dropdown that opens on hover, while keeping click and keyboard working.
+ * Hover only where there is a real pointer. Touch keeps tap-to-open, and small
+ * screens use the separate accordion menu anyway.
+ */
+const canHover = () =>
+  typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+/**
+ * Nav dropdown, opening on either hover or click.
  *
- * Radix's DropdownMenu is click-driven by design, so the open state is lifted here
- * and driven by pointer events. Three details matter:
+ * Radix's DropdownMenu is click-driven by design, so openOn="click" is the
+ * primitive as shipped, and openOn="hover" layers pointer handling over it. Two
+ * details matter for the hover variant:
  *   - modal={false}: a modal menu locks page scroll, which is wrong for something
  *     that opens just by passing the cursor over it.
  *   - a short close delay, so crossing the gap between trigger and menu does not
  *     dismiss it.
  *
+ * Which menu is open lives in the header rather than in each dropdown. Radix
+ * dismisses a menu on outside *pointerdown*, which a hover never produces, so
+ * without a single owner, hovering Services while Industries was clicked open
+ * would leave both panels on screen at once.
+ *
  * Radix focuses the menu on open and there is no public prop to skip that, so a
  * hover also moves focus into the menu. It is returned to the trigger on close.
  */
-function HoverDropdown({ label, children }: { label: string; children: ReactNode }) {
-  const [open, setOpen] = useState(false);
+function NavDropdown({
+  id,
+  label,
+  openOn,
+  openMenu,
+  onOpenChange,
+  children,
+}: {
+  id: NavMenu;
+  label: string;
+  openOn: "hover" | "click";
+  openMenu: NavMenu | null;
+  onOpenChange: (id: NavMenu, open: boolean) => void;
+  children: ReactNode;
+}) {
+  const open = openMenu === id;
+  const hover = openOn === "hover";
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -76,16 +107,10 @@ function HoverDropdown({ label, children }: { label: string; children: ReactNode
     }
   };
 
-  // Hover only where there is a real pointer. Touch keeps tap-to-open, and small
-  // screens use the separate accordion menu anyway.
-  const canHover = () =>
-    typeof window !== "undefined" &&
-    window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-
   const handleEnter = () => {
-    if (!canHover()) return;
+    if (!hover || !canHover()) return;
     clearTimer();
-    setOpen(true);
+    onOpenChange(id, true);
   };
 
   /**
@@ -95,7 +120,7 @@ function HoverDropdown({ label, children }: { label: string; children: ReactNode
    * whether the pointer is inside either box is unambiguous and covers the gap.
    */
   useEffect(() => {
-    if (!open || !canHover()) return;
+    if (!open || !hover || !canHover()) return;
 
     const onMove = (e: PointerEvent) => {
       const boxes = [triggerRef.current, contentRef.current]
@@ -115,7 +140,7 @@ function HoverDropdown({ label, children }: { label: string; children: ReactNode
       } else if (!closeTimer.current) {
         closeTimer.current = setTimeout(() => {
           closeTimer.current = null;
-          setOpen(false);
+          onOpenChange(id, false);
         }, 120);
       }
     };
@@ -125,7 +150,7 @@ function HoverDropdown({ label, children }: { label: string; children: ReactNode
       document.removeEventListener("pointermove", onMove);
       clearTimer();
     };
-  }, [open]);
+  }, [open, hover, id, onOpenChange]);
 
   useEffect(() => clearTimer, []);
 
@@ -134,7 +159,7 @@ function HoverDropdown({ label, children }: { label: string; children: ReactNode
       open={open}
       onOpenChange={(next) => {
         clearTimer();
-        setOpen(next);
+        onOpenChange(id, next);
       }}
       modal={false}
     >
@@ -162,9 +187,16 @@ function HoverDropdown({ label, children }: { label: string; children: ReactNode
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState<NavMenu | null>(null);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [industriesOpen, setIndustriesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  // Stable, so the hover dropdown can list it as an effect dependency without
+  // rebinding its pointermove listener on every render.
+  const handleMenuChange = useCallback((id: NavMenu, next: boolean) => {
+    setOpenMenu((current) => (next ? id : current === id ? null : current));
+  }, []);
 
   // Fixed rather than sticky so the translucent bar sits over the hero instead
   // of pushing it down, then goes solid once the page scrolls under it.
@@ -193,7 +225,13 @@ export function SiteHeader() {
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
-          <HoverDropdown label="Services">
+          <NavDropdown
+            id="services"
+            label="Services"
+            openOn="hover"
+            openMenu={openMenu}
+            onOpenChange={handleMenuChange}
+          >
             <DropdownMenuItem asChild className={menuLeadClass}>
               <Link to="/services">All Services →</Link>
             </DropdownMenuItem>
@@ -207,9 +245,15 @@ export function SiteHeader() {
                 </DropdownMenuItem>
               ))}
             </div>
-          </HoverDropdown>
+          </NavDropdown>
 
-          <HoverDropdown label="Industries">
+          <NavDropdown
+            id="industries"
+            label="Industries"
+            openOn="click"
+            openMenu={openMenu}
+            onOpenChange={handleMenuChange}
+          >
             <DropdownMenuItem asChild className={menuLeadClass}>
               <Link to="/industries">All Industries →</Link>
             </DropdownMenuItem>
@@ -223,7 +267,7 @@ export function SiteHeader() {
                 </DropdownMenuItem>
               ))}
             </div>
-          </HoverDropdown>
+          </NavDropdown>
 
           {nav.map((item) => (
             <Link
