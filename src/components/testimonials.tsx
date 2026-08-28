@@ -88,9 +88,22 @@ export function Testimonials({
         </p>
       </div>
 
+      {/*
+        Desktop shows all six reviews as a 3x2 grid; below lg it stays a slider,
+        since six stacked cards make for a long scroll on a phone.
+
+        Embla is switched off at lg rather than rendering the list twice, so the
+        markup and the DOM stay single. With active:false it tears down the engine
+        and drops its inline transform, leaving the container free to be restyled
+        from a flex track into a grid by the classes below.
+      */}
       <Carousel
         setApi={setApi}
-        opts={{ align: "start", loop: true }}
+        opts={{
+          align: "start",
+          loop: true,
+          breakpoints: { "(min-width: 1024px)": { active: false } },
+        }}
         className="container-page relative mt-14"
       >
         <div className="border-y border-dashed border-offwhite/20 py-6">
@@ -102,18 +115,23 @@ export function Testimonials({
 
             Every item sits on one flex line, so they all stretch to the tallest
             quote; h-full passes that height down to the card itself, which keeps
-            the cards level now that more than one is visible at a time.
+            the cards level now that more than one is visible at a time. A grid
+            sizes each row on its own content instead, which split the two rows by
+            58px, so auto-rows-fr makes every row take the same share. It is used
+            in preference to grid-rows-2 because the live Google feed can return
+            fewer than six reviews, and a fixed two would then leave an empty row.
 
             The basis subtracts its share of the gutter because CarouselContent's
-            -ml-5 makes the track 20px wider than the visible window, so a flat 40%
-            measures against the wrong width and lands at 2.46 cards. 40% - 8px
-            (0.4 x 20px) resolves to exactly two fifths of the window at any size.
+            -ml-5 makes the track 20px wider than the visible window, so a flat 50%
+            measures against the wrong width. 50% - 10px (0.5 x 20px) resolves to
+            exactly half the window at any size. At lg the negative margin and the
+            per-item padding are both dropped in favour of a real grid gap.
           */}
-          <CarouselContent className="-ml-5">
+          <CarouselContent className="-ml-5 lg:ml-0 lg:grid lg:auto-rows-fr lg:grid-cols-3 lg:gap-5">
             {items.map((t, index) => (
               <CarouselItem
                 key={`${t.author}-${index}`}
-                className="basis-[86%] pl-5 md:basis-[calc(50%-0.625rem)] lg:basis-[calc(40%-0.5rem)]"
+                className="basis-[86%] pl-5 md:basis-[calc(50%-0.625rem)] lg:basis-auto lg:pl-0"
               >
                 <figure className="flex h-full flex-col justify-between rounded-lg border border-offwhite/10 bg-offwhite/[0.04] p-6 sm:p-7">
                   <div>
@@ -164,7 +182,8 @@ export function Testimonials({
           </CarouselContent>
         </div>
 
-        <div className="mt-6 flex items-center justify-between gap-4">
+        {/* Nothing to page through once the grid shows every review. */}
+        <div className="mt-6 flex items-center justify-between gap-4 lg:hidden">
           <div className="flex items-center gap-2" aria-label="Choose a review">
             {items.map((t, index) => (
               <button
