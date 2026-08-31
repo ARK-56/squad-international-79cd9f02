@@ -172,8 +172,17 @@
     border-color 200ms ease,
     background-color 200ms ease;
 
-  &:hover {
-    transform: translateY(-4px) scale(1.015);
+  /*
+   * Gated on a real hovering pointer to match Tailwind, which wraps its own
+   * hover: variants the same way. Without this, tapping a card on iOS applies
+   * :hover and leaves it stuck there until something else is tapped, and it
+   * would stick lifted while the border colour did not change, because the
+   * colour half of the effect is a gated Tailwind utility.
+   */
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-4px) scale(1.015);
+    }
   }
 
   /* A lift is precisely the motion this setting asks to be dropped; the colour
@@ -244,11 +253,18 @@
     color 200ms ease,
     filter 200ms ease;
 
-  &:hover {
-    transform: translateY(-3px) scale(1.05);
+  /* Hover only where there is a hovering pointer; see the note on card-pop. */
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-3px) scale(1.05);
+    }
   }
 
-  /* Presses back down, so a click feels answered rather than only lit up. */
+  /*
+   * Presses back down, so a click feels answered rather than only lit up. Left
+   * ungated on purpose: unlike :hover, :active releases when a touch ends, so it
+   * is the press feedback a touch device should get.
+   */
   &:active {
     transform: translateY(-1px) scale(0.98);
   }
