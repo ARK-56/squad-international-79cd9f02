@@ -87,26 +87,43 @@ export function FlowMedia({
 export function OrbitMedia({ center, roles }: { center: string; roles: string[] }) {
   const items = roles.slice(0, 6);
   return (
-    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-border bg-offwhite">
+    <div className="@container relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-border bg-offwhite">
       <div className="absolute left-1/2 top-1/2 aspect-square w-[68%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-marigold/30 bg-marigold/10" />
       <div className="absolute left-1/2 top-1/2 aspect-square w-[44%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-charcoal/15" />
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-charcoal px-5 py-3 text-sm font-semibold text-offwhite shadow-[var(--shadow-elevated)]">
+      <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-charcoal px-5 py-3 text-sm font-semibold text-offwhite shadow-[var(--shadow-elevated)]">
         {center}
       </div>
-      {items.map((role, i) => {
-        const angle = (i / items.length) * 2 * Math.PI - Math.PI / 2;
-        const top = 50 + Math.sin(angle) * 36;
-        const left = 50 + Math.cos(angle) * 34;
-        return (
-          <span
-            key={role}
-            className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-border bg-background px-3.5 py-1.5 text-xs font-medium text-charcoal shadow-sm"
-            style={{ top: `${top}%`, left: `${left}%` }}
-          >
-            {role}
-          </span>
-        );
-      })}
+      {/*
+        The labels live on a square layer so their six positions describe a true
+        circle. Previously each was placed with a percentage of height against a
+        percentage of width inside a 4:3 box, which is an ellipse: rotating that
+        would swing the pills in and out rather than carrying them around.
+      */}
+      {/*
+        The labels are a fixed size while the box is not, so a small box leaves the
+        widest pill almost touching the edge as it swings past. The orbit tightens
+        on a narrow box to keep that clearance. It is a container query rather than
+        a breakpoint because this box is one column of a grid that collapses: at
+        1024px it is narrower than it is at 768px, where the layout is single column.
+      */}
+      <div className="orbit-ring absolute left-1/2 top-1/2 aspect-square w-[62%] -translate-x-1/2 -translate-y-1/2 @max-[480px]:w-[50%]">
+        {items.map((role, i) => {
+          const angle = (i / items.length) * 2 * Math.PI - Math.PI / 2;
+          const top = 50 + Math.sin(angle) * 50;
+          const left = 50 + Math.cos(angle) * 50;
+          return (
+            <span
+              key={role}
+              className="absolute -translate-x-1/2 -translate-y-1/2"
+              style={{ top: `${top}%`, left: `${left}%` }}
+            >
+              <span className="orbit-pill block whitespace-nowrap rounded-full border border-border bg-background px-3.5 py-1.5 text-xs font-medium text-charcoal shadow-sm">
+                {role}
+              </span>
+            </span>
+          );
+        })}
+      </div>
     </div>
   );
 }

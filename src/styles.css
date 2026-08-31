@@ -189,6 +189,43 @@
   }
 }
 
+/**
+ * The team-structure diagram. The ring carries the rotation and each label runs
+ * the same rotation in reverse at the same duration, so a pill travels around the
+ * circle without ever tipping over or reading upside down at the bottom.
+ *
+ * Two utilities rather than one because the counter-rotation has to sit on its
+ * own element: the pill is centred on its point with a translate, and combining
+ * the two on one element would swing it around instead of spinning it in place.
+ */
+@keyframes orbit-forward {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes orbit-back {
+  to {
+    rotate: -360deg;
+  }
+}
+
+@utility orbit-ring {
+  animation: orbit-forward 40s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@utility orbit-pill {
+  animation: orbit-back 40s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
 @utility text-marigold-rule {
   position: relative;
 }
