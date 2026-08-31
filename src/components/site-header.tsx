@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { Menu, X, CalendarDays, MessageCircle, ChevronDown, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
 import { site, services, industries } from "@/lib/site-data";
 import {
@@ -52,11 +52,20 @@ function MenuItemText({
    */
   highlights?: string[];
 }) {
+  const hasChips = Boolean(highlights && highlights.length > 0);
   return (
     <>
-      <span className="text-sm font-semibold text-charcoal">{title}</span>
+      {/*
+        Services reserve two lines for the title. In three columns one of the six
+        wraps to a second line and the others do not, which left the menu's two
+        rows 20px apart. Industries are wide enough to stay on one line, so they
+        keep the natural height.
+      */}
+      <span className={`text-sm font-semibold text-charcoal ${hasChips ? "min-h-10" : ""}`}>
+        {title}
+      </span>
       <span className="mt-1 text-xs leading-relaxed text-muted-foreground">{description}</span>
-      {highlights && highlights.length > 0 && (
+      {hasChips && highlights && (
         <>
           {/*
             bg-card rather than the cards' bg-background: the panel is already
@@ -339,20 +348,59 @@ export function SiteHeader() {
             menuWidth={SERVICES_MENU_WIDTH}
             matchBox={bar}
           >
-            <DropdownMenuItem asChild className={menuLeadClass}>
-              <Link to="/services">All Services →</Link>
-            </DropdownMenuItem>
-            <div className="my-1 h-px bg-border" />
-            {/* Three across now that the panel spans the header bar; the menu only
-                renders at lg and up, so it needs no smaller step. */}
-            <div className="grid gap-0.5 grid-cols-3">
-              {services.map((s) => (
-                <DropdownMenuItem key={s.slug} asChild className={menuItemClass}>
-                  <Link to="/services/$slug" params={{ slug: s.slug }}>
-                    <MenuItemText title={s.title} description={s.short} highlights={s.highlights} />
+            {/*
+              A narrow intro column beside the services themselves. The lead row
+              that used to sit across the top is gone; its link is the button at
+              the foot of this column instead.
+            */}
+            <div className="@container grid grid-cols-[17rem_1fr] gap-5">
+              <div className="flex flex-col justify-between rounded-lg bg-muted/60 p-5">
+                <div>
+                  <span className="text-[11px] uppercase tracking-[0.2em] text-marigold">
+                    What we do
+                  </span>
+                  <p className="mt-3 font-display text-xl uppercase leading-tight text-charcoal">
+                    Capabilities you can switch on
+                  </p>
+                  <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                    Six service lines built around the way your business works, from customer
+                    support to the back office.
+                  </p>
+                </div>
+                {/*
+                  A menu item rather than a Button, so it stays in Radix's keyboard
+                  order with the services; buttonVariants only lends it the look.
+                */}
+                <DropdownMenuItem
+                  asChild
+                  className={`${buttonVariants({ variant: "outlineDark", size: "sm" })} mt-5 w-full cursor-pointer justify-center`}
+                >
+                  <Link to="/services">
+                    All services <ArrowRight />
                   </Link>
                 </DropdownMenuItem>
-              ))}
+              </div>
+
+              {/*
+                Three across only once the panel is wide enough to afford it. The
+                intro column is a fixed 17rem, so at 1024 a third column squeezed
+                each service to 213px and pushed its chips onto three rows; two
+                columns keep them readable. Measured against the panel rather than
+                the viewport, since the panel tracks the header bar, not the window.
+              */}
+              <div className="grid grid-cols-2 gap-0.5 @[68rem]:grid-cols-3">
+                {services.map((s) => (
+                  <DropdownMenuItem key={s.slug} asChild className={menuItemClass}>
+                    <Link to="/services/$slug" params={{ slug: s.slug }}>
+                      <MenuItemText
+                        title={s.title}
+                        description={s.short}
+                        highlights={s.highlights}
+                      />
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </div>
             </div>
           </NavDropdown>
 
