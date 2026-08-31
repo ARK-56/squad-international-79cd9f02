@@ -258,6 +258,19 @@
     &:hover {
       transform: translateY(-3px) scale(1.05);
     }
+
+    /*
+     * On a narrow window a button can be nearly as wide as the viewport, and the
+     * hero CTA is: 363px of a 375px screen, so scaling it takes it 3px past each
+     * edge and the hero clips it. There is nowhere to grow, so keep the lift and
+     * drop the scale. Phones are unaffected either way, being covered by the
+     * hover gate above; this is for a narrow desktop window.
+     */
+    @media (width <= 30rem) {
+      &:hover {
+        transform: translateY(-3px);
+      }
+    }
   }
 
   /*

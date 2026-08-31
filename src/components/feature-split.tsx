@@ -65,7 +65,9 @@ export function FlowMedia({
         {steps.map((s, i) => (
           <div
             key={s.value}
-            className="rounded-lg border border-border bg-background p-4 shadow-[var(--shadow-elevated)]"
+            // Same card-pop as the card grids. No hover shadow here: these already
+            // carry the elevated shadow permanently, so only the border changes.
+            className="card-pop rounded-lg border border-border bg-background p-4 shadow-[var(--shadow-elevated)] hover:border-marigold"
             style={{ marginLeft: `${i * 7}%` }}
           >
             <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
