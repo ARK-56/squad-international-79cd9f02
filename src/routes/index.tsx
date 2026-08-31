@@ -16,6 +16,12 @@ import heroImage from "@/assets/hero-operations.jpg";
 import heroVideo from "@/assets/hero-video.mp4.asset.json";
 import { assetUrl } from "@/lib/asset-url";
 import teamImage from "@/assets/team-about.jpg";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
 import { CtaBand } from "@/components/cta-band";
@@ -488,13 +494,30 @@ function Home() {
             title="Questions before you outsource?"
             description="If yours isn't here, the FAQ page goes deeper, or just ask us directly."
           />
-          <div className="divide-y divide-border border-y border-border">
-            {faqs.slice(0, 4).map((f) => (
-              <div key={f.q} className="py-6">
-                <h3 className="text-base text-charcoal">{f.q}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.a[0]}</p>
-              </div>
-            ))}
+          {/*
+            Collapsed by default, matching /faqs so the two behave the same. Because
+            an answer is now opened deliberately rather than sitting open, each item
+            carries the whole answer instead of the first paragraph the static list
+            was limited to.
+
+            The first item is open on load so the section does not read as four bare
+            headings with nothing under them.
+          */}
+          <div className="border-t border-border">
+            <Accordion type="single" collapsible defaultValue="faq-0">
+              {faqs.slice(0, 4).map((f, index) => (
+                <AccordionItem key={f.q} value={`faq-${index}`} className="border-border">
+                  <AccordionTrigger className="py-5 text-left text-base text-charcoal hover:text-marigold">
+                    {f.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="space-y-3 pb-5 text-sm leading-relaxed text-muted-foreground">
+                    {f.a.map((para) => (
+                      <p key={para}>{para}</p>
+                    ))}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
             <div className="py-6">
               <Button variant="outlineDark" asChild>
                 <Link to="/faqs">
