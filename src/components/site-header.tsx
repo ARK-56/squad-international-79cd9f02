@@ -25,9 +25,9 @@ const nav = [
 const triggerClass =
   "group flex items-center gap-1 text-sm font-medium text-offwhite/70 transition-colors hover:text-offwhite data-[state=open]:text-offwhite";
 const chevronClass = "size-4 transition-transform group-data-[state=open]:rotate-180";
-// Width is passed per dropdown rather than shared: Services carries capability
-// chips and a "View service" line under each summary and wants the extra room,
-// while Industries is still just a title over a one-line tagline.
+// Width is passed per dropdown rather than shared: Services carries an intro
+// column and capability chips under each summary and wants the extra room, while
+// Industries is still just a title over a one-line tagline.
 const menuClass = "rounded-xl border-border bg-background p-3 shadow-lg";
 const SERVICES_MENU_WIDTH = "w-[min(56rem,calc(100vw-3rem))]";
 const INDUSTRIES_MENU_WIDTH = "w-[min(44rem,calc(100vw-3rem))]";
@@ -40,7 +40,8 @@ const menuItemClass =
 // Services carry the intro column's fill so the menu reads as a row of blocks
 // rather than text floating on the panel. Hover still registers, taking the same
 // colour to full strength.
-const serviceItemClass = `${menuItemClass} bg-muted/60`;
+// group so the arrow beside the chips can pick up the item's hover.
+const serviceItemClass = `${menuItemClass} group bg-muted/60`;
 
 /** Title over description, matching the two-line treatment used on the page cards. */
 function MenuItemText({
@@ -69,14 +70,14 @@ function MenuItemText({
          * gap under the title, which is what reserving two title lines used to
          * do. It also lines the chips up across a row.
          */
-        <span className="mt-auto flex w-full flex-col pt-4">
+        <span className="mt-auto flex w-full items-center gap-3 pt-4">
           {/*
             bg-card rather than the cards' bg-background: the panel is already
             bg-background, so that would leave the chips with no fill against it.
             card is lighter than both the panel and the item's muted hover, so the
             chips hold their edge in either state.
           */}
-          <span className="flex flex-wrap gap-1.5">
+          <span className="flex min-w-0 flex-1 flex-wrap gap-1.5">
             {highlights.map((h) => (
               <span
                 key={h}
@@ -87,15 +88,14 @@ function MenuItemText({
             ))}
           </span>
           {/*
-            Visual affordance only. The whole item is already the link, so reading
-            these words out would just repeat what the item does.
+            The arrow alone, in its own column beside the chips, in place of the
+            "View service" line. Still aria-hidden: the item is the link, so the
+            affordance is for the eye only.
           */}
-          <span
+          <ArrowRight
             aria-hidden="true"
-            className="mt-2.5 inline-flex items-center gap-1.5 pb-1 text-xs font-semibold text-charcoal"
-          >
-            View service <ArrowRight className="size-3.5" />
-          </span>
+            className="size-4 shrink-0 text-charcoal transition-colors group-hover:text-marigold"
+          />
         </span>
       )}
     </>
