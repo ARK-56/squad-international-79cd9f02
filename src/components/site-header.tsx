@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
-import { Menu, X, CalendarDays, MessageCircle, ChevronDown } from "lucide-react";
+import { Menu, X, CalendarDays, MessageCircle, ChevronDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
 import { site, services, industries } from "@/lib/site-data";
@@ -37,11 +37,53 @@ const menuItemClass =
   "cursor-pointer flex-col items-start gap-0 whitespace-normal rounded-lg px-3 py-2.5 hover:bg-muted focus:bg-muted";
 
 /** Title over description, matching the two-line treatment used on the page cards. */
-function MenuItemText({ title, description }: { title: string; description: string }) {
+function MenuItemText({
+  title,
+  description,
+  highlights,
+}: {
+  title: string;
+  description: string;
+  /**
+   * Capability chips, carrying the service cards' treatment into the menu. Only
+   * the services have them; industries have no equivalent field.
+   */
+  highlights?: string[];
+}) {
   return (
     <>
       <span className="text-sm font-semibold text-charcoal">{title}</span>
       <span className="mt-1 text-xs leading-relaxed text-muted-foreground">{description}</span>
+      {highlights && highlights.length > 0 && (
+        <>
+          {/*
+            bg-card rather than the cards' bg-background: the panel is already
+            bg-background, so that would leave the chips with no fill against it.
+            card is lighter than both the panel and the item's muted hover, so the
+            chips hold their edge in either state.
+          */}
+          <span className="mt-2.5 flex flex-wrap gap-1.5">
+            {highlights.map((h) => (
+              <span
+                key={h}
+                className="rounded-full border border-border bg-card px-2.5 py-0.5 text-[11px] font-medium text-charcoal"
+              >
+                {h}
+              </span>
+            ))}
+          </span>
+          {/*
+            Visual affordance only. The whole item is already the link, so reading
+            these words out would just repeat what the item does.
+          */}
+          <span
+            aria-hidden="true"
+            className="mt-2.5 inline-flex items-center gap-1.5 text-xs font-semibold text-charcoal"
+          >
+            View service <ArrowRight className="size-3.5" />
+          </span>
+        </>
+      )}
     </>
   );
 }
@@ -240,7 +282,7 @@ export function SiteHeader() {
               {services.map((s) => (
                 <DropdownMenuItem key={s.slug} asChild className={menuItemClass}>
                   <Link to="/services/$slug" params={{ slug: s.slug }}>
-                    <MenuItemText title={s.title} description={s.short} />
+                    <MenuItemText title={s.title} description={s.short} highlights={s.highlights} />
                   </Link>
                 </DropdownMenuItem>
               ))}
