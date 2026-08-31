@@ -42,7 +42,7 @@ function IndustriesPage() {
               key={i.slug}
               to="/industries/$slug"
               params={{ slug: i.slug }}
-              className="group flex flex-col rounded-lg border border-border bg-card p-8 transition-all hover:-translate-y-1 hover:border-marigold"
+              className="group flex flex-col rounded-lg border border-border bg-card p-8 card-pop hover:border-marigold hover:shadow-[var(--shadow-elevated)]"
             >
               <h2 className="text-xs uppercase tracking-[0.18em] text-marigold">{i.name}</h2>
               <p className="mt-3 text-lg leading-snug text-charcoal">{i.headline}</p>

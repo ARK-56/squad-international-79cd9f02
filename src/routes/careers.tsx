@@ -151,7 +151,7 @@ function CareersPage() {
           {roles.map((r) => (
             <article
               key={r.title}
-              className="flex flex-col rounded-lg border border-border bg-card p-7 transition-colors hover:border-marigold"
+              className="flex flex-col rounded-lg border border-border bg-card p-7 card-pop hover:border-marigold hover:shadow-[var(--shadow-elevated)]"
             >
               <h3 className="text-lg text-charcoal">{r.title}</h3>
               <p className="mt-2 text-xs uppercase tracking-wider text-marigold">

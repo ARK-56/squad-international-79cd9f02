@@ -65,7 +65,7 @@ function BlogPost() {
                 key={p.slug}
                 to="/blog/$slug"
                 params={{ slug: p.slug }}
-                className="group rounded-lg border border-border bg-background p-6 transition-colors hover:border-marigold"
+                className="group rounded-lg border border-border bg-background p-6 card-pop hover:border-marigold hover:shadow-[var(--shadow-elevated)]"
               >
                 <span className="eyebrow">{p.category}</span>
                 <h3 className="mt-3 text-lg text-charcoal group-hover:text-marigold">{p.title}</h3>

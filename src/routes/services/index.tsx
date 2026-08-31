@@ -45,7 +45,7 @@ function ServicesPage() {
           {services.map((s, index) => (
             <article
               key={s.slug}
-              className="flex flex-col rounded-lg border border-border bg-card p-8 transition-all hover:-translate-y-1 hover:border-marigold"
+              className="flex flex-col rounded-lg border border-border bg-card p-8 card-pop hover:border-marigold hover:shadow-[var(--shadow-elevated)]"
             >
               <span className="text-xs uppercase tracking-[0.18em] text-marigold">
                 Service {String(index + 1).padStart(2, "0")}

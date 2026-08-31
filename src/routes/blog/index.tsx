@@ -37,7 +37,7 @@ function BlogIndex() {
           {posts.map((p) => (
             <article
               key={p.slug}
-              className="flex flex-col rounded-lg border border-border bg-card p-8 transition-all hover:-translate-y-1 hover:border-marigold"
+              className="flex flex-col rounded-lg border border-border bg-card p-8 card-pop hover:border-marigold hover:shadow-[var(--shadow-elevated)]"
             >
               <span className="eyebrow">{p.category}</span>
               <h2 className="mt-3 text-xl text-charcoal">{p.title}</h2>

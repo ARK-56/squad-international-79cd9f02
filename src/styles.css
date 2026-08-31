@@ -156,6 +156,39 @@
   color: var(--offwhite);
 }
 
+/**
+ * Card hover: a small lift and scale, plus the transitions the colour changes
+ * ride on. Motion only, deliberately: the light and dark card surfaces need
+ * different hover colours, so those stay as Tailwind classes on each card while
+ * the movement is defined once here.
+ *
+ * Replaces the ad-hoc mix that had grown across the routes, where some cards
+ * lifted, some only changed border colour and some did nothing at all.
+ */
+@utility card-pop {
+  transition:
+    transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 250ms ease,
+    border-color 200ms ease,
+    background-color 200ms ease;
+
+  &:hover {
+    transform: translateY(-4px) scale(1.015);
+  }
+
+  /* A lift is precisely the motion this setting asks to be dropped; the colour
+     change is not motion, so it stays. */
+  @media (prefers-reduced-motion: reduce) {
+    transition:
+      border-color 200ms ease,
+      background-color 200ms ease;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
 @utility text-marigold-rule {
   position: relative;
 }

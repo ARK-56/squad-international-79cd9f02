@@ -84,7 +84,7 @@ function IndustryDetail() {
                   key={c.slug}
                   to="/case-studies/$slug"
                   params={{ slug: c.slug }}
-                  className="rounded-lg border border-border bg-background p-7 transition-colors hover:border-marigold"
+                  className="rounded-lg border border-border bg-background p-7 card-pop hover:border-marigold hover:shadow-[var(--shadow-elevated)]"
                 >
                   <span className="eyebrow">{c.service}</span>
                   <h3 className="mt-3 text-lg text-charcoal">{c.client}</h3>

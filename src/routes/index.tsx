@@ -204,7 +204,10 @@ function Home() {
         </div>
         <div className="mt-12 grid gap-5 md:grid-cols-3">
           {bpoBenefits.map((b) => (
-            <div key={b.title} className="rounded-lg border border-border bg-card p-7">
+            <div
+              key={b.title}
+              className="rounded-lg border border-border bg-card p-7 card-pop hover:border-marigold hover:shadow-[var(--shadow-elevated)]"
+            >
               <b.icon className="size-7 text-marigold" />
               <h3 className="mt-5 text-lg text-charcoal">{b.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{b.body}</p>
@@ -233,7 +236,7 @@ function Home() {
               key={s.slug}
               to="/services/$slug"
               params={{ slug: s.slug }}
-              className="group flex flex-col rounded-lg border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-marigold hover:shadow-[var(--shadow-elevated)]"
+              className="group flex flex-col rounded-lg border border-border bg-card p-7 card-pop hover:border-marigold hover:shadow-[var(--shadow-elevated)]"
             >
               {/*
                 Reserve the tallest wrap the two- and three-column layouts produce,
@@ -316,7 +319,7 @@ function Home() {
             {differentiators.map((d) => (
               <div
                 key={d.title}
-                className="rounded-lg border border-offwhite/10 bg-offwhite/[0.04] p-7"
+                className="card-pop rounded-lg border border-offwhite/10 bg-offwhite/[0.04] p-7 hover:border-marigold/60 hover:bg-offwhite/[0.07]"
               >
                 <d.icon className="size-7 text-marigold" />
                 <h3 className="mt-5 text-lg text-offwhite">{d.title}</h3>
@@ -409,7 +412,7 @@ function Home() {
               key={i.slug}
               to="/industries/$slug"
               params={{ slug: i.slug }}
-              className="group rounded-lg border border-border bg-card p-7 transition-colors hover:border-marigold"
+              className="group rounded-lg border border-border bg-card p-7 card-pop hover:border-marigold hover:shadow-[var(--shadow-elevated)]"
             >
               <h3 className="text-lg text-charcoal group-hover:text-marigold">{i.name}</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{i.tagline}</p>
@@ -454,7 +457,7 @@ function Home() {
                   key={c.slug}
                   to="/case-studies/$slug"
                   params={{ slug: c.slug }}
-                  className="group flex flex-col rounded-lg border border-border bg-background p-7 transition-all hover:-translate-y-1 hover:border-marigold"
+                  className="group flex flex-col rounded-lg border border-border bg-background p-7 card-pop hover:border-marigold hover:shadow-[var(--shadow-elevated)]"
                 >
                   <span className="eyebrow">{c.industry}</span>
                   <h3 className="mt-3 text-lg text-charcoal">{c.client}</h3>
