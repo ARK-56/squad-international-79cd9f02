@@ -5,7 +5,9 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  // btn-pop replaces transition-colors here: it carries the lift and press as well
+  // as the colour transition, so every variant pops rather than only marigold.
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer btn-pop focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -17,9 +19,9 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         marigold:
-          "bg-marigold text-primary-foreground font-semibold tracking-wide shadow-[var(--shadow-marigold)] hover:brightness-105 hover:-translate-y-0.5 transition-all",
+          "bg-marigold text-primary-foreground font-semibold tracking-wide shadow-[var(--shadow-marigold)] hover:brightness-105",
         charcoal:
-          "bg-charcoal text-charcoal-foreground font-semibold tracking-wide hover:bg-gunmetal transition-colors",
+          "bg-charcoal text-charcoal-foreground font-semibold tracking-wide hover:bg-gunmetal",
         outlineLight:
           "border border-offwhite/35 bg-transparent text-offwhite font-medium hover:bg-offwhite/10",
         outlineDark:

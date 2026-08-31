@@ -226,6 +226,47 @@
   }
 }
 
+/**
+ * Button hover. The same idea as card-pop but deliberately stronger, because a
+ * button is a much smaller target and the same 4px lift barely registers at that
+ * size: it takes a real scale to read as a response.
+ *
+ * This also owns the colour transition. The variants used to carry their own
+ * transition-colors or transition-all, which left it to Tailwind's output order
+ * whether that or the transform transition won.
+ */
+@utility btn-pop {
+  transition:
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 200ms ease,
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    filter 200ms ease;
+
+  &:hover {
+    transform: translateY(-3px) scale(1.05);
+  }
+
+  /* Presses back down, so a click feels answered rather than only lit up. */
+  &:active {
+    transform: translateY(-1px) scale(0.98);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition:
+      background-color 200ms ease,
+      border-color 200ms ease,
+      color 200ms ease,
+      filter 200ms ease;
+
+    &:hover,
+    &:active {
+      transform: none;
+    }
+  }
+}
+
 @utility text-marigold-rule {
   position: relative;
 }
