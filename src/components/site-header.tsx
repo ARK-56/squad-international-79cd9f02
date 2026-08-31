@@ -25,10 +25,12 @@ const nav = [
 const triggerClass =
   "group flex items-center gap-1 text-sm font-medium text-offwhite/70 transition-colors hover:text-offwhite data-[state=open]:text-offwhite";
 const chevronClass = "size-4 transition-transform group-data-[state=open]:rotate-180";
-// Wide enough for two columns of title + description, but never wider than the
-// viewport on a small laptop.
-const menuClass =
-  "w-[min(44rem,calc(100vw-3rem))] rounded-xl border-border bg-background p-3 shadow-lg";
+// Width is passed per dropdown rather than shared: Services carries capability
+// chips and a "View service" line under each summary and wants the extra room,
+// while Industries is still just a title over a one-line tagline.
+const menuClass = "rounded-xl border-border bg-background p-3 shadow-lg";
+const SERVICES_MENU_WIDTH = "w-[min(56rem,calc(100vw-3rem))]";
+const INDUSTRIES_MENU_WIDTH = "w-[min(44rem,calc(100vw-3rem))]";
 const menuLeadClass =
   "cursor-pointer rounded-lg px-3 py-2 text-sm font-semibold text-charcoal hover:bg-muted focus:bg-muted";
 // flex-col/items-start override the primitive's single-line centring so the
@@ -127,6 +129,7 @@ function NavDropdown({
   openOn,
   openMenu,
   onOpenChange,
+  menuWidth,
   children,
 }: {
   id: NavMenu;
@@ -134,6 +137,8 @@ function NavDropdown({
   openOn: "hover" | "click";
   openMenu: NavMenu | null;
   onOpenChange: (id: NavMenu, open: boolean) => void;
+  /** Tailwind width class for the panel; the two menus hold different content. */
+  menuWidth: string;
   children: ReactNode;
 }) {
   const open = openMenu === id;
@@ -218,7 +223,7 @@ function NavDropdown({
         // The panel is wide enough that a start-aligned menu on the right-hand
         // triggers runs past the viewport at 1024px; this lets Radix shift it back.
         collisionPadding={16}
-        className={menuClass}
+        className={`${menuWidth} ${menuClass}`}
         onPointerEnter={handleEnter}
       >
         {children}
@@ -273,6 +278,7 @@ export function SiteHeader() {
             openOn="hover"
             openMenu={openMenu}
             onOpenChange={handleMenuChange}
+            menuWidth={SERVICES_MENU_WIDTH}
           >
             <DropdownMenuItem asChild className={menuLeadClass}>
               <Link to="/services">All Services →</Link>
@@ -295,6 +301,7 @@ export function SiteHeader() {
             openOn="click"
             openMenu={openMenu}
             onOpenChange={handleMenuChange}
+            menuWidth={INDUSTRIES_MENU_WIDTH}
           >
             <DropdownMenuItem asChild className={menuLeadClass}>
               <Link to="/industries">All Industries →</Link>
