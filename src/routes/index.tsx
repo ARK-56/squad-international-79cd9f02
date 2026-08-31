@@ -24,6 +24,7 @@ import { ClientSpotlight } from "@/components/client-spotlight";
 import { FeatureSplit, FlowMedia, OrbitMedia } from "@/components/feature-split";
 
 import { SectionHeading } from "@/components/section-heading";
+import { StatValue } from "@/components/stat-value";
 import { services, industries, caseStudies, stats, faqs, site } from "@/lib/site-data";
 
 export const Route = createFileRoute("/")({
@@ -173,7 +174,9 @@ function Home() {
         <div className="container-page grid grid-cols-2 gap-8 py-10 lg:grid-cols-4">
           {stats.map((s) => (
             <div key={s.label}>
-              <p className="font-display text-4xl text-charcoal">{s.value}</p>
+              <p className="font-display text-4xl text-charcoal">
+                <StatValue value={s.value} />
+              </p>
               <p className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
                 {s.label}
               </p>
