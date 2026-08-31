@@ -97,6 +97,9 @@ const mobileSubLinkClass =
 /** Only one nav dropdown is open at a time, so the header tracks which. */
 type NavMenu = "services" | "industries";
 
+/** A measured box a panel can be sized and aligned to. */
+type PanelBox = { width: number; left: number };
+
 /**
  * Hover only where there is a real pointer. Touch keeps tap-to-open, and small
  * screens use the separate accordion menu anyway.
@@ -130,6 +133,7 @@ function NavDropdown({
   openMenu,
   onOpenChange,
   menuWidth,
+  matchBox,
   children,
 }: {
   id: NavMenu;
@@ -139,6 +143,13 @@ function NavDropdown({
   onOpenChange: (id: NavMenu, open: boolean) => void;
   /** Tailwind width class for the panel; the two menus hold different content. */
   menuWidth: string;
+  /**
+   * When given, the panel takes this box's width and starts at its left edge
+   * instead of the trigger's, which is how the services menu spans the header
+   * bar. Null until measured, so the class width above is the fallback and also
+   * what the server renders.
+   */
+  matchBox?: PanelBox | null;
   children: ReactNode;
 }) {
   const open = openMenu === id;
@@ -201,6 +212,22 @@ function NavDropdown({
 
   useEffect(() => clearTimer, []);
 
+  /**
+   * Radix aligns the panel to the trigger, so spanning the header bar means
+   * offsetting by the distance between the two. Recomputed whenever the menu
+   * opens as well as when the box changes, since the trigger moves with the
+   * layout while the offset itself is only read at open time.
+   */
+  const [alignOffset, setAlignOffset] = useState(0);
+  useEffect(() => {
+    const el = triggerRef.current;
+    if (!matchBox || !el) {
+      setAlignOffset(0);
+      return;
+    }
+    setAlignOffset(Math.round(matchBox.left - el.getBoundingClientRect().left));
+  }, [matchBox, open]);
+
   return (
     <DropdownMenu
       open={open}
@@ -219,11 +246,15 @@ function NavDropdown({
       <DropdownMenuContent
         ref={contentRef}
         align="start"
+        alignOffset={alignOffset}
         sideOffset={10}
         // The panel is wide enough that a start-aligned menu on the right-hand
         // triggers runs past the viewport at 1024px; this lets Radix shift it back.
+        // A matched panel already sits inside the header's own 24px inset, so this
+        // never fires for it.
         collisionPadding={16}
-        className={`${menuWidth} ${menuClass}`}
+        className={matchBox ? menuClass : `${menuWidth} ${menuClass}`}
+        style={matchBox ? { width: matchBox.width } : undefined}
         onPointerEnter={handleEnter}
       >
         {children}
@@ -238,6 +269,32 @@ export function SiteHeader() {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [industriesOpen, setIndustriesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const barRef = useRef<HTMLDivElement>(null);
+  const [bar, setBar] = useState<PanelBox | null>(null);
+
+  /**
+   * The services panel is sized and placed to the header bar, so it has to be
+   * measured. CSS cannot express that box: it is max-w-[84rem] inside the
+   * header's own 24px padding, and calc(100vw - 3rem) would be wrong by the width
+   * of the scrollbar, since 100vw counts it and the bar does not. That error is
+   * platform-dependent, which is worse than being merely approximate.
+   */
+  useEffect(() => {
+    const el = barRef.current;
+    if (!el) return;
+    const measure = () => {
+      const r = el.getBoundingClientRect();
+      setBar({ width: Math.round(r.width), left: Math.round(r.left) });
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
+    window.addEventListener("resize", measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, []);
 
   // Stable, so the hover dropdown can list it as an effect dependency without
   // rebinding its pointermove listener on every render.
@@ -257,6 +314,7 @@ export function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 py-3 md:px-6">
       <div
+        ref={barRef}
         className={`mx-auto flex w-full max-w-[84rem] items-center justify-between gap-6 rounded-full border px-5 py-2.5 transition-colors duration-300 md:px-7 ${
           scrolled
             ? "border-offwhite/10 bg-charcoal shadow-lg"
@@ -279,12 +337,15 @@ export function SiteHeader() {
             openMenu={openMenu}
             onOpenChange={handleMenuChange}
             menuWidth={SERVICES_MENU_WIDTH}
+            matchBox={bar}
           >
             <DropdownMenuItem asChild className={menuLeadClass}>
               <Link to="/services">All Services →</Link>
             </DropdownMenuItem>
             <div className="my-1 h-px bg-border" />
-            <div className="grid gap-0.5 sm:grid-cols-2">
+            {/* Three across now that the panel spans the header bar; the menu only
+                renders at lg and up, so it needs no smaller step. */}
+            <div className="grid gap-0.5 grid-cols-3">
               {services.map((s) => (
                 <DropdownMenuItem key={s.slug} asChild className={menuItemClass}>
                   <Link to="/services/$slug" params={{ slug: s.slug }}>
