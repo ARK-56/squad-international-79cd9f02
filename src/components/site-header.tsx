@@ -37,6 +37,10 @@ const menuLeadClass =
 // description can sit under the title.
 const menuItemClass =
   "cursor-pointer flex-col items-start gap-0 whitespace-normal rounded-lg px-3 py-2.5 hover:bg-muted focus:bg-muted";
+// Services carry the intro column's fill so the menu reads as a row of blocks
+// rather than text floating on the panel. Hover still registers, taking the same
+// colour to full strength.
+const serviceItemClass = `${menuItemClass} bg-muted/60`;
 
 /** Title over description, matching the two-line treatment used on the page cards. */
 function MenuItemText({
@@ -352,7 +356,11 @@ export function SiteHeader() {
               that used to sit across the top is gone; its link is the button at
               the foot of this column instead.
             */}
-            <div className="@container grid grid-cols-[17rem_1fr] gap-5">
+            {/* 20rem, not 17: the heading needs 252px of text and the column adds
+                40px of padding, so 272px wrapped it onto two lines. 320px clears
+                that with room for the webfont to differ, and costs the services
+                nothing measurable: their chips wrap to two rows either way. */}
+            <div className="@container grid grid-cols-[20rem_1fr] gap-5">
               <div className="flex flex-col justify-between rounded-lg bg-muted/60 p-5">
                 <div>
                   <span className="text-[11px] uppercase tracking-[0.2em] text-marigold">
@@ -387,9 +395,9 @@ export function SiteHeader() {
                 columns keep them readable. Measured against the panel rather than
                 the viewport, since the panel tracks the header bar, not the window.
               */}
-              <div className="grid auto-rows-fr grid-cols-2 gap-0.5 @[68rem]:grid-cols-3">
+              <div className="grid auto-rows-fr grid-cols-2 gap-2 @[68rem]:grid-cols-3">
                 {services.map((s) => (
-                  <DropdownMenuItem key={s.slug} asChild className={menuItemClass}>
+                  <DropdownMenuItem key={s.slug} asChild className={serviceItemClass}>
                     <Link to="/services/$slug" params={{ slug: s.slug }}>
                       <MenuItemText
                         title={s.title}
