@@ -55,25 +55,24 @@ function MenuItemText({
   const hasChips = Boolean(highlights && highlights.length > 0);
   return (
     <>
-      {/*
-        Services reserve two lines for the title. In three columns one of the six
-        wraps to a second line and the others do not, which left the menu's two
-        rows 20px apart. Industries are wide enough to stay on one line, so they
-        keep the natural height.
-      */}
-      <span className={`text-sm font-semibold text-charcoal ${hasChips ? "min-h-10" : ""}`}>
-        {title}
-      </span>
+      <span className="text-sm font-semibold text-charcoal">{title}</span>
       <span className="mt-1 text-xs leading-relaxed text-muted-foreground">{description}</span>
       {hasChips && highlights && (
-        <>
+        /*
+         * mt-auto sinks the chips and the affordance to the foot of the item. The
+         * grid gives every row the same height, so the slack from a shorter
+         * summary or a one-line title collects above the chips rather than as a
+         * gap under the title, which is what reserving two title lines used to
+         * do. It also lines the chips up across a row.
+         */
+        <span className="mt-auto flex w-full flex-col pt-4">
           {/*
             bg-card rather than the cards' bg-background: the panel is already
             bg-background, so that would leave the chips with no fill against it.
             card is lighter than both the panel and the item's muted hover, so the
             chips hold their edge in either state.
           */}
-          <span className="mt-2.5 flex flex-wrap gap-1.5">
+          <span className="flex flex-wrap gap-1.5">
             {highlights.map((h) => (
               <span
                 key={h}
@@ -89,11 +88,11 @@ function MenuItemText({
           */}
           <span
             aria-hidden="true"
-            className="mt-2.5 inline-flex items-center gap-1.5 text-xs font-semibold text-charcoal"
+            className="mt-2.5 inline-flex items-center gap-1.5 pb-1 text-xs font-semibold text-charcoal"
           >
             View service <ArrowRight className="size-3.5" />
           </span>
-        </>
+        </span>
       )}
     </>
   );
@@ -388,7 +387,7 @@ export function SiteHeader() {
                 columns keep them readable. Measured against the panel rather than
                 the viewport, since the panel tracks the header bar, not the window.
               */}
-              <div className="grid grid-cols-2 gap-0.5 @[68rem]:grid-cols-3">
+              <div className="grid auto-rows-fr grid-cols-2 gap-0.5 @[68rem]:grid-cols-3">
                 {services.map((s) => (
                   <DropdownMenuItem key={s.slug} asChild className={menuItemClass}>
                     <Link to="/services/$slug" params={{ slug: s.slug }}>
