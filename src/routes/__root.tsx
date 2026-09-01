@@ -82,14 +82,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Squad International | Dedicated Offshore Teams" },
+      { title: "Squad International | Your Business Companion" },
       {
         name: "description",
         content:
           "Dedicated offshore teams for customer support, business assistance, lead generation and operational delivery.",
       },
       { name: "author", content: "Squad International" },
-      { property: "og:title", content: "Squad International | Dedicated Offshore Teams" },
+      { property: "og:title", content: "Squad International | Your Business Companion" },
       {
         property: "og:description",
         content:

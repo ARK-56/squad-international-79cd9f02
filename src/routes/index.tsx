@@ -38,7 +38,7 @@ import { services, industries, caseStudies, stats, faqs, site } from "@/lib/site
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Squad International | Dedicated Offshore Teams & BPO" },
+      { title: "Squad International | Your Business Companion" },
       {
         name: "description",
         content:
@@ -46,7 +46,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Squad International | Dedicated Offshore Teams & BPO",
+        content: "Squad International | Your Business Companion",
       },
       {
         property: "og:description",
