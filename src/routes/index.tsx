@@ -154,7 +154,7 @@ function Home() {
           */}
           <h1 className="font-display text-5xl uppercase leading-none tracking-tight text-offwhite md:text-6xl lg:text-7xl xl:text-8xl">
             Dedicated Teams. <br /> Built Around{" "}
-            <span className="text-marigold">Your Business</span>.
+            <span className="text-marigold">Your Business.</span>
           </h1>
 
           <p className="mx-auto mt-8 max-w-2xl text-lg font-light leading-relaxed text-offwhite/70 md:text-xl">
