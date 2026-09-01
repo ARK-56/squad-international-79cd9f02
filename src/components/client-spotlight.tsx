@@ -1,5 +1,5 @@
 import { CalendarDays, MessageCircle, Users } from "lucide-react";
-import teamImage from "@/assets/team-about.jpg";
+import dataWallImage from "@/assets/spotlight-data-wall.jpg";
 import { Button } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
 import { site } from "@/lib/site-data";
@@ -39,8 +39,8 @@ export function ClientSpotlight() {
 
         <div className="relative">
           <img
-            src={teamImage}
-            alt="Squad International specialists supporting client accounts"
+            src={dataWallImage}
+            alt="A wall of live dashboards tracking performance, volumes and market data"
             loading="lazy"
             className="ml-auto h-[420px] w-full max-w-xl rounded-xl object-cover"
           />
