@@ -16,6 +16,7 @@ import heroImage from "@/assets/hero-operations.jpg";
 import heroVideo from "@/assets/hero-video.mp4.asset.json";
 import { assetUrl } from "@/lib/asset-url";
 import teamImage from "@/assets/team-about.jpg";
+import whySquadImage from "@/assets/why-squad-analytics.jpg";
 import {
   Accordion,
   AccordionContent,
@@ -310,8 +311,8 @@ function Home() {
             />
             <figure className="relative h-56 overflow-hidden rounded-xl border border-offwhite/10 md:h-72">
               <img
-                src={heroImage}
-                alt="Operations team working together across shared systems"
+                src={whySquadImage}
+                alt="A Squad analytics team reviewing performance dashboards in a glass-walled office"
                 loading="lazy"
                 className="h-full w-full object-cover opacity-70"
               />
