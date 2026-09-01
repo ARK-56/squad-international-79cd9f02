@@ -13,14 +13,15 @@ customer support, virtual assistance, lead generation and operational delivery.
 
 ## Development
 
-Requires Node.js. Bun is the package manager — `bun.lock` is the source of truth.
+Requires Node.js. npm is the package manager — `package-lock.json` is the source
+of truth.
 
 ```sh
-bun install
-bun run dev
+npm install
+npm run dev
 ```
 
-npm works too (`npm i && npm run dev`). Available scripts:
+Available scripts:
 
 | Script | Purpose |
 | --- | --- |
