@@ -302,14 +302,15 @@ function Home() {
 
       <section className="surface-dark py-20 md:py-28">
         <div className="container-page">
-          <div className="grid items-end gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+          {/* Same proportions and figure height as the Industries section below. */}
+          <div className="grid items-end gap-10 lg:grid-cols-[1fr_0.85fr]">
             <SectionHeading
               eyebrow="Why Squad"
               title="Outsourcing without the usual trade-offs"
               description="The reason clients stay with us is simple and deliberate: dependable people, clear responsibilities and consistent execution. We build support around your business instead of forcing your business into a fixed outsourcing model."
               tone="light"
             />
-            <figure className="relative h-56 overflow-hidden rounded-xl border border-offwhite/10 md:h-72">
+            <figure className="relative h-48 overflow-hidden rounded-xl border border-offwhite/10 md:h-56">
               <img
                 src={whySquadImage}
                 alt="A Squad analytics team reviewing performance dashboards in a glass-walled office"
