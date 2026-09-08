@@ -146,10 +146,27 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+/**
+ * Routes that render without the site chrome: no nav, no footer, no floating
+ * WhatsApp button. Campaign landing pages, where every link off the page is a
+ * link away from converting. They supply their own masthead and legal footer.
+ */
+const BARE_ROUTES = new Set(["/get-started"]);
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const routerState = useRouterState();
-  const isHome = routerState.location.pathname === "/";
+  const pathname = routerState.location.pathname;
+  const isBare = BARE_ROUTES.has(pathname.replace(/\/+$/, "") || "/");
+
+  if (isBare) {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <Outlet />
+        <Toaster />
+      </QueryClientProvider>
+    );
+  }
 
   return (
     <QueryClientProvider client={queryClient}>
