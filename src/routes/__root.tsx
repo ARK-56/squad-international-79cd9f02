@@ -108,6 +108,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
+    /**
+     * Google Analytics 4, on the root route so it loads once for every page.
+     * HeadContent renders these into <head>, which is where gtag wants to be.
+     *
+     * The loader is async so it does not block rendering; the snippet below it is
+     * inline and synchronous on purpose, because it has to define dataLayer and
+     * gtag before the loader finishes and starts reading them.
+     */
+    scripts: [
+      { src: "https://www.googletagmanager.com/gtag/js?id=G-Q80EHWPPBW", async: true },
+      {
+        children: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-Q80EHWPPBW');`,
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
