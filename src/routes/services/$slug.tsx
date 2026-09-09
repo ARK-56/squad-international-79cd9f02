@@ -1,5 +1,13 @@
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
-import { ArrowRight, CalendarDays, MessageCircle, CheckCircle2, Users, Clock } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarDays,
+  MessageCircle,
+  CheckCircle2,
+  Users,
+  Clock,
+  Wallet,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { BookingDialog } from "@/components/booking-dialog";
@@ -147,6 +155,30 @@ function ServiceDetail() {
         <aside className="h-fit rounded-lg border border-border bg-card p-8 lg:sticky lg:top-28">
           <h2 className="text-xl text-charcoal">Typical engagement</h2>
           <dl className="mt-5 space-y-4">
+            {/*
+              Only rendered for the lines that publish a figure. Framed as a
+              starting price, because the note below it names a second model and
+              the scope still gets quoted per engagement.
+            */}
+            {service.pricing && (
+              <div className="flex gap-3">
+                <Wallet className="mt-0.5 size-4 shrink-0 text-marigold" />
+                <div>
+                  <dt className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                    Starting from
+                  </dt>
+                  <dd className="mt-1 text-sm text-charcoal">
+                    <span className="font-display text-2xl leading-none text-charcoal">
+                      {service.pricing.from}
+                    </span>{" "}
+                    <span className="text-muted-foreground">{service.pricing.unit}</span>
+                  </dd>
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                    {service.pricing.note}
+                  </p>
+                </div>
+              </div>
+            )}
             <div className="flex gap-3">
               <Users className="mt-0.5 size-4 shrink-0 text-marigold" />
               <div>

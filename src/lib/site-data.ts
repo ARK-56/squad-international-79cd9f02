@@ -45,6 +45,12 @@ export type Service = {
   highlights: string[];
   supportModel: string;
   scaling: string;
+  /**
+   * Published starting price, on the lines that have one. Optional because most
+   * engagements are scoped and quoted rather than listed; medical billing is the
+   * only line that publishes a figure, so the sidebar hides this when absent.
+   */
+  pricing?: { from: string; unit: string; note: string };
 };
 
 export const services: Service[] = [
@@ -88,6 +94,11 @@ export const services: Service[] = [
     highlights: ["Eligibility Checks", "Billing & Claims", "AR Follow-Up"],
     supportModel: "Dedicated & Reliable",
     scaling: "Flexible to Your Needs",
+    pricing: {
+      from: "$1,500",
+      unit: "per month",
+      note: "For a dedicated billing resource. Percentage of collections is available for higher claim volumes.",
+    },
   },
   {
     slug: "customer-support",
@@ -471,7 +482,7 @@ export const faqs: { q: string; a: string[] }[] = [
   {
     q: "How is pricing structured?",
     a: [
-      "Pricing is built around your specific requirements rather than a fixed package or per-seat rate.",
+      "Most pricing is built around your specific requirements rather than a fixed package or per-seat rate, though some service lines publish a starting price.",
       "Factors such as the type of work, number of resources, responsibilities, working hours and overall scope can affect pricing.",
       "For pricing, book a free consultation or WhatsApp us to discuss your requirements.",
     ],
