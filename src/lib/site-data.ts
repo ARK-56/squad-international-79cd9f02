@@ -49,6 +49,47 @@ export type Service = {
 
 export const services: Service[] = [
   {
+    slug: "medical-billing-healthcare",
+    title: "Medical Billing & RCM",
+    short:
+      "End-to-end revenue cycle support for US healthcare providers, from eligibility checks through denials and AR follow-up.",
+    summary:
+      "Billing and administrative support for practices and healthcare services — eligibility checks, charge entry, claim submission, denial handling and accounts-receivable follow-up, run to documented process with audit sampling.",
+    outcomes: [
+      "Clean-claim rates tracked and reported weekly",
+      "Shorter AR cycles through structured follow-up",
+      "Clinical staff returned to clinical work",
+    ],
+    capabilities: [
+      "Insurance eligibility and benefits verification",
+      "Charge entry and claim preparation",
+      "Claim submission and clearinghouse handling",
+      "Denial management and appeals",
+      "Accounts-receivable follow-up and reporting",
+      "Patient billing enquiries",
+    ],
+    process: [
+      { step: "Scope & controls", detail: "Payer mix, volumes and the access controls and agreements needed before go-live." },
+      { step: "Train & certify", detail: "Billers are trained on your specialty, payers and practice management system." },
+      { step: "Pilot with audit", detail: "A supervised ramp with claim-level review before full volume." },
+      { step: "Steady state", detail: "Weekly AR and denial reporting with monthly performance review." },
+    ],
+    idealFor: ["Medical practices and clinics", "Billing companies", "Allied health and diagnostics"],
+    tools: [
+      "Athenahealth, DrChrono and Kareo",
+      "AdvancedMD and eClinicalWorks",
+      "Epic and Cerner portals",
+      "Availity and payer portals",
+      "Clearinghouses such as Office Ally",
+      "Your practice management system",
+    ],
+    pitch:
+      "Support routine healthcare billing and administrative processes with dedicated outsourced resources — adding back-office capacity without having to build every function internally.",
+    highlights: ["Eligibility Checks", "Billing & Claims", "AR Follow-Up"],
+    supportModel: "Dedicated & Reliable",
+    scaling: "Flexible to Your Needs",
+  },
+  {
     slug: "customer-support",
     title: "Customer Support Outsourcing",
     short:
@@ -91,7 +132,7 @@ export const services: Service[] = [
   },
   {
     slug: "lead-generation",
-    title: "Lead Generation & Appointment Setting",
+    title: "Outbound Sales Support",
     short:
       "Dedicated prospecting support that keeps your sales pipeline active and your internal team focused on qualified leads.",
     summary:
@@ -132,7 +173,7 @@ export const services: Service[] = [
   },
   {
     slug: "virtual-business-assistance",
-    title: "Virtual Assistant & Desk Support",
+    title: "Dedicated Teams & Virtual Assistance",
     short:
       "Move recurring administrative and desk work to dedicated resources built around your existing tools and workflow.",
     summary:
@@ -168,129 +209,6 @@ export const services: Service[] = [
     pitch:
       "Move recurring administrative and desk work to dedicated support so your internal team can spend more time on the work that drives the business forward.",
     highlights: ["Data Entry & Admin Support", "Research", "CRM & Order Processing"],
-    supportModel: "Dedicated & Reliable",
-    scaling: "Flexible to Your Needs",
-  },
-  {
-    slug: "medical-billing-healthcare",
-    title: "Medical Billing & Healthcare",
-    short:
-      "Dedicated support for process-driven healthcare billing and the administrative work that sits behind every claim.",
-    summary:
-      "Billing and administrative support for practices and healthcare services — eligibility checks, charge entry, claim submission, denial handling and accounts-receivable follow-up, run to documented process with audit sampling.",
-    outcomes: [
-      "Clean-claim rates tracked and reported weekly",
-      "Shorter AR cycles through structured follow-up",
-      "Clinical staff returned to clinical work",
-    ],
-    capabilities: [
-      "Insurance eligibility and benefits verification",
-      "Charge entry and claim preparation",
-      "Claim submission and clearinghouse handling",
-      "Denial management and appeals",
-      "Accounts-receivable follow-up and reporting",
-      "Patient billing enquiries",
-    ],
-    process: [
-      { step: "Scope & controls", detail: "Payer mix, volumes and the access controls and agreements needed before go-live." },
-      { step: "Train & certify", detail: "Billers are trained on your specialty, payers and practice management system." },
-      { step: "Pilot with audit", detail: "A supervised ramp with claim-level review before full volume." },
-      { step: "Steady state", detail: "Weekly AR and denial reporting with monthly performance review." },
-    ],
-    idealFor: ["Medical practices and clinics", "Billing companies", "Allied health and diagnostics"],
-    tools: [
-      "Athenahealth, DrChrono and Kareo",
-      "AdvancedMD and eClinicalWorks",
-      "Epic and Cerner portals",
-      "Availity and payer portals",
-      "Clearinghouses such as Office Ally",
-      "Your practice management system",
-    ],
-    pitch:
-      "Support routine healthcare billing and administrative processes with dedicated outsourced resources — adding back-office capacity without having to build every function internally.",
-    highlights: ["Eligibility Checks", "Billing & Claims", "AR Follow-Up"],
-    supportModel: "Dedicated & Reliable",
-    scaling: "Flexible to Your Needs",
-  },
-  {
-    slug: "ecommerce-customer-support",
-    title: "E-commerce Customer Support",
-    short:
-      "Support your customers and your day-to-day e-commerce operations without continuously increasing internal headcount.",
-    summary:
-      "Support teams for online retail — pre-sale questions, order and delivery enquiries, returns and refunds — working inside your storefront and helpdesk across the hours your customers actually shop.",
-    outcomes: [
-      "Faster first response on order and delivery enquiries",
-      "Returns and refunds handled to policy, consistently",
-      "Peak-season capacity without hiring locally",
-    ],
-    capabilities: [
-      "Pre-sale and product enquiries",
-      "Order status and delivery chasing",
-      "Returns, refunds and exchanges",
-      "Marketplace buyer messaging",
-      "Listing and catalogue support",
-      "Chargeback and dispute documentation",
-    ],
-    process: [
-      { step: "Coverage modelling", detail: "Order volumes, peak periods and channels define headcount and shifts." },
-      { step: "Product & policy training", detail: "Agents learn your catalogue, returns policy and tone of voice." },
-      { step: "Pilot with QA", detail: "A supervised ramp with daily scorecards through a first peak." },
-      { step: "Steady state", detail: "SLA reporting, macro upkeep and continuous coaching." },
-    ],
-    idealFor: ["Shopify and WooCommerce brands", "Amazon and marketplace sellers", "D2C and subscription retail"],
-    tools: [
-      "Shopify and Shopify Inbox",
-      "Amazon Seller Central",
-      "Gorgias and Zendesk",
-      "Re:amaze and Help Scout",
-      "ShipStation and AfterShip",
-      "Klaviyo and your CRM",
-    ],
-    pitch:
-      "Give your customers dependable support across their buying journey while adding the capacity to manage orders, returns and customer service without continuously increasing internal headcount.",
-    highlights: ["Shopify & Amazon Support", "Orders + Returns", "Customer Service"],
-    supportModel: "Dedicated & Reliable",
-    scaling: "Flexible to Your Needs",
-  },
-  {
-    slug: "accounting-bookkeeping",
-    title: "Accounting & Bookkeeping",
-    short:
-      "Reliable support for recurring bookkeeping, reconciliation and month-end reporting, delivered on your own ledger.",
-    summary:
-      "Day-to-day bookkeeping and finance operations — transaction coding, accounts payable and receivable, reconciliations and month-end reporting — delivered on your ledger against an agreed close calendar.",
-    outcomes: [
-      "A month-end close that lands on the same date every month",
-      "Reconciled ledgers with documented review",
-      "Finance leadership out of transaction processing",
-    ],
-    capabilities: [
-      "Transaction coding and ledger upkeep",
-      "Accounts payable and supplier payment runs",
-      "Accounts receivable and collections support",
-      "Bank, card and merchant reconciliations",
-      "Month-end close and management reporting",
-      "Payroll and expense administration support",
-    ],
-    process: [
-      { step: "Books review", detail: "We review the current ledger, chart of accounts and close calendar." },
-      { step: "Document the workflow", detail: "Coding rules, approval paths and reporting pack are written down." },
-      { step: "Parallel close", detail: "The first close runs alongside your existing process as a check." },
-      { step: "Steady state", detail: "Owned close calendar with monthly review of exceptions." },
-    ],
-    idealFor: ["Owner-managed businesses", "Accounting and bookkeeping firms", "Multi-entity service businesses"],
-    tools: [
-      "QuickBooks Online and Desktop",
-      "Xero and Sage",
-      "Bill.com and Dext",
-      "Stripe, PayPal and merchant portals",
-      "Excel, Sheets and Power BI",
-      "Your payroll platform",
-    ],
-    pitch:
-      "Keep recurring financial administration organized and moving with dedicated bookkeeping support built around your business processes and reporting requirements.",
-    highlights: ["QuickBooks & Xero", "AP/AR", "Month-End Reporting"],
     supportModel: "Dedicated & Reliable",
     scaling: "Flexible to Your Needs",
   },
@@ -496,7 +414,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "saas-outbound-pipeline",
     client: "B2B workflow software company",
     industry: "SaaS & Technology",
-    service: "Lead Generation & Appointment Setting",
+    service: "Outbound Sales Support",
     challenge:
       "Two local SDRs cost more than the pipeline they produced, and outreach stalled whenever one of them left.",
     approach: [

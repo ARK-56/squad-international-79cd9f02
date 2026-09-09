@@ -7,21 +7,29 @@ import { CtaBand } from "@/components/cta-band";
 import { services, site } from "@/lib/site-data";
 
 /**
- * Service lines retired when the six delivery lines were renamed. Their URLs were
- * live, so they redirect to the services index rather than 404 — none of the
- * current six is a close enough match to send a visitor to directly.
+ * Service lines whose URLs were once live. They redirect rather than 404, to the
+ * closest current service where there is one and to the services index where the
+ * capability has no successor.
+ *
+ * The first three date from the rename of the original delivery lines. The last
+ * two come from the move to four services: e-commerce support became part of
+ * customer support and keeps a direct equivalent, while bookkeeping was dropped
+ * as a service line and has nowhere specific to send a visitor.
  */
-const RETIRED_SLUGS = new Set([
-  "dedicated-team-support",
-  "operational-management",
-  "growth-support",
+const RETIRED_SLUGS = new Map<string, string>([
+  ["dedicated-team-support", "/services"],
+  ["operational-management", "/services"],
+  ["growth-support", "/services"],
+  ["ecommerce-customer-support", "/services/customer-support"],
+  ["accounting-bookkeeping", "/services"],
 ]);
 
 export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
     const service = services.find((s) => s.slug === params.slug);
     if (!service) {
-      if (RETIRED_SLUGS.has(params.slug)) throw redirect({ to: "/services" });
+      const retiredTarget = RETIRED_SLUGS.get(params.slug);
+      if (retiredTarget) throw redirect({ to: retiredTarget, statusCode: 301 });
       throw notFound();
     }
     return service;

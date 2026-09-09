@@ -93,8 +93,8 @@ function AboutPage() {
             <p>
               Squad International started in 2019 with a focus on telemarketing and business
               support. Since then, we have grown into a broader BPO partner supporting businesses
-              across customer service, lead generation, virtual assistance, healthcare operations,
-              e-commerce and bookkeeping.
+              across medical billing and revenue cycle management, customer service, outbound
+              sales and virtual assistance.
             </p>
             <p>
               Today, we are trusted by businesses across different markets and industries to provide

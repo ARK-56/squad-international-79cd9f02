@@ -229,7 +229,7 @@ function Home() {
           <SectionHeading
             eyebrow="What we do"
             title="Capabilities you can switch on"
-            description="Six service lines built around the way your business works."
+            description="Four service lines built around the way your business works."
           />
           <Button variant="outlineDark" asChild>
             <Link to="/services">
@@ -238,7 +238,7 @@ function Home() {
           </Button>
         </div>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
           {services.map((s) => (
             <Link
               key={s.slug}

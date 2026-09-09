@@ -13,7 +13,7 @@ export const Route = createFileRoute("/services/")({
       {
         name: "description",
         content:
-          "Customer support outsourcing, lead generation, virtual assistant and desk support, medical billing, e-commerce support and bookkeeping — built around the way your business works.",
+          "Medical billing and revenue cycle management, customer support outsourcing, outbound sales support and dedicated virtual assistance, built around the way your business works.",
       },
       { property: "og:title", content: "Outsourcing Services | Squad International" },
       {
@@ -31,7 +31,7 @@ function ServicesPage() {
       <PageHero
         eyebrow="Services"
         title="Flexible support. Built around your business."
-        description="From customer support and lead generation to healthcare, e-commerce and bookkeeping, we provide outsourced support built around the way your business works — helping you reduce operating costs, improve efficiency and add capacity without building every role in-house."
+        description="From medical billing and revenue cycle management to customer support, outbound sales and dedicated virtual assistance, we provide outsourced support built around the way your business works, helping you reduce operating costs, improve efficiency and add capacity without building every role in-house."
       >
         <BookingDialog>
           <Button variant="marigold" size="lg">

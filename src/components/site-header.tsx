@@ -360,7 +360,7 @@ export function SiteHeader() {
                 40px of padding, so 272px wrapped it onto two lines. 320px clears
                 that with room for the webfont to differ, and costs the services
                 nothing measurable: their chips wrap to two rows either way. */}
-            <div className="@container grid grid-cols-[20rem_1fr] gap-5">
+            <div className="grid grid-cols-[20rem_1fr] gap-5">
               <div className="flex flex-col justify-between rounded-lg bg-muted/60 p-5">
                 <div>
                   <span className="text-[11px] uppercase tracking-[0.2em] text-marigold">
@@ -370,8 +370,8 @@ export function SiteHeader() {
                     Capabilities you can switch on
                   </p>
                   <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                    Six service lines built around the way your business works, from customer
-                    support to the back office.
+                    Four service lines built around the way your business works, from medical
+                    billing to the back office.
                   </p>
                 </div>
                 {/*
@@ -389,13 +389,12 @@ export function SiteHeader() {
               </div>
 
               {/*
-                Three across only once the panel is wide enough to afford it. The
-                intro column is a fixed 17rem, so at 1024 a third column squeezed
-                each service to 213px and pushed its chips onto three rows; two
-                columns keep them readable. Measured against the panel rather than
-                the viewport, since the panel tracks the header bar, not the window.
+                Two columns, which divides the four services evenly and gives each
+                card ~421px next to the fixed 20rem intro column. A third column
+                would strand one service on a row of its own, and squeezed each
+                card to 213px at 1024 wide, pushing its chips onto three rows.
               */}
-              <div className="grid auto-rows-fr grid-cols-2 gap-2 @[68rem]:grid-cols-3">
+              <div className="grid auto-rows-fr grid-cols-2 gap-2">
                 {services.map((s) => (
                   <DropdownMenuItem key={s.slug} asChild className={serviceItemClass}>
                     <Link to="/services/$slug" params={{ slug: s.slug }}>
