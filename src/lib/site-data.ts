@@ -242,6 +242,30 @@ export type Industry = {
 
 export const industries: Industry[] = [
   {
+    slug: "healthcare",
+    name: "Healthcare & Wellness",
+    short:
+      "Billing, claims and administrative workloads can consume valuable internal time. We help healthcare and wellness businesses add dependable back-office capacity while maintaining consistent processes and accountability.",
+    headline: "Reliable Support for Process-Driven Healthcare Operations",
+    tagline: "Reliable support for process-driven healthcare and admin operations.",
+    keyFocus: ["Billing Support", "Administrative Workflows", "Consistent Execution"],
+    challenges: [
+      "Administrative burden on clinical staff",
+      "Appointment no-shows and scheduling churn",
+      "Documentation and claims backlogs",
+    ],
+    solutions: [
+      "Patient scheduling, reminders and follow-up",
+      "Records, intake and documentation support",
+      "Claims and billing operations with audit sampling",
+    ],
+    metrics: [
+      { label: "Admin hours returned", value: "22/wk" },
+      { label: "No-show rate", value: "-31%" },
+      { label: "Claims accuracy", value: "99.2%" },
+    ],
+  },
+  {
     slug: "ecommerce-retail",
     name: "E-commerce & Retail",
     short:
@@ -290,30 +314,6 @@ export const industries: Industry[] = [
     ],
   },
   {
-    slug: "healthcare",
-    name: "Healthcare & Wellness",
-    short:
-      "Billing, claims and administrative workloads can consume valuable internal time. We help healthcare and wellness businesses add dependable back-office capacity while maintaining consistent processes and accountability.",
-    headline: "Reliable Support for Process-Driven Healthcare Operations",
-    tagline: "Reliable support for process-driven healthcare and admin operations.",
-    keyFocus: ["Billing Support", "Administrative Workflows", "Consistent Execution"],
-    challenges: [
-      "Administrative burden on clinical staff",
-      "Appointment no-shows and scheduling churn",
-      "Documentation and claims backlogs",
-    ],
-    solutions: [
-      "Patient scheduling, reminders and follow-up",
-      "Records, intake and documentation support",
-      "Claims and billing operations with audit sampling",
-    ],
-    metrics: [
-      { label: "Admin hours returned", value: "22/wk" },
-      { label: "No-show rate", value: "-31%" },
-      { label: "Claims accuracy", value: "99.2%" },
-    ],
-  },
-  {
     slug: "logistics",
     name: "Logistics & Supply Chain",
     short:
@@ -339,21 +339,21 @@ export const industries: Industry[] = [
   },
   {
     slug: "financial-services",
-    name: "Financial & Professional Services",
+    name: "Professional & Business Services",
     short:
-      "Financial and professional service businesses depend on accurate, consistent administrative and financial processes. Dedicated outsourced support helps keep recurring work moving without requiring every function to be built internally.",
+      "Professional and business service firms depend on accurate, consistent client and administrative processes. Dedicated outsourced support helps keep recurring work moving without requiring every function to be built internally.",
     headline: "More Back-Office Capacity. Less Internal Overhead.",
     tagline: "Add dependable back-office capacity without added internal overhead.",
-    keyFocus: ["Financial Administration", "Client Support", "Operational Efficiency"],
+    keyFocus: ["Client Administration", "Client Support", "Operational Efficiency"],
     challenges: [
-      "Regulated processes requiring consistent execution",
+      "Documented processes requiring consistent execution",
       "Client servicing volumes outpacing headcount",
       "Costly local hiring for repeatable work",
     ],
     solutions: [
-      "KYC and onboarding documentation support",
+      "Client onboarding and documentation support",
       "Client servicing and enquiry management",
-      "Reconciliation and reporting operations",
+      "Scheduling, reporting and billing operations",
     ],
     metrics: [
       { label: "Process accuracy", value: "99.5%" },
@@ -383,6 +383,30 @@ export const industries: Industry[] = [
       { label: "Speed to lead", value: "< 5 min" },
       { label: "Appointments / month", value: "60+" },
       { label: "Listing accuracy", value: "100%" },
+    ],
+  },
+  {
+    slug: "restaurants-hospitality",
+    name: "Restaurants & Hospitality",
+    short:
+      "Restaurants, hotels and hospitality groups handle constant booking, ordering and guest enquiry volume across long service hours. Dedicated outsourced support covers those channels without expanding front-of-house headcount.",
+    headline: "Cover Every Booking And Enquiry Across Service Hours",
+    tagline: "Cover bookings, orders and guest enquiries across every service hour.",
+    keyFocus: ["Reservations", "Order Support", "Guest Communication"],
+    challenges: [
+      "Enquiry peaks landing in the middle of service",
+      "Long opening hours to cover across sites",
+      "High turnover in front-of-house roles",
+    ],
+    solutions: [
+      "Reservation, booking and amendment handling",
+      "Phone and online order support",
+      "Review responses and guest follow-up",
+    ],
+    metrics: [
+      { label: "Calls answered", value: "98%" },
+      { label: "Response time", value: "-60%" },
+      { label: "Operating cost", value: "-50%" },
     ],
   },
 ];

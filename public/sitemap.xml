@@ -46,13 +46,13 @@
     <loc>https://squadinternational.net/services/virtual-business-assistance</loc>
   </url>
   <url>
+    <loc>https://squadinternational.net/industries/healthcare</loc>
+  </url>
+  <url>
     <loc>https://squadinternational.net/industries/ecommerce-retail</loc>
   </url>
   <url>
     <loc>https://squadinternational.net/industries/saas-technology</loc>
-  </url>
-  <url>
-    <loc>https://squadinternational.net/industries/healthcare</loc>
   </url>
   <url>
     <loc>https://squadinternational.net/industries/logistics</loc>
@@ -62,6 +62,9 @@
   </url>
   <url>
     <loc>https://squadinternational.net/industries/real-estate</loc>
+  </url>
+  <url>
+    <loc>https://squadinternational.net/industries/restaurants-hospitality</loc>
   </url>
   <url>
     <loc>https://squadinternational.net/case-studies/d2c-peak-season-support</loc>
