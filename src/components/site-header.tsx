@@ -58,6 +58,18 @@ const menuItemClass =
 const serviceItemClass = `${menuItemClass} group bg-muted/60`;
 
 /**
+ * The width below which the services panel stops being comfortable. Measured on
+ * the four current services: at 940 the chips take three rows and the longest
+ * title two lines, at 980 the chips fall to two rows, and at 1020 every title
+ * fits one line and the cards drop from 235px tall to 168px. Past that it gains
+ * nothing until 1180, so 1020 is where the width stops paying for itself.
+ *
+ * A trigger-anchored panel grows leftward to reach this, and is still capped by
+ * the header bar, so on a narrow window it simply spans the bar as before.
+ */
+const MIN_SERVICES_PANEL = 1020;
+
+/**
  * One icon per service, keyed by slug rather than array position so reordering
  * the services cannot silently reassign them. Presentation only, which is why it
  * sits here instead of in site-data: that file holds no React imports, and these
@@ -280,11 +292,15 @@ function NavDropdown({
       return;
     }
     const triggerLeft = el.getBoundingClientRect().left;
-    setPanelBox(
-      anchor === "trigger"
-        ? { alignOffset: 0, width: Math.round(matchBox.left + matchBox.width - triggerLeft) }
-        : { alignOffset: Math.round(matchBox.left - triggerLeft), width: matchBox.width },
-    );
+    if (anchor !== "trigger") {
+      setPanelBox({ alignOffset: Math.round(matchBox.left - triggerLeft), width: matchBox.width });
+      return;
+    }
+    const barRight = matchBox.left + matchBox.width;
+    const width = Math.min(matchBox.width, Math.max(barRight - triggerLeft, MIN_SERVICES_PANEL));
+    // Right edge stays on the bar, so any extra width is taken off the left.
+    const left = Math.max(matchBox.left, barRight - width);
+    setPanelBox({ alignOffset: Math.round(left - triggerLeft), width: Math.round(width) });
   }, [matchBox, open, anchor]);
 
   return (
@@ -439,12 +455,11 @@ export function SiteHeader() {
 
               {/*
                 Two columns, which divides the four services evenly; a third would
-                strand one service on a row of its own. Starting the panel at the
-                trigger rather than at the bar's left edge costs width, so cards
-                run 293px at 1456 down to 192px at 1024. Below roughly 960px of
-                panel the chips take a third row, which is accepted: the panel
-                still fits without scrolling at 1024x700, the narrowest size the
-                desktop nav is shown at.
+                strand one service on a row of its own. The panel starts at the
+                trigger but never narrower than MIN_SERVICES_PANEL, so the cards
+                hold at 323px wherever the bar allows that width and fall to about
+                295px at 1024, where the bar itself is the limit. Chips stay on two
+                rows throughout.
               */}
               <div className="grid auto-rows-fr grid-cols-2 gap-2">
                 {services.map((s) => (
