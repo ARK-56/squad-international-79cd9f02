@@ -63,18 +63,14 @@ function ServicesPage() {
                 ))}
               </ul>
               <dl className="mt-6 grid flex-1 gap-3 border-t border-border pt-5 text-sm sm:grid-cols-2">
-                <div>
-                  <dt className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                    Support model
-                  </dt>
-                  <dd className="mt-1 text-charcoal">{s.supportModel}</dd>
-                </div>
-                <div>
-                  <dt className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                    Scaling
-                  </dt>
-                  <dd className="mt-1 text-charcoal">{s.scaling}</dd>
-                </div>
+                {s.facts.map((f) => (
+                  <div key={f.label}>
+                    <dt className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                      {f.label}
+                    </dt>
+                    <dd className="mt-1 text-charcoal">{f.value}</dd>
+                  </div>
+                ))}
               </dl>
               <div className="mt-8">
                 <Button variant="charcoal" asChild>

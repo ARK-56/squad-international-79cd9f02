@@ -52,8 +52,13 @@ export type Service = {
    * are a third of the width with a panel height to hold.
    */
   offerings: string[];
-  supportModel: string;
-  scaling: string;
+  /**
+   * The two facts shown under the service cards and in the engagement panel.
+   * Each line labels its own, since what matters about a billing engagement is
+   * not what matters about an outbound one. Two entries: both surfaces lay them
+   * out as a pair.
+   */
+  facts: { label: string; value: string }[];
   /**
    * How the line is priced. Optional because most engagements are scoped and
    * quoted rather than listed, so the sidebar hides this when absent. More than
@@ -117,8 +122,10 @@ export const services: Service[] = [
       "Full-Service Percentage-Based RCM",
       "AR Follow-Up",
     ],
-    supportModel: "Dedicated & Reliable",
-    scaling: "Flexible to Your Needs",
+    facts: [
+      { label: "Engagement model", value: "Percentage-Based RCM" },
+      { label: "Team model", value: "Dedicated RCM Team" },
+    ],
     pricing: [
       {
         label: "Dedicated team",
@@ -182,8 +189,10 @@ export const services: Service[] = [
       "SDR Support",
       "Sales Follow-Up",
     ],
-    supportModel: "Dedicated & Reliable",
-    scaling: "Flexible to Your Needs",
+    facts: [
+      { label: "Campaign model", value: "Client-Provided Leads/Data" },
+      { label: "Team setup", value: "Dedicated Callers / SDRs" },
+    ],
   },
   {
     slug: "customer-support",
@@ -233,8 +242,10 @@ export const services: Service[] = [
       "Email",
       "Live Chat",
     ],
-    supportModel: "Dedicated & Reliable",
-    scaling: "Flexible to Your Needs",
+    facts: [
+      { label: "Support model", value: "Dedicated Support Team" },
+      { label: "Channel coverage", value: "Voice, Chat, Email & Tickets" },
+    ],
   },
   {
     slug: "virtual-business-assistance",
@@ -284,8 +295,10 @@ export const services: Service[] = [
       "Administrative Support",
       "Custom Dedicated Teams",
     ],
-    supportModel: "Dedicated & Reliable",
-    scaling: "Flexible to Your Needs",
+    facts: [
+      { label: "Resource model", value: "Dedicated Talent" },
+      { label: "Engagement type", value: "VA, Specialist or Full Team" },
+    ],
   },
 ];
 

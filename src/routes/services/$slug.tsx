@@ -231,24 +231,21 @@ function ServiceDetail() {
                 </div>
               </div>
             )}
-            <div className="flex gap-3">
-              <Users className="mt-0.5 size-4 shrink-0 text-marigold" />
-              <div>
-                <dt className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                  Support model
-                </dt>
-                <dd className="mt-1 text-sm text-charcoal">{service.supportModel}</dd>
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <Clock className="mt-0.5 size-4 shrink-0 text-marigold" />
-              <div>
-                <dt className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                  Scaling
-                </dt>
-                <dd className="mt-1 text-sm text-charcoal">{service.scaling}</dd>
-              </div>
-            </div>
+            {service.facts.map((f, i) => {
+              /* Two facts, so the pair keeps the icons the fixed rows used. */
+              const Icon = i === 0 ? Users : Clock;
+              return (
+                <div key={f.label} className="flex gap-3">
+                  <Icon className="mt-0.5 size-4 shrink-0 text-marigold" />
+                  <div>
+                    <dt className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                      {f.label}
+                    </dt>
+                    <dd className="mt-1 text-sm text-charcoal">{f.value}</dd>
+                  </div>
+                </div>
+              );
+            })}
           </dl>
 
           <h2 className="mt-8 border-t border-border pt-6 text-xl text-charcoal">Ideal for</h2>
