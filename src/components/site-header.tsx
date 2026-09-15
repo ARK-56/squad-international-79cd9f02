@@ -56,14 +56,18 @@ const serviceItemClass = `${menuItemClass} group bg-muted/60`;
 /**
  * The width below which the services panel stops being comfortable. Measured on
  * the four current services: at 940 the chips take three rows and the longest
- * title two lines, at 980 the chips fall to two rows, and at 1020 every title
+ * title two lines, at 980 the chips fall to two rows, and at 1030 every title
  * fits one line and the cards drop from 235px tall to 168px. Past that it gains
- * nothing until 1180, so 1020 is where the width stops paying for itself.
+ * nothing until 1180, so this is where the width stops paying for itself.
+ *
+ * 1040 rather than 1030 for the same reason the intro column is 20rem: the
+ * threshold is a text measurement and wants slack for the webfont to differ.
+ * It moved from 1020 when the icons went to 20px, so it tracks them.
  *
  * A trigger-anchored panel grows leftward to reach this, and is still capped by
  * the header bar, so on a narrow window it simply spans the bar as before.
  */
-const MIN_SERVICES_PANEL = 1020;
+const MIN_SERVICES_PANEL = 1040;
 
 /** Title over description, matching the two-line treatment used on the page cards. */
 function MenuItemText({
@@ -86,7 +90,7 @@ function MenuItemText({
   return (
     <>
       <span className="flex items-start gap-2">
-        {Icon && <Icon className="mt-0.5 size-4 shrink-0 text-marigold" />}
+        {Icon && <Icon className="size-5 shrink-0 text-marigold" />}
         <span className="text-sm font-semibold text-charcoal">{title}</span>
       </span>
       <span className="mt-1 text-xs leading-relaxed text-muted-foreground">{description}</span>
@@ -439,7 +443,7 @@ export function SiteHeader() {
                 Two columns, which divides the four services evenly; a third would
                 strand one service on a row of its own. The panel starts at the
                 trigger but never narrower than MIN_SERVICES_PANEL, so the cards
-                hold at 323px wherever the bar allows that width and fall to about
+                hold at 333px wherever the bar allows that width and fall to about
                 295px at 1024, where the bar itself is the limit. Chips stay on two
                 rows throughout.
               */}
