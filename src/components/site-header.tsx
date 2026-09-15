@@ -8,16 +8,12 @@ import {
   ChevronDown,
   ArrowRight,
   ToggleRight,
-  Stethoscope,
-  Headset,
-  PhoneOutgoing,
-  Users,
-  Briefcase,
   type LucideIcon,
 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
 import { site, services, industries } from "@/lib/site-data";
+import { serviceIcon } from "@/lib/service-icons";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -68,20 +64,6 @@ const serviceItemClass = `${menuItemClass} group bg-muted/60`;
  * the header bar, so on a narrow window it simply spans the bar as before.
  */
 const MIN_SERVICES_PANEL = 1020;
-
-/**
- * One icon per service, keyed by slug rather than array position so reordering
- * the services cannot silently reassign them. Presentation only, which is why it
- * sits here instead of in site-data: that file holds no React imports, and these
- * are components. Briefcase is the fallback, so a service added later still gets
- * a mark rather than sitting iconless beside the four that have one.
- */
-const SERVICE_ICONS: Record<string, LucideIcon> = {
-  "medical-billing-healthcare": Stethoscope,
-  "customer-support": Headset,
-  "lead-generation": PhoneOutgoing,
-  "virtual-business-assistance": Users,
-};
 
 /** Title over description, matching the two-line treatment used on the page cards. */
 function MenuItemText({
@@ -469,7 +451,7 @@ export function SiteHeader() {
                         title={s.title}
                         description={s.short}
                         highlights={s.highlights}
-                        icon={SERVICE_ICONS[s.slug] ?? Briefcase}
+                        icon={serviceIcon(s.slug)}
                       />
                     </Link>
                   </DropdownMenuItem>

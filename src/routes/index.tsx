@@ -33,6 +33,7 @@ import { FeatureSplit, FlowMedia, OrbitMedia } from "@/components/feature-split"
 
 import { SectionHeading } from "@/components/section-heading";
 import { StatValue } from "@/components/stat-value";
+import { ServiceIcon } from "@/lib/service-icons";
 import { services, industries, caseStudies, stats, faqs, site } from "@/lib/site-data";
 
 export const Route = createFileRoute("/")({
@@ -247,14 +248,19 @@ function Home() {
               className="group flex flex-col rounded-lg border border-border bg-card p-7 card-pop hover:border-marigold hover:shadow-[var(--shadow-elevated)]"
             >
               {/*
-                Reserve the tallest wrap the two- and three-column layouts produce,
-                a two-line title over four lines of copy, so every row is the same
-                height wherever each string happens to break. Character counts alone
-                cannot do this: two of these summaries are the same length and still
-                wrap differently. From xl the container stops growing and every card
-                settles at one title line over three, which is what these reset to.
+                Reserve the tallest wrap the two-column layout produces, a two-line
+                title over four lines of copy, so every row is the same height
+                wherever each string happens to break. Character counts alone cannot
+                do this: two of these summaries are the same length and still wrap
+                differently. The icon shares the title's line and narrows it, which
+                this reservation already absorbs. From xl the container stops growing
+                and every card settles at one title line over three, which is what
+                these reset to.
               */}
-              <h3 className="text-xl text-charcoal md:min-h-14 xl:min-h-7">{s.title}</h3>
+              <h3 className="flex items-start gap-2.5 text-xl text-charcoal md:min-h-14 xl:min-h-7">
+                <ServiceIcon slug={s.slug} className="mt-1 size-5 shrink-0 text-marigold" />
+                <span>{s.title}</span>
+              </h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:min-h-[calc(4*1.625em)] xl:min-h-[calc(3*1.625em)]">
                 {s.short}
               </p>
