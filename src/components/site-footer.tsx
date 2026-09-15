@@ -80,7 +80,9 @@ export function SiteFooter() {
           ))}
         </FooterCol>
 
-        <FooterCol title="Industries">
+        {/* See the offices block below: the two tall columns span both rows so
+            the short ones leave a row for it rather than a gap. */}
+        <FooterCol title="Industries" className="lg:row-span-2">
           {industries.map((i) => (
             <li key={i.slug}>
               <Link
@@ -94,7 +96,7 @@ export function SiteFooter() {
           ))}
         </FooterCol>
 
-        <FooterCol title="Company">
+        <FooterCol title="Company" className="lg:row-span-2">
           {[
             { to: "/about", label: "About" },
             { to: "/case-studies", label: "Case Studies" },
@@ -115,16 +117,14 @@ export function SiteFooter() {
             </li>
           ))}
         </FooterCol>
-      </div>
 
-      {/*
-        The offices, directly under the columns and across the full width. The
-        brand column ends at the phone number while the taller link columns beside
-        it run on, so this fills that gap rather than being stacked four-wide in a
-        quarter of the width.
-      */}
-      <div className="px-8 pt-10 md:px-12">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/*
+          The offices take the second row beneath the brand and Services columns,
+          the space their shorter lists leave while Industries and Company run on
+          past them. Two across rather than three: the block is half the footer
+          here, not all of it.
+        */}
+        <div className="grid gap-6 sm:grid-cols-2 md:col-span-2">
           {site.locations.map((loc) => (
             <div key={loc.city} className="flex items-start gap-2 text-sm text-offwhite/65">
               <MapPin className="mt-0.5 size-4 shrink-0 text-marigold" />
