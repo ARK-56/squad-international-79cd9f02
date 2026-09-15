@@ -53,7 +53,7 @@ function ServicesPage() {
               <h2 className="mt-3 text-2xl text-charcoal">{s.title}</h2>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{s.pitch}</p>
               <ul className="mt-6 flex flex-wrap gap-2">
-                {s.highlights.map((h) => (
+                {s.offerings.map((h) => (
                   <li
                     key={h}
                     className="rounded-full border border-border bg-background px-3.5 py-1.5 text-xs font-medium text-charcoal"
