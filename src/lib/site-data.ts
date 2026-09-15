@@ -108,54 +108,6 @@ export const services: Service[] = [
     },
   },
   {
-    slug: "customer-support",
-    title: "Customer Support Outsourcing",
-    short:
-      "Reliable customer support that helps you increase service capacity without continuously expanding your internal team.",
-    summary:
-      "Trained support agents handling voice, email, chat and ticketing on your brand and your tooling — with the QA, coverage planning and escalation paths of an in-house function.",
-    outcomes: [
-      "First response times under 15 minutes on live channels",
-      "CSAT held above 90% through structured QA",
-      "24/7 or follow-the-sun coverage without hiring locally",
-    ],
-    capabilities: [
-      "Inbound voice and callback handling",
-      "Email, chat and social response",
-      "Ticket triage and escalation management",
-      "Order, billing and account support",
-      "Technical tier-1 support",
-      "Knowledge base and macro development",
-    ],
-    process: [
-      { step: "Coverage modelling", detail: "Volumes, peak hours and channels define headcount and shifts." },
-      { step: "Product training", detail: "Agents complete structured product and tone-of-voice training." },
-      { step: "Pilot with QA", detail: "A supervised ramp period with daily scorecards and calibration." },
-      { step: "Steady state", detail: "SLA reporting, QA sampling and continuous coaching." },
-    ],
-    idealFor: ["E-commerce and D2C", "SaaS platforms", "Healthcare and insurance services"],
-    tools: [
-      "Zendesk, Freshdesk and Intercom",
-      "Gorgias and Shopify",
-      "Salesforce Service Cloud",
-      "Talkdesk, Aircall and RingCentral",
-      "Front and Help Scout",
-      "Your knowledge base and macro library",
-    ],
-    pitch:
-      "Expand your customer support capacity with dedicated resources that work around your processes — helping you serve customers consistently without carrying the cost of building every support role internally.",
-    highlights: ["Inbound Calls", "Live Chat + Email", "Ticket Management"],
-    offerings: [
-      "Voice",
-      "Email",
-      "Live Chat",
-      "Tickets / Helpdesk",
-      "Booking / Reservations / Customer Care",
-    ],
-    supportModel: "Dedicated & Reliable",
-    scaling: "Flexible to Your Needs",
-  },
-  {
     slug: "lead-generation",
     title: "Outbound Sales Support",
     short:
@@ -199,6 +151,54 @@ export const services: Service[] = [
       "Appointment Setting",
       "SDR Support",
       "Sales Follow-Up",
+    ],
+    supportModel: "Dedicated & Reliable",
+    scaling: "Flexible to Your Needs",
+  },
+  {
+    slug: "customer-support",
+    title: "Customer Support Outsourcing",
+    short:
+      "Reliable customer support that helps you increase service capacity without continuously expanding your internal team.",
+    summary:
+      "Trained support agents handling voice, email, chat and ticketing on your brand and your tooling — with the QA, coverage planning and escalation paths of an in-house function.",
+    outcomes: [
+      "First response times under 15 minutes on live channels",
+      "CSAT held above 90% through structured QA",
+      "24/7 or follow-the-sun coverage without hiring locally",
+    ],
+    capabilities: [
+      "Inbound voice and callback handling",
+      "Email, chat and social response",
+      "Ticket triage and escalation management",
+      "Order, billing and account support",
+      "Technical tier-1 support",
+      "Knowledge base and macro development",
+    ],
+    process: [
+      { step: "Coverage modelling", detail: "Volumes, peak hours and channels define headcount and shifts." },
+      { step: "Product training", detail: "Agents complete structured product and tone-of-voice training." },
+      { step: "Pilot with QA", detail: "A supervised ramp period with daily scorecards and calibration." },
+      { step: "Steady state", detail: "SLA reporting, QA sampling and continuous coaching." },
+    ],
+    idealFor: ["E-commerce and D2C", "SaaS platforms", "Healthcare and insurance services"],
+    tools: [
+      "Zendesk, Freshdesk and Intercom",
+      "Gorgias and Shopify",
+      "Salesforce Service Cloud",
+      "Talkdesk, Aircall and RingCentral",
+      "Front and Help Scout",
+      "Your knowledge base and macro library",
+    ],
+    pitch:
+      "Expand your customer support capacity with dedicated resources that work around your processes — helping you serve customers consistently without carrying the cost of building every support role internally.",
+    highlights: ["Inbound Calls", "Live Chat + Email", "Ticket Management"],
+    offerings: [
+      "Voice",
+      "Email",
+      "Live Chat",
+      "Tickets / Helpdesk",
+      "Booking / Reservations / Customer Care",
     ],
     supportModel: "Dedicated & Reliable",
     scaling: "Flexible to Your Needs",
