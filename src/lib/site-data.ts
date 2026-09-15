@@ -55,11 +55,20 @@ export type Service = {
   supportModel: string;
   scaling: string;
   /**
-   * Published starting price, on the lines that have one. Optional because most
-   * engagements are scoped and quoted rather than listed; medical billing is the
-   * only line that publishes a figure, so the sidebar hides this when absent.
+   * How the line is priced. Optional because most engagements are scoped and
+   * quoted rather than listed, so the sidebar hides this when absent. More than
+   * one entry makes the page offer a toggle, since the same work can be bought
+   * on different bases.
    */
-  pricing?: { from: string; unit: string; note: string };
+  pricing?: {
+    /** The toggle's label for this model. Short: two sit side by side. */
+    label: string;
+    /** The headline figure, or the basis where there is no single number. */
+    amount: string;
+    /** Follows the figure, e.g. "per month". Omitted where it reads alone. */
+    unit?: string;
+    note: string;
+  }[];
 };
 
 export const services: Service[] = [
@@ -110,11 +119,23 @@ export const services: Service[] = [
     ],
     supportModel: "Dedicated & Reliable",
     scaling: "Flexible to Your Needs",
-    pricing: {
-      from: "$1,500",
-      unit: "per month",
-      note: "For a dedicated billing resource. Percentage of collections is available for higher claim volumes.",
-    },
+    pricing: [
+      {
+        label: "Dedicated team",
+        amount: "$1,500",
+        unit: "per month",
+        note: "A dedicated biller working your claims at a fixed monthly cost, whatever they collect. Suits steady, predictable volume.",
+      },
+      {
+        /*
+         * No rate here on purpose: one has not been set. The amount reads as the
+         * basis rather than a figure, and the page sizes it accordingly.
+         */
+        label: "Percentage of collections",
+        amount: "% of collections",
+        note: "Billed as a share of what is actually recovered, so the cost tracks the revenue rather than the headcount. Suits higher or seasonal claim volume. The rate is quoted against your specialty and volume.",
+      },
+    ],
   },
   {
     slug: "lead-generation",

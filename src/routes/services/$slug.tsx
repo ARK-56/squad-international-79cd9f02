@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -58,6 +59,21 @@ export const Route = createFileRoute("/services/$slug")({
 function ServiceDetail() {
   const service = Route.useLoaderData();
   const others = services.filter((s) => s.slug !== service.slug).slice(0, 3);
+
+  /*
+   * Which pricing model the panel is showing, by index: the list is short and
+   * ordered, and the first entry is the one to land on. Falls back to the first
+   * so the panel still reads if the index ever outruns the list.
+   */
+  const [priceModel, setPriceModel] = useState(0);
+  const models = service.pricing ?? [];
+  const price = models[priceModel] ?? models[0];
+  /*
+   * A model without a numeral is a basis rather than a figure, e.g. a share of
+   * collections. Display type would make that read as a missing number, and
+   * "Starting from" is the wrong label for it.
+   */
+  const priceIsFigure = price ? /\d/.test(price.amount) : false;
 
   return (
     <>
@@ -153,29 +169,65 @@ function ServiceDetail() {
         </div>
 
         <aside className="h-fit rounded-lg border border-border bg-card p-8 lg:sticky lg:top-28">
+          {/*
+            Only where the line is sold on more than one basis, which today is
+            medical billing alone. A radiogroup rather than tabs: it chooses how
+            one figure below is expressed, it does not swap panels.
+          */}
+          {models.length > 1 && (
+            <div className="mb-7">
+              <span
+                id="pricing-model-label"
+                className="text-xs uppercase tracking-[0.18em] text-muted-foreground"
+              >
+                Pricing model
+              </span>
+              <div
+                role="radiogroup"
+                aria-labelledby="pricing-model-label"
+                className="mt-3 grid grid-cols-2 gap-1 rounded-full border border-border bg-muted/60 p-1"
+              >
+                {models.map((m, i) => (
+                  <button
+                    key={m.label}
+                    type="button"
+                    role="radio"
+                    aria-checked={i === priceModel}
+                    onClick={() => setPriceModel(i)}
+                    className={`rounded-full px-3 py-2 text-xs font-medium transition-colors ${
+                      i === priceModel
+                        ? "bg-marigold text-charcoal"
+                        : "text-muted-foreground hover:text-charcoal"
+                    }`}
+                  >
+                    {m.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
           <h2 className="text-xl text-charcoal">Typical engagement</h2>
           <dl className="mt-5 space-y-4">
-            {/*
-              Only rendered for the lines that publish a figure. Framed as a
-              starting price, because the note below it names a second model and
-              the scope still gets quoted per engagement.
-            */}
-            {service.pricing && (
+            {price && (
               <div className="flex gap-3">
                 <Wallet className="mt-0.5 size-4 shrink-0 text-marigold" />
                 <div>
                   <dt className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                    Starting from
+                    {priceIsFigure ? "Starting from" : "Billed as"}
                   </dt>
                   <dd className="mt-1 text-sm text-charcoal">
-                    <span className="font-display text-2xl leading-none text-charcoal">
-                      {service.pricing.from}
-                    </span>{" "}
-                    <span className="text-muted-foreground">{service.pricing.unit}</span>
+                    {priceIsFigure ? (
+                      <>
+                        <span className="font-display text-2xl leading-none text-charcoal">
+                          {price.amount}
+                        </span>{" "}
+                        {price.unit && <span className="text-muted-foreground">{price.unit}</span>}
+                      </>
+                    ) : (
+                      <span className="font-semibold text-charcoal">{price.amount}</span>
+                    )}
                   </dd>
-                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                    {service.pricing.note}
-                  </p>
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{price.note}</p>
                 </div>
               </div>
             )}
