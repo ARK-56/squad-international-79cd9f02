@@ -7,7 +7,7 @@ import {
   MessageCircle,
   ChevronDown,
   ArrowRight,
-  LayoutGrid,
+  ToggleRight,
   Stethoscope,
   Headset,
   PhoneOutgoing,
@@ -411,10 +411,10 @@ export function SiteHeader() {
             <div className="grid grid-cols-[20rem_1fr] gap-5">
               <div className="flex flex-col justify-between rounded-lg bg-muted/60 p-5">
                 <div>
-                  <span className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-marigold">
-                    <LayoutGrid className="size-4 shrink-0" />
+                  <span className="text-[11px] uppercase tracking-[0.2em] text-marigold">
                     What we do
                   </span>
+                  <ToggleRight className="mt-3 block size-6 text-marigold" />
                   <p className="mt-3 font-display text-xl uppercase leading-tight text-charcoal">
                     Capabilities you can switch on
                   </p>
