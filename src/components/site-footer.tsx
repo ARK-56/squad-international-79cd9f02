@@ -63,12 +63,20 @@ export function SiteFooter() {
                 {site.phone}
               </a>
             </li>
+            {/* One pin for the set, with each office named above its address. */}
             <li className="flex items-start gap-2">
               <MapPin className="mt-0.5 size-4 shrink-0 text-marigold" />
-              <span>
-                {site.addressLines.map((line) => (
-                  <span key={line} className="block">
-                    {line}
+              <span className="space-y-3">
+                {site.locations.map((loc) => (
+                  <span key={loc.city} className="block">
+                    <span className="block text-[11px] uppercase tracking-[0.18em] text-marigold">
+                      {loc.city}
+                    </span>
+                    {loc.lines.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
                   </span>
                 ))}
               </span>

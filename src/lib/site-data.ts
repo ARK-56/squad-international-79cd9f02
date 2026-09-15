@@ -16,9 +16,16 @@ export const site = {
   googleReviewCount: 33,
   // Kept as explicit lines so the footer renders exactly two rather than wrapping
   // to three in a narrow column. The contact page joins them.
-  // First line keeps its comma so the two blocks do not read as "AveNorth" when
-  // the text is extracted, and so joining them needs only a space.
-  addressLines: ["276 Holten Ave,", "Staten Island, NY 10309-4028, US"],
+  /**
+   * The offices, New York first. Each line keeps its trailing comma so the parts
+   * do not run together when they are joined back into one string, and so the
+   * join needs only a space.
+   */
+  locations: [
+    { city: "New York", lines: ["276 Holten Ave,", "Staten Island, NY 10309-4028, US"] },
+    { city: "Karachi", lines: ["75 Hamid Hussain Farooqi Rd,", "Block 2 PECHS, Karachi, 75100"] },
+    { city: "Wah Cantt", lines: ["Kohistan Enclave, Wah Cantt,", "Rawalpindi, Punjab"] },
+  ],
   boilerplate: "High-performing offshore teams and managed business support built to scale.",
   socials: [
     { name: "LinkedIn", url: "https://www.linkedin.com/company/squadinternational" },

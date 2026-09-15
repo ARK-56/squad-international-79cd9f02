@@ -64,9 +64,17 @@ function ContactPage() {
                   {site.phone}
                 </a>
               </li>
+              {/* All three, since this is the page someone opens to find us. */}
               <li className="flex items-start gap-3">
-                <MapPin className="mt-0.5 size-4 shrink-0 text-marigold" />{" "}
-                {site.addressLines.join(" ")}
+                <MapPin className="mt-0.5 size-4 shrink-0 text-marigold" />
+                <span className="space-y-2">
+                  {site.locations.map((loc) => (
+                    <span key={loc.city} className="block">
+                      <span className="font-semibold text-charcoal">{loc.city}</span>{" "}
+                      {loc.lines.join(" ")}
+                    </span>
+                  ))}
+                </span>
               </li>
               <li className="flex items-start gap-3">
                 <Clock className="mt-0.5 size-4 shrink-0 text-marigold" />
