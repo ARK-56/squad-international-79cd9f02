@@ -146,6 +146,7 @@ function NavDropdown({
   onOpenChange,
   menuWidth,
   matchBox,
+  anchor = "bar",
   children,
 }: {
   id: NavMenu;
@@ -156,12 +157,16 @@ function NavDropdown({
   /** Tailwind width class for the panel; the two menus hold different content. */
   menuWidth: string;
   /**
-   * When given, the panel takes this box's width and starts at its left edge
-   * instead of the trigger's, which is how the services menu spans the header
-   * bar. Null until measured, so the class width above is the fallback and also
-   * what the server renders.
+   * The box the panel is sized against, which is the header bar. Null until
+   * measured, so the class width above is the fallback and what the server
+   * renders. `anchor` decides which of its edges the panel hangs from.
    */
   matchBox?: PanelBox | null;
+  /**
+   * Which edge of matchBox the panel starts from. "bar" spans the whole box;
+   * "trigger" starts under the trigger and runs to the box's right edge.
+   */
+  anchor?: "bar" | "trigger";
   children: ReactNode;
 }) {
   const open = openMenu === id;
@@ -225,20 +230,28 @@ function NavDropdown({
   useEffect(() => clearTimer, []);
 
   /**
-   * Radix aligns the panel to the trigger, so spanning the header bar means
-   * offsetting by the distance between the two. Recomputed whenever the menu
-   * opens as well as when the box changes, since the trigger moves with the
-   * layout while the offset itself is only read at open time.
+   * Radix aligns the panel to the trigger, so both numbers are measured from
+   * there. A bar-anchored panel offsets back to the box's left edge and takes
+   * its full width; a trigger-anchored one needs no offset and instead stops at
+   * the box's right edge, so its width falls out of where the trigger sits.
+   *
+   * Recomputed whenever the menu opens as well as when the box changes, since
+   * the trigger moves with the layout while these are only read at open time.
    */
-  const [alignOffset, setAlignOffset] = useState(0);
+  const [panelBox, setPanelBox] = useState<{ alignOffset: number; width: number } | null>(null);
   useEffect(() => {
     const el = triggerRef.current;
     if (!matchBox || !el) {
-      setAlignOffset(0);
+      setPanelBox(null);
       return;
     }
-    setAlignOffset(Math.round(matchBox.left - el.getBoundingClientRect().left));
-  }, [matchBox, open]);
+    const triggerLeft = el.getBoundingClientRect().left;
+    setPanelBox(
+      anchor === "trigger"
+        ? { alignOffset: 0, width: Math.round(matchBox.left + matchBox.width - triggerLeft) }
+        : { alignOffset: Math.round(matchBox.left - triggerLeft), width: matchBox.width },
+    );
+  }, [matchBox, open, anchor]);
 
   return (
     <DropdownMenu
@@ -258,15 +271,15 @@ function NavDropdown({
       <DropdownMenuContent
         ref={contentRef}
         align="start"
-        alignOffset={alignOffset}
+        alignOffset={panelBox ? panelBox.alignOffset : 0}
         sideOffset={10}
         // The panel is wide enough that a start-aligned menu on the right-hand
         // triggers runs past the viewport at 1024px; this lets Radix shift it back.
         // A matched panel already sits inside the header's own 24px inset, so this
         // never fires for it.
         collisionPadding={16}
-        className={matchBox ? menuClass : `${menuWidth} ${menuClass}`}
-        style={matchBox ? { width: matchBox.width } : undefined}
+        className={panelBox ? menuClass : `${menuWidth} ${menuClass}`}
+        style={panelBox ? { width: panelBox.width } : undefined}
         onPointerEnter={handleEnter}
       >
         {children}
@@ -345,6 +358,7 @@ export function SiteHeader() {
           <NavDropdown
             id="services"
             label="Services"
+            anchor="trigger"
             openOn="hover"
             openMenu={openMenu}
             onOpenChange={handleMenuChange}
@@ -389,10 +403,13 @@ export function SiteHeader() {
               </div>
 
               {/*
-                Two columns, which divides the four services evenly and gives each
-                card ~421px next to the fixed 20rem intro column. A third column
-                would strand one service on a row of its own, and squeezed each
-                card to 213px at 1024 wide, pushing its chips onto three rows.
+                Two columns, which divides the four services evenly; a third would
+                strand one service on a row of its own. Starting the panel at the
+                trigger rather than at the bar's left edge costs width, so cards
+                run 293px at 1456 down to 192px at 1024. Below roughly 960px of
+                panel the chips take a third row, which is accepted: the panel
+                still fits without scrolling at 1024x700, the narrowest size the
+                desktop nav is shown at.
               */}
               <div className="grid auto-rows-fr grid-cols-2 gap-2">
                 {services.map((s) => (
