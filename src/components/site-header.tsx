@@ -8,6 +8,7 @@ import {
   ChevronDown,
   ArrowRight,
   ToggleRight,
+  Star,
   type LucideIcon,
 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -425,6 +426,29 @@ export function SiteHeader() {
                     billing to the back office.
                   </p>
                 </div>
+
+                {/*
+                  The column is justify-between over three children now, so this
+                  sits in the space the two-child version left empty between the
+                  copy and the button.
+
+                  The rating and the count are the live listing's, the same pair
+                  the reviews section and the landing page show. The homepage stat
+                  band is deliberately not reused here: those figures are
+                  placeholders, and this is a nav panel on every page.
+                */}
+                <div>
+                  <span className="flex items-center gap-0.5" aria-hidden="true">
+                    {Array.from({ length: 5 }, (_, i) => (
+                      <Star key={i} className="size-3.5 fill-marigold text-marigold" />
+                    ))}
+                  </span>
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                    Rated {site.googleRating} out of 5 from {site.googleReviewCount} reviews on
+                    Google
+                  </p>
+                </div>
+
                 {/*
                   A menu item rather than a Button, so it stays in Radix's keyboard
                   order with the services; buttonVariants only lends it the look.
