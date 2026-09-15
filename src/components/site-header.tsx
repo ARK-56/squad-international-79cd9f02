@@ -379,8 +379,8 @@ export function SiteHeader() {
         ref={barRef}
         className={`mx-auto flex w-full max-w-[84rem] items-center justify-between gap-6 rounded-full border px-5 py-2.5 transition-colors duration-300 md:px-7 ${
           scrolled
-            ? "border-offwhite/10 bg-charcoal shadow-lg"
-            : "border-offwhite/15 bg-charcoal/50 backdrop-blur-md"
+            ? "liquid-glass-strong border-offwhite/10"
+            : "liquid-glass border-offwhite/15"
         }`}
       >
         <Link to="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>

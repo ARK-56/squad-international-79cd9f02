@@ -157,6 +157,65 @@
 }
 
 /**
+ * Liquid glass, for the header bar: a blurred and re-saturated view of whatever
+ * is behind it, tinted with the brand charcoal and lit along its top edge.
+ *
+ * The saturate() is what separates this from a plain frost. Blur alone averages
+ * the colour out of what shows through and leaves it grey; lifting saturation
+ * back above 100% keeps the page's colour alive inside the glass, which is what
+ * reads as liquid rather than fogged.
+ *
+ * The highlights are inset shadows rather than a border, so they follow the
+ * inside of the rounded edge: a bright hairline along the top where light would
+ * catch, and a fainter one along the bottom for the far wall of the glass.
+ *
+ * --glass-tint sets how much charcoal sits in front of the blur, so the same
+ * utility covers both the transparent bar at the top of the page and the more
+ * solid one once content is running underneath it.
+ */
+@utility liquid-glass {
+  background-color: color-mix(in oklab, var(--charcoal) 55%, transparent);
+  backdrop-filter: blur(16px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in oklab, var(--offwhite) 14%, transparent),
+    inset 0 -1px 0 0 color-mix(in oklab, var(--offwhite) 5%, transparent),
+    0 8px 32px -12px oklch(0 0 0 / 0.5);
+
+  /*
+   * Some people turn transparency down at the OS level, usually because layered
+   * translucency is hard to read. This is exactly that effect, so honour it.
+   */
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--charcoal);
+    backdrop-filter: none;
+  }
+}
+
+/**
+ * The same glass once the page has scrolled, carrying more tint because there is
+ * now content running under the whole bar rather than the top of a hero.
+ *
+ * A second complete utility rather than one that overrides the first's
+ * background. The tint started as a custom property read inside the color-mix,
+ * which measured as having no effect: the build precomputes the mix and the
+ * static value it leaves behind ignores the property. Two utilities, applied one
+ * at a time, need neither the property nor a guess about which rule sorts last.
+ */
+@utility liquid-glass-strong {
+  background-color: color-mix(in oklab, var(--charcoal) 78%, transparent);
+  backdrop-filter: blur(16px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in oklab, var(--offwhite) 10%, transparent),
+    inset 0 -1px 0 0 color-mix(in oklab, var(--offwhite) 4%, transparent),
+    0 10px 36px -12px oklch(0 0 0 / 0.6);
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--charcoal);
+    backdrop-filter: none;
+  }
+}
+
+/**
  * Card hover: a small lift and scale, plus the transitions the colour changes
  * ride on. Motion only, deliberately: the light and dark card surfaces need
  * different hover colours, so those stay as Tailwind classes on each card while
