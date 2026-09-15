@@ -6,13 +6,13 @@ import { site, testimonials } from "@/lib/site-data";
 /**
  * How many of the stored reviews this section shows. The array holds twenty, and
  * rendering all of them made this section 3523px tall, 28% of the homepage, in
- * seven rows of three. Nine keeps it a tidy three by three.
+ * seven rows of three. Six keeps the three by two grid the section was built
+ * around, and is close to the five the live Places API returns, so the fallback
+ * is not far longer than the real thing.
  *
- * The live Places API returns about five, so capping here also keeps the two
- * paths a similar size rather than the fallback being far longer than the real
- * thing. The rest of the array is still the record of what the listing holds.
+ * The rest of the array stays as the record of what the listing holds.
  */
-const HOMEPAGE_REVIEWS = 9;
+const HOMEPAGE_REVIEWS = 6;
 
 /**
  * Renders the Google Business Profile reviews.
