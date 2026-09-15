@@ -41,8 +41,14 @@ export type Service = {
   tools: string[];
   /** Longer positioning line used on the services page card. */
   pitch: string;
-  /** Capability chips shown under the pitch. */
+  /** Three short capability chips, shown in the header menu. */
   highlights: string[];
+  /**
+   * What the line actually sells, broken out. Shown as pills on the homepage
+   * cards only: these run far longer than highlights, and the menu's cards are a
+   * third of the width with a panel height to keep.
+   */
+  offerings: string[];
   supportModel: string;
   scaling: string;
   /**
@@ -92,6 +98,7 @@ export const services: Service[] = [
     pitch:
       "Support routine healthcare billing and administrative processes with dedicated outsourced resources — adding back-office capacity without having to build every function internally.",
     highlights: ["Eligibility Checks", "Billing & Claims", "AR Follow-Up"],
+    offerings: ["Full-Service Percentage-Based RCM", "Dedicated RCM Team"],
     supportModel: "Dedicated & Reliable",
     scaling: "Flexible to Your Needs",
     pricing: {
@@ -138,6 +145,13 @@ export const services: Service[] = [
     pitch:
       "Expand your customer support capacity with dedicated resources that work around your processes — helping you serve customers consistently without carrying the cost of building every support role internally.",
     highlights: ["Inbound Calls", "Live Chat + Email", "Ticket Management"],
+    offerings: [
+      "Voice",
+      "Email",
+      "Live Chat",
+      "Tickets / Helpdesk",
+      "Booking / Reservations / Customer Care",
+    ],
     supportModel: "Dedicated & Reliable",
     scaling: "Flexible to Your Needs",
   },
@@ -179,6 +193,13 @@ export const services: Service[] = [
     pitch:
       "Keep your sales pipeline moving with dedicated prospecting support — without increasing the internal overhead required to manage every stage of outreach and qualification.",
     highlights: ["Cold Calling", "Lead Qualification", "Appointment Setting"],
+    offerings: [
+      "Cold Calling",
+      "Lead Qualification",
+      "Appointment Setting",
+      "SDR Support",
+      "Sales Follow-Up",
+    ],
     supportModel: "Dedicated & Reliable",
     scaling: "Flexible to Your Needs",
   },
@@ -220,6 +241,13 @@ export const services: Service[] = [
     pitch:
       "Move recurring administrative and desk work to dedicated support so your internal team can spend more time on the work that drives the business forward.",
     highlights: ["Data Entry & Admin Support", "Research", "CRM & Order Processing"],
+    offerings: [
+      "Virtual Assistants",
+      "Administrative Support",
+      "Back Office",
+      "CRM / Data / Order Processing",
+      "Custom Dedicated Teams",
+    ],
     supportModel: "Dedicated & Reliable",
     scaling: "Flexible to Your Needs",
   },

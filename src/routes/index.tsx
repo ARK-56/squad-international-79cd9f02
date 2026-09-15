@@ -265,7 +265,7 @@ function Home() {
                 {s.short}
               </p>
               <ul className="mt-5 flex flex-1 flex-wrap content-start gap-2">
-                {s.highlights.map((h) => (
+                {s.offerings.map((h) => (
                   <li
                     key={h}
                     className="rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-charcoal"
