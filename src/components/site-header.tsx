@@ -1,6 +1,20 @@
 import { Link } from "@tanstack/react-router";
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
-import { Menu, X, CalendarDays, MessageCircle, ChevronDown, ArrowRight } from "lucide-react";
+import {
+  Menu,
+  X,
+  CalendarDays,
+  MessageCircle,
+  ChevronDown,
+  ArrowRight,
+  LayoutGrid,
+  Stethoscope,
+  Headset,
+  PhoneOutgoing,
+  Users,
+  Briefcase,
+  type LucideIcon,
+} from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
 import { site, services, industries } from "@/lib/site-data";
@@ -43,14 +57,31 @@ const menuItemClass =
 // group so the arrow beside the chips can pick up the item's hover.
 const serviceItemClass = `${menuItemClass} group bg-muted/60`;
 
+/**
+ * One icon per service, keyed by slug rather than array position so reordering
+ * the services cannot silently reassign them. Presentation only, which is why it
+ * sits here instead of in site-data: that file holds no React imports, and these
+ * are components. Briefcase is the fallback, so a service added later still gets
+ * a mark rather than sitting iconless beside the four that have one.
+ */
+const SERVICE_ICONS: Record<string, LucideIcon> = {
+  "medical-billing-healthcare": Stethoscope,
+  "customer-support": Headset,
+  "lead-generation": PhoneOutgoing,
+  "virtual-business-assistance": Users,
+};
+
 /** Title over description, matching the two-line treatment used on the page cards. */
 function MenuItemText({
   title,
   description,
   highlights,
+  icon: Icon,
 }: {
   title: string;
   description: string;
+  /** Only the services pass one; the industries have no icon of their own. */
+  icon?: LucideIcon;
   /**
    * Capability chips, carrying the service cards' treatment into the menu. Only
    * the services have them; industries have no equivalent field.
@@ -60,7 +91,10 @@ function MenuItemText({
   const hasChips = Boolean(highlights && highlights.length > 0);
   return (
     <>
-      <span className="text-sm font-semibold text-charcoal">{title}</span>
+      <span className="flex items-start gap-2">
+        {Icon && <Icon className="mt-0.5 size-4 shrink-0 text-marigold" />}
+        <span className="text-sm font-semibold text-charcoal">{title}</span>
+      </span>
       <span className="mt-1 text-xs leading-relaxed text-muted-foreground">{description}</span>
       {hasChips && highlights && (
         /*
@@ -377,7 +411,8 @@ export function SiteHeader() {
             <div className="grid grid-cols-[20rem_1fr] gap-5">
               <div className="flex flex-col justify-between rounded-lg bg-muted/60 p-5">
                 <div>
-                  <span className="text-[11px] uppercase tracking-[0.2em] text-marigold">
+                  <span className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-marigold">
+                    <LayoutGrid className="size-4 shrink-0" />
                     What we do
                   </span>
                   <p className="mt-3 font-display text-xl uppercase leading-tight text-charcoal">
@@ -419,6 +454,7 @@ export function SiteHeader() {
                         title={s.title}
                         description={s.short}
                         highlights={s.highlights}
+                        icon={SERVICE_ICONS[s.slug] ?? Briefcase}
                       />
                     </Link>
                   </DropdownMenuItem>
