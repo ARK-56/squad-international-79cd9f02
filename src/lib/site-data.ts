@@ -44,9 +44,12 @@ export type Service = {
   /** Three short capability chips, shown in the header menu. */
   highlights: string[];
   /**
-   * What the line actually sells, broken out. Shown as pills on the homepage
-   * cards only: these run far longer than highlights, and the menu's cards are a
-   * third of the width with a panel height to keep.
+   * The homepage card's pills, in the order they are shown. Not derived from
+   * highlights: the running order is chosen per card and interleaves the two, so
+   * concatenating them cannot produce it. The repeated entries are deliberate.
+   *
+   * The menu keeps highlights instead, since these run far longer and its cards
+   * are a third of the width with a panel height to hold.
    */
   offerings: string[];
   supportModel: string;
@@ -98,7 +101,13 @@ export const services: Service[] = [
     pitch:
       "Support routine healthcare billing and administrative processes with dedicated outsourced resources — adding back-office capacity without having to build every function internally.",
     highlights: ["Eligibility Checks", "Billing & Claims", "AR Follow-Up"],
-    offerings: ["Full-Service Percentage-Based RCM", "Dedicated RCM Team"],
+    offerings: [
+      "Eligibility Checks",
+      "Billing & Claims",
+      "Dedicated RCM Team",
+      "Full-Service Percentage-Based RCM",
+      "AR Follow-Up",
+    ],
     supportModel: "Dedicated & Reliable",
     scaling: "Flexible to Your Needs",
     pricing: {
@@ -194,11 +203,14 @@ export const services: Service[] = [
       "Expand your customer support capacity with dedicated resources that work around your processes — helping you serve customers consistently without carrying the cost of building every support role internally.",
     highlights: ["Inbound Calls", "Live Chat + Email", "Ticket Management"],
     offerings: [
+      "Inbound Calls",
+      "Live Chat + Email",
+      "Ticket Management",
       "Voice",
+      "Booking / Reservations / Customer Care",
+      "Tickets / Helpdesk",
       "Email",
       "Live Chat",
-      "Tickets / Helpdesk",
-      "Booking / Reservations / Customer Care",
     ],
     supportModel: "Dedicated & Reliable",
     scaling: "Flexible to Your Needs",
@@ -242,10 +254,13 @@ export const services: Service[] = [
       "Move recurring administrative and desk work to dedicated support so your internal team can spend more time on the work that drives the business forward.",
     highlights: ["Data Entry & Admin Support", "Research", "CRM & Order Processing"],
     offerings: [
+      "Data Entry & Admin Support",
+      "Research",
+      "CRM & Order Processing",
       "Virtual Assistants",
-      "Administrative Support",
-      "Back Office",
       "CRM / Data / Order Processing",
+      "Back Office",
+      "Administrative Support",
       "Custom Dedicated Teams",
     ],
     supportModel: "Dedicated & Reliable",

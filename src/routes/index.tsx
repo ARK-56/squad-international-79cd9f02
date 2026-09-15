@@ -264,14 +264,8 @@ function Home() {
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:min-h-[calc(4*1.625em)] xl:min-h-[calc(3*1.625em)]">
                 {s.short}
               </p>
-              {/*
-                Both lists, in that order, with exact repeats dropped. Outbound's
-                three chips are the same strings as the first three of its
-                offerings, so a plain concatenation would render each twice and
-                hand the list below two children with the same key.
-              */}
               <ul className="mt-5 flex flex-1 flex-wrap content-start gap-2">
-                {[...new Set([...s.highlights, ...s.offerings])].map((h) => (
+                {s.offerings.map((h) => (
                   <li
                     key={h}
                     className="rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-charcoal"
