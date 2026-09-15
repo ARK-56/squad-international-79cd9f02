@@ -1,12 +1,6 @@
-import { useEffect, useState, type ReactNode } from "react";
-import { ArrowLeft, ArrowRight, Star } from "lucide-react";
+import { type ReactNode } from "react";
+import { Star } from "lucide-react";
 import { testimonials } from "@/lib/site-data";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  type CarouselApi,
-} from "@/components/ui/carousel";
 
 function initials(name: string) {
   return name
@@ -20,7 +14,7 @@ export type TestimonialItem = {
   quote: string;
   author: string;
   role: string;
-  /** 1-5. Renders a star row when present. */
+  /** 1-5. Shown as a figure beside a single star. */
   rating?: number;
   photoUrl?: string | null;
   /** Links the card back to its source, e.g. the review on Google. */
@@ -57,18 +51,63 @@ function GoogleMark({ className }: { className?: string }) {
   );
 }
 
-function Stars({ rating }: { rating: number }) {
-  const rounded = Math.round(rating);
+/**
+ * One card in the wall. A fixed width rather than a fluid one, so the cards stay
+ * a consistent size as the row slides and the quotes keep a steady measure.
+ */
+function ReviewCard({ item }: { item: TestimonialItem }) {
   return (
-    <span className="flex items-center gap-0.5" aria-label={`${rating} out of 5 stars`}>
-      {Array.from({ length: 5 }, (_, i) => (
-        <Star
-          key={i}
-          aria-hidden
-          className={i < rounded ? "size-4 fill-marigold text-marigold" : "size-4 text-offwhite/25"}
-        />
-      ))}
-    </span>
+    <figure className="mr-5 flex w-[19rem] shrink-0 flex-col rounded-xl border border-offwhite/10 bg-offwhite/[0.04] p-6 text-left sm:w-[21rem]">
+      <div className="flex items-start gap-3">
+        {item.photoUrl ? (
+          <img
+            src={item.photoUrl}
+            alt=""
+            loading="lazy"
+            referrerPolicy="no-referrer"
+            className="size-10 shrink-0 rounded-full object-cover"
+          />
+        ) : (
+          /* The Takeout export carries no reviewer photos, so most cards land here. */
+          <span className="grid size-10 shrink-0 place-items-center rounded-full bg-marigold text-sm font-semibold text-charcoal">
+            {initials(item.author)}
+          </span>
+        )}
+        {/* min-w-0 lets the two lines truncate instead of pushing the rating out. */}
+        <span className="min-w-0 flex-1">
+          <span className="block truncate text-sm font-semibold text-offwhite">{item.author}</span>
+          <span className="block truncate text-xs text-offwhite/60">{item.role}</span>
+        </span>
+        {typeof item.rating === "number" && (
+          <span
+            className="flex shrink-0 items-center gap-1 text-sm font-semibold text-offwhite"
+            aria-label={`${item.rating} out of 5 stars`}
+          >
+            {item.rating.toFixed(1)}
+            <Star aria-hidden className="size-3.5 fill-marigold text-marigold" />
+          </span>
+        )}
+      </div>
+
+      <blockquote className="mt-5 flex-1 text-sm leading-relaxed text-offwhite/85">
+        &ldquo;{item.quote}&rdquo;
+      </blockquote>
+
+      {item.sourceUrl && (
+        <figcaption className="mt-5 border-t border-offwhite/10 pt-4">
+          <a
+            href={item.sourceUrl}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`Read ${item.author}'s review on Google`}
+            className="inline-flex items-center gap-2 text-xs text-offwhite/60 transition-colors hover:text-marigold"
+          >
+            <GoogleMark className="size-3.5" />
+            Read on Google
+          </a>
+        </figcaption>
+      )}
+    </figure>
   );
 }
 
@@ -85,24 +124,15 @@ export function Testimonials({
   items?: TestimonialItem[];
   footer?: ReactNode;
 }) {
-  const [api, setApi] = useState<CarouselApi>();
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  useEffect(() => {
-    if (!api) return;
-
-    const updateSelectedIndex = () => setSelectedIndex(api.selectedScrollSnap());
-    updateSelectedIndex();
-    api.on("select", updateSelectedIndex);
-    api.on("reInit", updateSelectedIndex);
-
-    return () => {
-      api.off("select", updateSelectedIndex);
-      api.off("reInit", updateSelectedIndex);
-    };
-  }, [api]);
-
   if (items.length === 0) return null;
+
+  /*
+   * Two rows running opposite ways. Split rather than repeated, so the same
+   * review is never on screen twice at once, and the top row is the longer half
+   * when the count is odd.
+   */
+  const half = Math.ceil(items.length / 2);
+  const rows = [items.slice(0, half), items.slice(half)].filter((r) => r.length > 0);
 
   return (
     <section className="surface-dark overflow-hidden py-20 md:py-28">
@@ -119,147 +149,37 @@ export function Testimonials({
       </div>
 
       {/*
-        Desktop shows all six reviews as a 3x2 grid; below lg it stays a slider,
-        since six stacked cards make for a long scroll on a phone.
-
-        Embla is switched off at lg rather than rendering the list twice, so the
-        markup and the DOM stay single. With active:false it tears down the engine
-        and drops its inline transform, leaving the container free to be restyled
-        from a flex track into a grid by the classes below.
+        Full width rather than inside container-page: the rows are meant to run
+        off both edges, which is what the mask on review-row fades.
       */}
-      <Carousel
-        setApi={setApi}
-        opts={{
-          align: "start",
-          loop: true,
-          breakpoints: { "(min-width: 1024px)": { active: false } },
-        }}
-        className="container-page relative mt-14"
-      >
-        <div className="border-y border-dashed border-offwhite/20 py-6">
-          {/*
-            Two and a half cards in view on desktop, so the clipped third signals
-            there is more to scroll. Narrower cards need smaller type and padding
-            than the old single full-width card carried. Phones get one card plus a
-            sliver and tablets two, since a third of a 375px screen is unreadable.
-
-            Every item sits on one flex line, so they all stretch to the tallest
-            quote; h-full passes that height down to the card itself, which keeps
-            the cards level now that more than one is visible at a time. A grid
-            sizes each row on its own content instead, which split the two rows by
-            58px, so auto-rows-fr makes every row take the same share. It is used
-            in preference to grid-rows-2 because the live Google feed can return
-            fewer than six reviews, and a fixed two would then leave an empty row.
-
-            The basis subtracts its share of the gutter because CarouselContent's
-            -ml-5 makes the track 20px wider than the visible window, so a flat 50%
-            measures against the wrong width. 50% - 10px (0.5 x 20px) resolves to
-            exactly half the window at any size. At lg the negative margin and the
-            per-item padding are both dropped in favour of a real grid gap.
-          */}
-          <CarouselContent className="-ml-5 lg:ml-0 lg:grid lg:auto-rows-fr lg:grid-cols-3 lg:gap-5">
-            {items.map((t, index) => (
-              <CarouselItem
-                key={`${t.author}-${index}`}
-                className="basis-[86%] pl-5 md:basis-[calc(50%-0.625rem)] lg:basis-auto lg:pl-0"
-              >
-                <figure className="flex h-full flex-col justify-between rounded-lg border border-offwhite/10 bg-offwhite/[0.04] p-6 sm:p-7">
-                  <div>
-                    {typeof t.rating === "number" && (
-                      <div className="mb-4 flex">
-                        <Stars rating={t.rating} />
-                      </div>
-                    )}
-                    <blockquote className="text-base leading-relaxed text-offwhite md:text-lg">
-                      &ldquo;{t.quote}&rdquo;
-                    </blockquote>
-                  </div>
-                  <figcaption className="mt-6 flex items-center gap-3 border-t border-offwhite/10 pt-5">
-                    {t.photoUrl ? (
-                      <img
-                        src={t.photoUrl}
-                        alt=""
-                        loading="lazy"
-                        referrerPolicy="no-referrer"
-                        className="size-10 shrink-0 rounded-full object-cover"
-                      />
-                    ) : (
-                      <span className="grid size-10 shrink-0 place-items-center rounded-full bg-marigold text-sm font-semibold text-charcoal">
-                        {initials(t.author)}
-                      </span>
-                    )}
-                    {/* min-w-0 lets the two lines truncate instead of pushing the link out. */}
-                    <span className="min-w-0 text-left">
-                      <span className="block truncate text-sm font-semibold text-offwhite">
-                        {t.author}
-                      </span>
-                      <span className="block truncate text-xs text-offwhite/60">{t.role}</span>
-                    </span>
-                    {t.sourceUrl && (
-                      <a
-                        href={t.sourceUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        // The mark is decorative, so the link carries the accessible
-                        // name, and title gives sighted users the same wording the
-                        // text link used to spell out.
-                        aria-label={`Read ${t.author}'s review on Google`}
-                        title="Read on Google"
-                        className="ml-auto grid size-8 shrink-0 place-items-center rounded-full border border-offwhite/15 transition-colors hover:border-marigold"
-                      >
-                        <GoogleMark className="size-4" />
-                      </a>
-                    )}
-                  </figcaption>
-                </figure>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </div>
-
-        {/* Nothing to page through once the grid shows every review. */}
-        <div className="mt-6 flex items-center justify-between gap-4 lg:hidden">
-          <div className="flex items-center gap-2" aria-label="Choose a review">
-            {items.map((t, index) => (
-              <button
-                key={`${t.author}-${index}`}
-                type="button"
-                onClick={() => api?.scrollTo(index)}
-                aria-label={`Show review ${index + 1} by ${t.author}`}
-                aria-current={selectedIndex === index ? "true" : undefined}
-                className={`h-2 rounded-full transition-all ${
-                  selectedIndex === index
-                    ? "w-7 bg-marigold"
-                    : "w-2 bg-offwhite/30 hover:bg-offwhite/60"
-                }`}
-              />
-            ))}
-          </div>
-          <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={() => api?.scrollPrev()}
-              aria-label="Previous review"
-              className="grid size-10 place-items-center rounded-full border border-offwhite/25 text-offwhite transition-colors hover:border-marigold hover:bg-marigold hover:text-charcoal"
+      <div className="mt-14 flex flex-col gap-5">
+        {rows.map((row, rowIndex) => (
+          <div key={rowIndex} className="review-row">
+            <div
+              className={`review-track flex ${rowIndex % 2 === 1 ? "review-track-reverse" : ""}`}
             >
-              <ArrowLeft className="size-4" />
-            </button>
-            <button
-              type="button"
-              onClick={() => api?.scrollNext()}
-              aria-label="Next review"
-              className="grid size-10 place-items-center rounded-full border border-offwhite/25 text-offwhite transition-colors hover:border-marigold hover:bg-marigold hover:text-charcoal"
-            >
-              <ArrowRight className="size-4" />
-            </button>
-          </div>
-        </div>
+              {/*
+                The row's cards twice. The animation travels half the track, so
+                the second copy arrives exactly where the first began and the
+                loop has no seam. That only holds because the spacing is a
+                trailing margin on each card rather than a gap on the track: a
+                gap leaves the track one gap short of twice a copy, and the loop
+                jumps by that much every pass.
 
-        <span className="pointer-events-none absolute -left-1.5 top-4 text-marigold">+</span>
-        <span className="pointer-events-none absolute -right-1.5 top-4 text-marigold">+</span>
-        <span className="pointer-events-none absolute -bottom-2 -left-1.5 text-marigold">+</span>
-        <span className="pointer-events-none absolute -bottom-2 -right-1.5 text-marigold">+</span>
-      </Carousel>
+                Only the first copy is exposed to assistive tech, which would
+                otherwise read every review out twice.
+              */}
+              {[0, 1].map((copy) => (
+                <div key={copy} className="flex" aria-hidden={copy === 1 || undefined}>
+                  {row.map((t, index) => (
+                    <ReviewCard key={`${t.author}-${index}`} item={t} />
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
 
       {footer && <div className="container-page mt-10 text-center">{footer}</div>}
     </section>

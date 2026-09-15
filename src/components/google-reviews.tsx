@@ -4,17 +4,6 @@ import { Testimonials, type TestimonialItem } from "@/components/testimonials";
 import { site, testimonials } from "@/lib/site-data";
 
 /**
- * How many of the stored reviews this section shows. The array holds twenty, and
- * rendering all of them made this section 3523px tall, 28% of the homepage, in
- * seven rows of three. Six keeps the three by two grid the section was built
- * around, and is close to the five the live Places API returns, so the fallback
- * is not far longer than the real thing.
- *
- * The rest of the array stays as the record of what the listing holds.
- */
-const HOMEPAGE_REVIEWS = 6;
-
-/**
  * Renders the Google Business Profile reviews.
  *
  * Without GOOGLE_PLACES_API_KEY / GOOGLE_PLACE_ID this still shows real reviews —
@@ -45,7 +34,13 @@ export function GoogleReviews() {
         photoUrl: r.photoUrl,
         sourceUrl: r.reviewUrl,
       }))
-    : testimonials.slice(0, HOMEPAGE_REVIEWS);
+    : testimonials;
+
+  /*
+   * All twenty, uncapped. The section is two sliding rows now rather than a
+   * grid, so length costs no height: more reviews make the loop longer, not the
+   * page. The cap existed only while every review was a row of the grid.
+   */
 
   const rating = live?.rating ?? site.googleRating;
   const total = live?.totalRatings ?? site.googleReviewCount;

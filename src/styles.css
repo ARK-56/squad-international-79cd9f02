@@ -236,6 +236,65 @@
 }
 
 /**
+ * The review wall: two rows of cards sliding in opposite directions.
+ *
+ * Each track holds its cards twice and travels exactly half its own width, so the
+ * second copy arrives where the first started and the loop has no seam. Because
+ * the distance is a percentage of the track rather than a pixel count, the
+ * duration alone sets the speed and adding reviews does not change it.
+ */
+@keyframes review-slide-left {
+  to {
+    translate: -50% 0;
+  }
+}
+
+@keyframes review-slide-right {
+  from {
+    translate: -50% 0;
+  }
+}
+
+@utility review-row {
+  overflow: hidden;
+  /* Fades both ends, so cards arrive and leave rather than being cut off. */
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 5rem,
+    #000 calc(100% - 5rem),
+    transparent
+  );
+
+  @media (hover: hover) {
+    &:hover .review-track {
+      animation-play-state: paused;
+    }
+  }
+
+  /*
+   * With the animation off there is no other way to reach the cards past the
+   * fold, so the row becomes a normal scroller.
+   */
+  @media (prefers-reduced-motion: reduce) {
+    overflow-x: auto;
+  }
+}
+
+@utility review-track {
+  width: max-content;
+  animation: review-slide-left 80s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@utility review-track-reverse {
+  animation-name: review-slide-right;
+}
+
+/**
  * Button hover. The same idea as card-pop but deliberately stronger, because a
  * button is a much smaller target and the same 4px lift barely registers at that
  * size: it takes a real scale to read as a response.
