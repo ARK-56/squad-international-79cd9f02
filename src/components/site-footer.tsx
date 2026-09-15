@@ -38,7 +38,7 @@ export function SiteFooter() {
       <div className="mx-auto w-full max-w-[84rem] overflow-hidden rounded-[2rem] bg-charcoal text-offwhite">
       {/* Tighter row gap than column gap: the socials/signup row sat too far below
           the link columns with a uniform 40px. */}
-      <div className="grid gap-x-10 gap-y-6 px-8 py-16 md:grid-cols-2 md:px-12 lg:grid-cols-4">
+      <div className="grid gap-x-10 gap-y-6 px-8 pt-16 md:grid-cols-2 md:px-12 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-2.5">
             <img
@@ -94,11 +94,7 @@ export function SiteFooter() {
           ))}
         </FooterCol>
 
-        {/* Eight links against six elsewhere makes this the tallest column, and on
-            one grid row its height left a blank band above the socials/signup row.
-            Spanning both rows lets it run alongside them in its own column instead
-            of stretching the first row to fit. */}
-        <FooterCol title="Company" className="lg:row-span-2">
+        <FooterCol title="Company">
           {[
             { to: "/about", label: "About" },
             { to: "/case-studies", label: "Case Studies" },
@@ -119,12 +115,41 @@ export function SiteFooter() {
             </li>
           ))}
         </FooterCol>
+      </div>
 
-        {/*
-          Second grid row: socials sit under the brand column and the signup spans
-          the Services and Industries columns, so the two sit side by side and the
-          field lines up with those headings.
-        */}
+      {/*
+        The offices, directly under the columns and across the full width. The
+        brand column ends at the phone number while the taller link columns beside
+        it run on, so this fills that gap rather than being stacked four-wide in a
+        quarter of the width.
+      */}
+      <div className="px-8 pt-10 md:px-12">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {site.locations.map((loc) => (
+            <div key={loc.city} className="flex items-start gap-2 text-sm text-offwhite/65">
+              <MapPin className="mt-0.5 size-4 shrink-0 text-marigold" />
+              <span>
+                <span className="block text-[11px] uppercase tracking-[0.18em] text-marigold">
+                  {loc.city}
+                </span>
+                {loc.lines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/*
+        Socials under the brand column and the signup across the Services and
+        Industries columns, so the field lines up with those headings. The same
+        four-column track as above keeps that alignment now that this is a row of
+        its own rather than the grid's second row.
+      */}
+      <div className="grid gap-x-10 gap-y-6 px-8 pb-16 pt-10 md:grid-cols-2 md:px-12 lg:grid-cols-4">
         <nav aria-label="Social media" className="flex flex-wrap gap-2">
           {site.socials.map((social) => {
             const path = BRAND_PATHS[social.name];
@@ -151,32 +176,6 @@ export function SiteFooter() {
 
         <div className="md:col-span-2">
           <SubscribeForm />
-        </div>
-      </div>
-
-      {/*
-        The offices get the full width rather than a quarter of it. Stacked in the
-        brand column they were a long thin list under the phone number, while the
-        row beside them was empty; three across uses that space and keeps each
-        address on two lines instead of wrapping.
-      */}
-      <div className="border-t border-offwhite/10 px-8 py-8 md:px-12">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {site.locations.map((loc) => (
-            <div key={loc.city} className="flex items-start gap-2 text-sm text-offwhite/65">
-              <MapPin className="mt-0.5 size-4 shrink-0 text-marigold" />
-              <span>
-                <span className="block text-[11px] uppercase tracking-[0.18em] text-marigold">
-                  {loc.city}
-                </span>
-                {loc.lines.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </span>
-            </div>
-          ))}
         </div>
       </div>
 
