@@ -63,24 +63,6 @@ export function SiteFooter() {
                 {site.phone}
               </a>
             </li>
-            {/* One pin for the set, with each office named above its address. */}
-            <li className="flex items-start gap-2">
-              <MapPin className="mt-0.5 size-4 shrink-0 text-marigold" />
-              <span className="space-y-3">
-                {site.locations.map((loc) => (
-                  <span key={loc.city} className="block">
-                    <span className="block text-[11px] uppercase tracking-[0.18em] text-marigold">
-                      {loc.city}
-                    </span>
-                    {loc.lines.map((line) => (
-                      <span key={line} className="block">
-                        {line}
-                      </span>
-                    ))}
-                  </span>
-                ))}
-              </span>
-            </li>
           </ul>
         </div>
 
@@ -169,6 +151,32 @@ export function SiteFooter() {
 
         <div className="md:col-span-2">
           <SubscribeForm />
+        </div>
+      </div>
+
+      {/*
+        The offices get the full width rather than a quarter of it. Stacked in the
+        brand column they were a long thin list under the phone number, while the
+        row beside them was empty; three across uses that space and keeps each
+        address on two lines instead of wrapping.
+      */}
+      <div className="border-t border-offwhite/10 px-8 py-8 md:px-12">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {site.locations.map((loc) => (
+            <div key={loc.city} className="flex items-start gap-2 text-sm text-offwhite/65">
+              <MapPin className="mt-0.5 size-4 shrink-0 text-marigold" />
+              <span>
+                <span className="block text-[11px] uppercase tracking-[0.18em] text-marigold">
+                  {loc.city}
+                </span>
+                {loc.lines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
 
