@@ -695,9 +695,21 @@ export type Testimonial = {
 };
 
 /**
- * Real reviews transcribed from the Google Business Profile (see site.googleReviewsUrl),
- * all five stars. Client reviews only — the listing's remaining five-star review is from a
- * former employee, which belongs on the careers page rather than in a client carousel.
+ * Real reviews, taken from the Google Business Profile's Takeout export rather than
+ * retyped from the listing (see site.googleReviewsUrl).
+ *
+ * The export holds 33 reviews: thirty at five stars, two at four and one at three,
+ * averaging 4.879. That is where site.googleRating and site.googleReviewCount come
+ * from, so the two agree by construction.
+ *
+ * Twenty are shown. The other thirteen are left out because five carry a rating and
+ * no text, three are below five stars, one is a former employee describing working
+ * here rather than buying from us, one reads as an internal view of the staff, and
+ * four are so short they leave a visibly empty card next to the rest.
+ *
+ * Quotes are the reviewers' own words. Whitespace, run-together punctuation and
+ * missing full stops are tidied; nothing is reworded. Names are case-normalised,
+ * since the listing has them in all caps and all lower.
  *
  * Once GOOGLE_PLACES_API_KEY and GOOGLE_PLACE_ID are set, src/lib/google-reviews.ts serves
  * live reviews instead and these become the offline fallback.
@@ -747,6 +759,118 @@ export const testimonials: Testimonial[] = [
     quote:
       "Had a great experience working with this business line. Would give them a 10/10 for their services. Always does their work on time. Will look forward working with them again.",
     author: "Tabish Zaman",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
+  },
+  {
+    quote:
+      "Excellent services and very attractive organization Squad International Team is professional and update related to all services. Highly recommend. Thanks Mr. Haider Ali.",
+    author: "Bilal Hussain",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
+  },
+  {
+    quote:
+      "I'm a small business owner, partnered with squad international 6 months ago to generate more business. I'm satisfied with the outcomes. Keep it up guys.",
+    author: "Bath and Body Essentials",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
+  },
+  {
+    quote:
+      "I have very good experience with this company and I also prefer you to work with this company because the staff and owner is very humble and friendly.",
+    author: "Ibrahim Toufiq",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
+  },
+  {
+    quote:
+      "Got their service few months ago and I should say that they are brilliant at doing their work. Would recommend everyone to contact them if needed!",
+    author: "Hawii Girl",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
+  },
+  {
+    quote:
+      "The best people to handle your marketing. Handled task with total professional behavior. Definitely gonna ask them for future tasks.",
+    author: "Ali Akhter",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
+  },
+  {
+    quote:
+      "Total Marketing Solutions and Quick Services. So much satisfied after connecting with Squad International.",
+    author: "Ali Raza",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
+  },
+  {
+    quote:
+      "Great telemarketing services. Working with them has boosted my sales. Wonderful experience 👍",
+    author: "Mustafa Toufiq",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
+  },
+  {
+    quote:
+      "Totally recommend working with them. They are handling customer services for my restaurant. 👍",
+    author: "Faiz Khan",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
+  },
+  {
+    quote:
+      "Thanks squad international appreciate your business and hope do work with you again next time.",
+    author: "Hasnain Abbas",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
+  },
+  {
+    quote:
+      "Very professional, managing my clients perfectly. Definitely getting more services from them.",
+    author: "Joshua Daniel",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
+  },
+  {
+    quote:
+      "Best telemarketing company 👍 very professional. I get my BPO services from them.",
+    author: "Hassan Zakir",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
+  },
+  {
+    quote:
+      "Very happy with the experience. Extremely professional and easy to work with.",
+    author: "Denassa Maqsood",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
+  },
+  {
+    quote:
+      "Quality work, timely delivery, highly professionals love to recommend.",
+    author: "Iftekhar Hussain",
+    role: "Google review",
+    rating: 5,
+    sourceUrl: site.googleReviewsUrl,
+  },
+  {
+    quote:
+      "Very professional 👍 authentic leads. Love their work 👍",
+    author: "Chocolatechip Cheese",
     role: "Google review",
     rating: 5,
     sourceUrl: site.googleReviewsUrl,
