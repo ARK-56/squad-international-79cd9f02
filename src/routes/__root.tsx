@@ -148,7 +148,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             "@type": "Person",
             name: site.founder.name,
             jobTitle: site.founder.role,
-            sameAs: site.founder.profiles,
+            sameAs: site.founder.profiles.map((p) => p.url),
           },
           contactPoint: {
             "@type": "ContactPoint",

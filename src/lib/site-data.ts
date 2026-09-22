@@ -69,13 +69,13 @@ export const site = {
     { name: "YouTube", url: "https://www.youtube.com/@thesquadinternational" },
     { name: "TikTok", url: "https://www.tiktok.com/@squadiansinternational" },
   ],
-  /** Named in the Organization schema as the company's founder. */
+  /** Shown on the about page and named in the Organization schema. */
   founder: {
     name: "Haider Ali",
     role: "Founder & CEO",
     profiles: [
-      "https://www.upwork.com/freelancers/haideralisquad",
-      "https://www.linkedin.com/in/haideralisquad",
+      { name: "LinkedIn", url: "https://www.linkedin.com/in/haideralisquad" },
+      { name: "Upwork", url: "https://www.upwork.com/freelancers/haideralisquad" },
     ],
   },
   /**

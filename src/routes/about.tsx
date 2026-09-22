@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CalendarDays, MessageCircle } from "lucide-react";
+import { ArrowUpRight, CalendarDays, MessageCircle } from "lucide-react";
 import teamImage from "@/assets/team-about.jpg";
 import { Button } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
@@ -104,6 +104,33 @@ function AboutPage() {
               Our role is simple: understand what your business needs, build support around your
               workflow and help your internal team stay focused on the work that drives growth.
             </p>
+          </div>
+
+          {/*
+            The founder, under the paragraph describing the company he started.
+            The links leave the site, so each carries the outward arrow and opens
+            in a new tab.
+          */}
+          <div className="mt-8 rounded-lg border border-border bg-card p-6">
+            <p className="text-base font-semibold text-charcoal">{site.founder.name}</p>
+            <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-marigold">
+              {site.founder.role}
+            </p>
+            <ul className="mt-5 flex flex-wrap gap-2">
+              {site.founder.profiles.map((p) => (
+                <li key={p.name}>
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3.5 py-1.5 text-xs font-medium text-charcoal transition-colors hover:border-marigold hover:text-marigold"
+                  >
+                    {p.name}
+                    <ArrowUpRight className="size-3.5" />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
         <figure className="overflow-hidden rounded-xl border border-border">
