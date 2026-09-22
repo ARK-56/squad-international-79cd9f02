@@ -86,9 +86,9 @@ export const site = {
   profiles: [
     { name: "Linktree", url: "https://linktr.ee/squadinternational" },
     { name: "Trustpilot", url: "https://www.trustpilot.com/review/squadinternational.net" },
-    { name: "Clutch", url: "https://clutch.co/profile/squad-international" },
+    { name: "Clutch", url: "https://clutch.co/profile/squad-international", short: "Cl" },
     { name: "Upwork", url: "https://www.upwork.com/agencies/2096008037645452073" },
-    { name: "GoodFirms", url: "https://www.goodfirms.co/company/squad-international" },
+    { name: "GoodFirms", url: "https://www.goodfirms.co/company/squad-international", short: "GF" },
   ],
 };
 
