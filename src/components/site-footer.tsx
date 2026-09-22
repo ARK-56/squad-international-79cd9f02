@@ -184,7 +184,15 @@ export function SiteFooter() {
                 {path ? (
                   <BrandIcon path={path} className="size-4" />
                 ) : (
-                  <span className="text-[10px] font-medium">
+                  /*
+                   * Sized and cased to match the marks beside it. At 10px the
+                   * lettering laid down 10-13px of ink against the icons' 16, and
+                   * lowercase made it worse: "Cl" measured 10.4px where "GF"
+                   * measured 12.9, so the two badges did not match each other
+                   * either. Uppercasing here rather than in the data keeps a
+                   * future badge consistent without the label carrying styling.
+                   */
+                  <span className="text-[13px] font-semibold uppercase leading-none">
                     {social.short ?? social.name.slice(0, 2)}
                   </span>
                 )}
