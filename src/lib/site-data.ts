@@ -1,5 +1,11 @@
 export const site = {
   name: "Squad International",
+  /**
+   * Canonical origin, no trailing slash. Needed wherever a URL has to be
+   * absolute rather than routed, which today is the Organization schema. The
+   * sitemap generator defaults to the same string via SITE_URL.
+   */
+  url: "https://squadinternational.net",
   tagline: "Your Business Companion",
   calendly: "https://calendly.com/squadinternational/30min",
   // wa.me needs the country code with no "+" and no leading zero: +92 313 297 2974.
@@ -22,9 +28,38 @@ export const site = {
    * join needs only a space.
    */
   locations: [
-    { city: "New York", lines: ["276 Holten Ave,", "Staten Island, NY 10309-4028, US"] },
-    { city: "Karachi", lines: ["75 Hamid Hussain Farooqi Rd,", "Block 2 PECHS, Karachi, 75100"] },
-    { city: "Wah Cantt", lines: ["Kohistan Enclave, Wah Cantt,", "Rawalpindi, Punjab"] },
+    {
+      city: "New York",
+      lines: ["276 Holten Ave,", "Staten Island, NY 10309-4028, US"],
+      address: {
+        streetAddress: "276 Holten Ave",
+        addressLocality: "Staten Island",
+        addressRegion: "NY",
+        postalCode: "10309-4028",
+        addressCountry: "US",
+      },
+    },
+    {
+      city: "Karachi",
+      lines: ["75 Hamid Hussain Farooqi Rd,", "Block 2 PECHS, Karachi, 75100"],
+      address: {
+        streetAddress: "75 Hamid Hussain Farooqi Rd, Block 2 PECHS",
+        addressLocality: "Karachi",
+        addressRegion: "Sindh",
+        postalCode: "75100",
+        addressCountry: "PK",
+      },
+    },
+    {
+      city: "Wah Cantt",
+      lines: ["Prestige Plaza, 1st Floor,", "Kohistan Enclave, Wah Cantt, Pakistan"],
+      address: {
+        streetAddress: "Prestige Plaza, 1st Floor, Kohistan Enclave",
+        addressLocality: "Wah Cantt",
+        addressRegion: "Punjab",
+        addressCountry: "PK",
+      },
+    },
   ],
   boilerplate: "High-performing offshore teams and managed business support built to scale.",
   socials: [
@@ -34,6 +69,15 @@ export const site = {
     { name: "YouTube", url: "https://www.youtube.com/@thesquadinternational" },
     { name: "TikTok", url: "https://www.tiktok.com/@squadiansinternational" },
   ],
+  /** Named in the Organization schema as the company's founder. */
+  founder: {
+    name: "Haider Ali",
+    role: "Founder & CEO",
+    profiles: [
+      "https://www.upwork.com/freelancers/haideralisquad",
+      "https://www.linkedin.com/in/haideralisquad",
+    ],
+  },
   /**
    * Where the business is listed and reviewed, as against socials, where it
    * posts. Named links rather than icons: these carry no widely known mark, and

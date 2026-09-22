@@ -11,6 +11,8 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import logoUrl from "@/assets/squad-logo.png";
+import { site } from "@/lib/site-data";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { WhatsAppFab } from "@/components/whatsapp-fab";
@@ -117,6 +119,48 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
      * gtag before the loader finishes and starts reading them.
      */
     scripts: [
+      /**
+       * Organization, on the root so it is served with every page rather than
+       * only the home page. Ties the site to the profiles it is listed on:
+       * sameAs is what tells a search engine the Clutch, Trustpilot and Upwork
+       * listings are this same company.
+       *
+       * No aggregateRating, deliberately. The Google rating is real, but a
+       * business marking up its own rating on its own site is self-serving
+       * review markup, which Google's policy excludes from rich results and
+       * treats as a spam signal. The rating stays visible on the page, where it
+       * is fine; it just is not claimed in schema.
+       */
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": `${site.url}/#organization`,
+          name: site.name,
+          url: `${site.url}/`,
+          logo: `${site.url}${logoUrl}`,
+          description: site.boilerplate,
+          email: site.email,
+          telephone: site.phone,
+          address: site.locations.map((l) => ({ "@type": "PostalAddress", ...l.address })),
+          founder: {
+            "@type": "Person",
+            name: site.founder.name,
+            jobTitle: site.founder.role,
+            sameAs: site.founder.profiles,
+          },
+          contactPoint: {
+            "@type": "ContactPoint",
+            contactType: "customer service",
+            email: site.email,
+            telephone: site.phone,
+            // Two offices share a country, so the list is deduplicated.
+            areaServed: [...new Set(site.locations.map((l) => l.address.addressCountry))],
+          },
+          sameAs: [...site.socials.map((s) => s.url), ...site.profiles.map((p) => p.url)],
+        }),
+      },
       { src: "https://www.googletagmanager.com/gtag/js?id=G-Q80EHWPPBW", async: true },
       {
         children: `window.dataLayer = window.dataLayer || [];
