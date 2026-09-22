@@ -1,6 +1,5 @@
 import { defineConfig, loadEnv, type UserConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
-import tsConfigPaths from "vite-tsconfig-paths";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import { nitro } from "nitro/vite";
@@ -45,6 +44,14 @@ export default defineConfig(async ({ command, mode }) => {
     define,
     css: { transformer: "lightningcss" },
     resolve: {
+      /*
+       * Vite resolves the tsconfig's paths itself now, which is what the
+       * vite-tsconfig-paths plugin was doing and what it warned about on every
+       * dev start. The alias below stays: tsconfig maps "@/*" for the app's own
+       * source, and this keeps that resolution identical for anything outside
+       * the project's includes.
+       */
+      tsconfigPaths: true,
       alias: { "@": `${process.cwd()}/src` },
       // One copy of each, or hooks break across duplicated instances.
       dedupe: [
@@ -73,7 +80,6 @@ export default defineConfig(async ({ command, mode }) => {
     },
     plugins: [
       tailwindcss(),
-      tsConfigPaths({ projects: ["./tsconfig.json"] }),
       tanstackStart({
         // Keeps server-only modules out of the client bundle, failing the build
         // rather than shipping them.
