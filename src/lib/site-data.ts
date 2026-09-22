@@ -31,6 +31,13 @@ export const site = {
     {
       city: "New York",
       lines: ["276 Holten Ave,", "Staten Island, NY 10309-4028, US"],
+      /*
+       * Derived from the address rather than a listing: unlike the other two,
+       * no Maps link was supplied for this office. It opens a search for the
+       * address, so swap it for the listing URL if there is one.
+       */
+      mapUrl:
+        "https://www.google.com/maps/search/?api=1&query=276%20Holten%20Ave%2C%20Staten%20Island%2C%20NY%2010309-4028%2C%20US",
       address: {
         streetAddress: "276 Holten Ave",
         addressLocality: "Staten Island",
@@ -42,6 +49,7 @@ export const site = {
     {
       city: "Karachi",
       lines: ["75 Hamid Hussain Farooqi Rd,", "Block 2 PECHS, Karachi, 75100"],
+      mapUrl: "https://share.google/ksHH7kLSqGZWMabdX",
       address: {
         streetAddress: "75 Hamid Hussain Farooqi Rd, Block 2 PECHS",
         addressLocality: "Karachi",
@@ -53,6 +61,7 @@ export const site = {
     {
       city: "Wah Cantt",
       lines: ["Prestige Plaza, 1st Floor,", "Kohistan Enclave, Wah Cantt, Pakistan"],
+      mapUrl: "https://maps.app.goo.gl/tR3TNHMNk6VFyTcG7?g_st=ic",
       address: {
         streetAddress: "Prestige Plaza, 1st Floor, Kohistan Enclave",
         addressLocality: "Wah Cantt",

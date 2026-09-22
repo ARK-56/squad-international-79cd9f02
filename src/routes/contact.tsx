@@ -69,10 +69,17 @@ function ContactPage() {
                 <MapPin className="mt-0.5 size-4 shrink-0 text-marigold" />
                 <span className="space-y-2">
                   {site.locations.map((loc) => (
-                    <span key={loc.city} className="block">
+                    <a
+                      key={loc.city}
+                      href={loc.mapUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${loc.city} office on Google Maps`}
+                      className="block transition-colors hover:text-marigold"
+                    >
                       <span className="font-semibold text-charcoal">{loc.city}</span>{" "}
                       {loc.lines.join(" ")}
-                    </span>
+                    </a>
                   ))}
                 </span>
               </li>

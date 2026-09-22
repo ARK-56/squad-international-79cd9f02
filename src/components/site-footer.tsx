@@ -138,7 +138,14 @@ export function SiteFooter() {
         */}
         <div className="grid gap-6 sm:grid-cols-2 md:col-span-2">
           {site.locations.map((loc) => (
-            <div key={loc.city} className="flex items-start gap-2 text-sm text-offwhite/65">
+            <a
+              key={loc.city}
+              href={loc.mapUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${loc.city} office on Google Maps`}
+              className="flex items-start gap-2 text-sm text-offwhite/65 transition-colors hover:text-offwhite"
+            >
               <MapPin className="mt-0.5 size-4 shrink-0 text-marigold" />
               <span>
                 <span className="block text-[11px] uppercase tracking-[0.18em] text-marigold">
@@ -150,7 +157,7 @@ export function SiteFooter() {
                   </span>
                 ))}
               </span>
-            </div>
+            </a>
           ))}
         </div>
       </div>
