@@ -177,6 +177,25 @@ export function SiteFooter() {
         <div className="md:col-span-2">
           <SubscribeForm />
         </div>
+
+        {/* The row's fourth column, which the signup does not reach. */}
+        <div>
+          <p className="text-[11px] uppercase tracking-[0.18em] text-marigold">Find us on</p>
+          <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5">
+            {site.profiles.map((p) => (
+              <li key={p.name}>
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm text-offwhite/65 transition-colors hover:text-marigold"
+                >
+                  {p.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <div className="border-t border-offwhite/10">
