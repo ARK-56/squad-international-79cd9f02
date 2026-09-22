@@ -9,12 +9,14 @@ import {
   ArrowRight,
   ToggleRight,
   Star,
+  Globe,
   type LucideIcon,
 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
 import { site, services, industries } from "@/lib/site-data";
 import { serviceIcon } from "@/lib/service-icons";
+import { industryIcon } from "@/lib/industry-icons";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -42,8 +44,6 @@ const chevronClass = "size-4 transition-transform group-data-[state=open]:rotate
 const menuClass = "rounded-xl border-border bg-background p-3 shadow-lg";
 const SERVICES_MENU_WIDTH = "w-[min(56rem,calc(100vw-3rem))]";
 const INDUSTRIES_MENU_WIDTH = "w-[min(44rem,calc(100vw-3rem))]";
-const menuLeadClass =
-  "cursor-pointer rounded-lg px-3 py-2 text-sm font-semibold text-charcoal hover:bg-muted focus:bg-muted";
 // flex-col/items-start override the primitive's single-line centring so the
 // description can sit under the title.
 const menuItemClass =
@@ -55,7 +55,9 @@ const menuItemClass =
 const serviceItemClass = `${menuItemClass} group bg-muted/60`;
 
 /**
- * The width below which the services panel stops being comfortable. Measured on
+ * The width below which a trigger-anchored panel stops being comfortable, which
+ * is both of them: sharing the figure keeps the two the same width, so they do
+ * not jump when the pointer moves between the triggers. Measured on
  * the four current services: at 940 the chips take three rows and the longest
  * title two lines, at 980 the chips fall to two rows, and at 1030 every title
  * fits one line and the cards drop from 235px tall to 168px. Past that it gains
@@ -68,7 +70,7 @@ const serviceItemClass = `${menuItemClass} group bg-muted/60`;
  * A trigger-anchored panel grows leftward to reach this, and is still capped by
  * the header bar, so on a narrow window it simply spans the bar as before.
  */
-const MIN_SERVICES_PANEL = 1040;
+const MIN_TRIGGER_PANEL = 1040;
 
 /** Title over description, matching the two-line treatment used on the page cards. */
 function MenuItemText({
@@ -284,7 +286,7 @@ function NavDropdown({
       return;
     }
     const barRight = matchBox.left + matchBox.width;
-    const width = Math.min(matchBox.width, Math.max(barRight - triggerLeft, MIN_SERVICES_PANEL));
+    const width = Math.min(matchBox.width, Math.max(barRight - triggerLeft, MIN_TRIGGER_PANEL));
     // Right edge stays on the bar, so any extra width is taken off the left.
     const left = Math.max(matchBox.left, barRight - width);
     setPanelBox({ alignOffset: Math.round(left - triggerLeft), width: Math.round(width) });
@@ -466,7 +468,7 @@ export function SiteHeader() {
               {/*
                 Two columns, which divides the four services evenly; a third would
                 strand one service on a row of its own. The panel starts at the
-                trigger but never narrower than MIN_SERVICES_PANEL, so the cards
+                trigger but never narrower than MIN_TRIGGER_PANEL, so the cards
                 hold at 333px wherever the bar allows that width and fall to about
                 295px at 1024, where the bar itself is the limit. Chips stay on two
                 rows throughout.
@@ -491,23 +493,58 @@ export function SiteHeader() {
           <NavDropdown
             id="industries"
             label="Industries"
+            anchor="trigger"
             openOn="click"
             openMenu={openMenu}
             onOpenChange={handleMenuChange}
             menuWidth={INDUSTRIES_MENU_WIDTH}
+            matchBox={bar}
           >
-            <DropdownMenuItem asChild className={menuLeadClass}>
-              <Link to="/industries">All Industries →</Link>
-            </DropdownMenuItem>
-            <div className="my-1 h-px bg-border" />
-            <div className="grid gap-0.5 sm:grid-cols-2">
-              {industries.map((i) => (
-                <DropdownMenuItem key={i.slug} asChild className={menuItemClass}>
-                  <Link to="/industries/$slug" params={{ slug: i.slug }}>
-                    <MenuItemText title={i.name} description={i.tagline} />
+            <div className="grid grid-cols-[20rem_1fr] gap-5">
+              <div className="flex flex-col justify-between rounded-lg bg-muted/60 p-5">
+                <div>
+                  <span className="text-[11px] uppercase tracking-[0.2em] text-marigold">
+                    Who we serve
+                  </span>
+                  <Globe className="mt-3 block size-6 text-marigold" />
+                  <p className="mt-3 font-display text-xl uppercase leading-tight text-charcoal">
+                    Sectors we know already
+                  </p>
+                  <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                    Every industry has its own workflows and expectations, so the team is built
+                    around yours rather than a script.
+                  </p>
+                </div>
+
+                <DropdownMenuItem
+                  asChild
+                  className={`${buttonVariants({ variant: "outlineDark", size: "sm" })} mt-5 w-full cursor-pointer justify-center`}
+                >
+                  <Link to="/industries">
+                    All industries <ArrowRight />
                   </Link>
                 </DropdownMenuItem>
-              ))}
+              </div>
+
+              {/*
+                Three columns rather than the services' two: there are seven of
+                these against four, and the cards carry a name and a line each
+                where a service card also carries chips. Two columns would run to
+                four rows and make the panel far taller than the services one.
+              */}
+              <div className="grid auto-rows-fr grid-cols-3 gap-2">
+                {industries.map((i) => (
+                  <DropdownMenuItem key={i.slug} asChild className={serviceItemClass}>
+                    <Link to="/industries/$slug" params={{ slug: i.slug }}>
+                      <MenuItemText
+                        title={i.name}
+                        description={i.tagline}
+                        icon={industryIcon(i.slug)}
+                      />
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </div>
             </div>
           </NavDropdown>
 
