@@ -47,6 +47,7 @@ const staticPaths = [
   "/case-studies",
   "/blog",
   "/about",
+  "/founder",
   "/careers",
   "/faqs",
   "/contact",

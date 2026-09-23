@@ -1,10 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, CalendarDays, MessageCircle } from "lucide-react";
 import teamImage from "@/assets/team-about.jpg";
 import { Button } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
 import { PageHero } from "@/components/page-hero";
 import { BusinessProfiles } from "@/components/business-profiles";
+import { FounderMark } from "@/components/founder-mark";
 import { SectionHeading } from "@/components/section-heading";
 import { StatValue } from "@/components/stat-value";
 import { aboutStats, site } from "@/lib/site-data";
@@ -106,33 +107,6 @@ function AboutPage() {
               workflow and help your internal team stay focused on the work that drives growth.
             </p>
           </div>
-
-          {/*
-            The founder, under the paragraph describing the company he started.
-            The links leave the site, so each carries the outward arrow and opens
-            in a new tab.
-          */}
-          <div className="mt-8 rounded-lg border border-border bg-card p-6">
-            <p className="text-base font-semibold text-charcoal">{site.founder.name}</p>
-            <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-marigold">
-              {site.founder.role}
-            </p>
-            <ul className="mt-5 flex flex-wrap gap-2">
-              {site.founder.profiles.map((p) => (
-                <li key={p.name}>
-                  <a
-                    href={p.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3.5 py-1.5 text-xs font-medium text-charcoal transition-colors hover:border-marigold hover:text-marigold"
-                  >
-                    {p.name}
-                    <ArrowUpRight className="size-3.5" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
         <figure className="overflow-hidden rounded-xl border border-border">
           <img
@@ -142,6 +116,46 @@ function AboutPage() {
             className="h-full w-full object-cover"
           />
         </figure>
+      </section>
+
+      {/*
+        The founder, in a section rather than tucked into the history column. The
+        profile links leave the site, so each carries the outward arrow; the
+        in-site link to his page does not.
+      */}
+      <section className="container-page pb-20 md:pb-24">
+        <div className="flex flex-col gap-6 rounded-xl border border-border bg-card p-8 sm:flex-row sm:items-center sm:gap-8">
+          <FounderMark className="size-20" />
+          <div className="flex-1">
+            <p className="text-lg text-charcoal">{site.founder.name}</p>
+            <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-marigold">
+              {site.founder.role}
+            </p>
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
+              {site.founder.summary}
+            </p>
+            <div className="mt-5 flex flex-wrap items-center gap-2">
+              <Link
+                to="/founder"
+                className="inline-flex items-center gap-1.5 rounded-full bg-charcoal px-3.5 py-1.5 text-xs font-medium text-offwhite transition-colors hover:bg-marigold hover:text-charcoal"
+              >
+                Read his story
+              </Link>
+              {site.founder.profiles.map((p) => (
+                <a
+                  key={p.name}
+                  href={p.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3.5 py-1.5 text-xs font-medium text-charcoal transition-colors hover:border-marigold hover:text-marigold"
+                >
+                  {p.name}
+                  <ArrowUpRight className="size-3.5" />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="border-y border-border bg-card">

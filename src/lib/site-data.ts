@@ -92,6 +92,19 @@ export const site = {
   founder: {
     name: "Haider Ali",
     role: "Founder & CEO",
+    /** One line, for the card on the about page. */
+    summary:
+      "Founded Squad International in 2019, to give growing businesses capacity without making them build every function in-house.",
+    /**
+     * His own account of why the company exists, put into the third person. No
+     * claim here is ours to make on his behalf, so nothing is added to it.
+     */
+    bio: [
+      "Haider Ali founded Squad International in 2019, out of a pattern he kept running into: growing businesses reach a point where the people running the company are also running every process inside it.",
+      "Customer conversations, follow-ups, admin, lead generation and operational work start competing with the work that actually moves the business forward.",
+      "His case for outsourcing is not that labour costs less. It is that the right team gives a business capacity without forcing it to build every function internally.",
+      "That is what Squad International has been built around since: dedicated teams across customer support, sales support and business operations, for companies scaling into international markets without adding unnecessary complexity.",
+    ],
     profiles: [
       { name: "LinkedIn", url: "https://www.linkedin.com/in/haideralisquad" },
       { name: "Upwork", url: "https://www.upwork.com/freelancers/haideralisquad" },
