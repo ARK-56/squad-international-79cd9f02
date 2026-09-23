@@ -93,34 +93,34 @@ export function SiteFooter() {
         </FooterCol>
 
         {/*
-          The offices take the second row beneath the brand and Services columns,
-          the space their shorter lists leave while Industries and Company run on
-          past them. Two across rather than three: the block is half the footer
-          here, not all of it.
+          City and country only. The addresses in full are on the contact page,
+          which is where someone actually needs them; here they were three
+          stacked blocks for information nobody reads out of a footer. Each city
+          still links to its place on Maps.
         */}
-        <div className="grid gap-6 sm:grid-cols-2 md:col-span-2">
-          {site.locations.map((loc) => (
-            <a
-              key={loc.city}
-              href={loc.mapUrl}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`${loc.city} office on Google Maps`}
-              className="flex items-start gap-2 text-sm text-offwhite/65 transition-colors hover:text-offwhite"
-            >
-              <MapPin className="mt-0.5 size-4 shrink-0 text-marigold" />
-              <span>
-                <span className="block text-[11px] uppercase tracking-[0.18em] text-marigold">
-                  {loc.city}
+        <div className="md:col-span-2">
+          <p className="flex items-center gap-2 text-sm text-offwhite/65">
+            <MapPin className="size-4 shrink-0 text-marigold" />
+            Locations
+          </p>
+          <ul className="mt-3 space-y-1.5">
+            {site.locations.map((loc) => (
+              <li key={loc.city} className="flex items-baseline gap-2.5">
+                <span aria-hidden="true" className="text-marigold">
+                  &bull;
                 </span>
-                {loc.lines.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </span>
-            </a>
-          ))}
+                <a
+                  href={loc.mapUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${loc.city} office on Google Maps`}
+                  className="text-sm text-marigold transition-colors hover:text-offwhite"
+                >
+                  {loc.city}, {loc.country}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 

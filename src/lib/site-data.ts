@@ -29,7 +29,33 @@ export const site = {
    */
   locations: [
     {
+      city: "Karachi",
+      country: "Pakistan",
+      lines: ["75 Hamid Hussain Farooqi Rd,", "Block 2 PECHS, Karachi, 75100"],
+      mapUrl: "https://share.google/ksHH7kLSqGZWMabdX",
+      address: {
+        streetAddress: "75 Hamid Hussain Farooqi Rd, Block 2 PECHS",
+        addressLocality: "Karachi",
+        addressRegion: "Sindh",
+        postalCode: "75100",
+        addressCountry: "PK",
+      },
+    },
+    {
+      city: "Wah Cantt",
+      country: "Pakistan",
+      lines: ["Prestige Plaza, 1st Floor,", "Kohistan Enclave, Wah Cantt, Pakistan"],
+      mapUrl: "https://maps.app.goo.gl/tR3TNHMNk6VFyTcG7?g_st=ic",
+      address: {
+        streetAddress: "Prestige Plaza, 1st Floor, Kohistan Enclave",
+        addressLocality: "Wah Cantt",
+        addressRegion: "Punjab",
+        addressCountry: "PK",
+      },
+    },
+    {
       city: "New York",
+      country: "United States",
       lines: ["276 Holten Ave,", "Staten Island, NY 10309-4028, US"],
       /*
        * Derived from the address rather than a listing: unlike the other two,
@@ -44,29 +70,6 @@ export const site = {
         addressRegion: "NY",
         postalCode: "10309-4028",
         addressCountry: "US",
-      },
-    },
-    {
-      city: "Karachi",
-      lines: ["75 Hamid Hussain Farooqi Rd,", "Block 2 PECHS, Karachi, 75100"],
-      mapUrl: "https://share.google/ksHH7kLSqGZWMabdX",
-      address: {
-        streetAddress: "75 Hamid Hussain Farooqi Rd, Block 2 PECHS",
-        addressLocality: "Karachi",
-        addressRegion: "Sindh",
-        postalCode: "75100",
-        addressCountry: "PK",
-      },
-    },
-    {
-      city: "Wah Cantt",
-      lines: ["Prestige Plaza, 1st Floor,", "Kohistan Enclave, Wah Cantt, Pakistan"],
-      mapUrl: "https://maps.app.goo.gl/tR3TNHMNk6VFyTcG7?g_st=ic",
-      address: {
-        streetAddress: "Prestige Plaza, 1st Floor, Kohistan Enclave",
-        addressLocality: "Wah Cantt",
-        addressRegion: "Punjab",
-        addressCountry: "PK",
       },
     },
   ],
