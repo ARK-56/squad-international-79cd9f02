@@ -3,6 +3,7 @@ import { CalendarDays, MessageCircle, Mail, Phone, MapPin, Clock } from "lucide-
 import { Button } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
 import { EnquiryForm } from "@/components/enquiry-form";
+import { BusinessProfiles } from "@/components/business-profiles";
 import { PageHero } from "@/components/page-hero";
 import { site } from "@/lib/site-data";
 
@@ -105,6 +106,9 @@ function ContactPage() {
           </div>
         </aside>
       </section>
+
+      {/* Plus the link hub, which the about page does not carry. */}
+      <BusinessProfiles items={[...site.profiles, site.linkHub]} />
     </>
   );
 }

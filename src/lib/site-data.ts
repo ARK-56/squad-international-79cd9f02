@@ -78,6 +78,13 @@ export const site = {
     { name: "YouTube", url: "https://www.youtube.com/@thesquadinternational" },
     { name: "TikTok", url: "https://www.tiktok.com/@squadiansinternational" },
   ],
+  /**
+   * The link hub, kept apart from both lists. It is not a listing anyone vets a
+   * supplier on, so it does not belong beside Clutch and Trustpilot everywhere;
+   * the contact page adds it, since that is where someone wants every way to
+   * reach us in one place.
+   */
+  linkHub: { name: "Linktree", url: "https://linktr.ee/squadinternational" },
   /** Shown on the about page and named in the Organization schema. */
   founder: {
     name: "Haider Ali",
@@ -89,11 +96,10 @@ export const site = {
   },
   /**
    * Where the business is listed and reviewed, as against socials, where it
-   * posts. Named links rather than icons: these carry no widely known mark, and
-   * the point of a Clutch or Trustpilot listing is that the name is recognised.
+   * posts. Shown as a section on the about and contact pages rather than in the
+   * footer: someone checking a supplier's listings is on those pages already.
    */
   profiles: [
-    { name: "Linktree", url: "https://linktr.ee/squadinternational" },
     { name: "Trustpilot", url: "https://www.trustpilot.com/review/squadinternational.net" },
     { name: "Clutch", url: "https://clutch.co/profile/squad-international", short: "Cl" },
     { name: "Upwork", url: "https://www.upwork.com/agencies/2096008037645452073" },

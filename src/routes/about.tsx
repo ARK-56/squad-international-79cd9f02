@@ -4,6 +4,7 @@ import teamImage from "@/assets/team-about.jpg";
 import { Button } from "@/components/ui/button";
 import { BookingDialog } from "@/components/booking-dialog";
 import { PageHero } from "@/components/page-hero";
+import { BusinessProfiles } from "@/components/business-profiles";
 import { SectionHeading } from "@/components/section-heading";
 import { StatValue } from "@/components/stat-value";
 import { aboutStats, site } from "@/lib/site-data";
@@ -216,6 +217,8 @@ function AboutPage() {
           </p>
         </div>
       </section>
+
+      <BusinessProfiles />
 
       <section className="surface-dark py-20 md:py-24">
         <div className="container-page">
