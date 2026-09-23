@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, ChevronDown } from "lucide-react";
 import { SubscribeForm } from "@/components/subscribe-form";
 import { services, industries, site } from "@/lib/site-data";
 import { BRAND_PATHS, BrandIcon, type IconLink } from "@/lib/brand-marks";
@@ -109,15 +109,38 @@ export function SiteFooter() {
                 <span aria-hidden="true" className="text-marigold">
                   &bull;
                 </span>
-                <a
-                  href={loc.mapUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`${loc.city} office on Google Maps`}
-                  className="text-sm text-marigold transition-colors hover:text-offwhite"
-                >
-                  {loc.city}, {loc.country}
-                </a>
+                {loc.mapUrl ? (
+                  <a
+                    href={loc.mapUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`${loc.city} office on Google Maps`}
+                    className="text-sm text-marigold transition-colors hover:text-offwhite"
+                  >
+                    {loc.city}, {loc.country}
+                  </a>
+                ) : (
+                  /*
+                   * No Maps listing for this office, so it opens to show the
+                   * address rather than linking to a search that only looks like
+                   * a listing. A details element, so it needs no state and keeps
+                   * the keyboard and screen reader behaviour browsers already
+                   * give a disclosure.
+                   */
+                  <details className="group min-w-0">
+                    <summary className="flex cursor-pointer list-none items-center gap-1.5 text-sm text-marigold transition-colors marker:content-none hover:text-offwhite">
+                      {loc.city}, {loc.country}
+                      <ChevronDown className="size-3.5 transition-transform group-open:rotate-180" />
+                    </summary>
+                    <address className="mt-1.5 not-italic text-sm text-offwhite/65">
+                      {loc.lines.map((line) => (
+                        <span key={line} className="block">
+                          {line}
+                        </span>
+                      ))}
+                    </address>
+                  </details>
+                )}
               </li>
             ))}
           </ul>

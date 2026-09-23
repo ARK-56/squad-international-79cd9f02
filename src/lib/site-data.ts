@@ -1,3 +1,21 @@
+/**
+ * An office. mapUrl is optional: only the offices with a Maps listing carry
+ * one, and the footer shows the address itself for any that does not.
+ */
+export type SiteLocation = {
+  city: string;
+  country: string;
+  lines: string[];
+  mapUrl?: string;
+  address: {
+    streetAddress: string;
+    addressLocality: string;
+    addressRegion?: string;
+    postalCode?: string;
+    addressCountry: string;
+  };
+};
+
 export const site = {
   name: "Squad International",
   /**
@@ -57,13 +75,6 @@ export const site = {
       city: "New York",
       country: "United States",
       lines: ["276 Holten Ave,", "Staten Island, NY 10309-4028, US"],
-      /*
-       * Derived from the address rather than a listing: unlike the other two,
-       * no Maps link was supplied for this office. It opens a search for the
-       * address, so swap it for the listing URL if there is one.
-       */
-      mapUrl:
-        "https://www.google.com/maps/search/?api=1&query=276%20Holten%20Ave%2C%20Staten%20Island%2C%20NY%2010309-4028%2C%20US",
       address: {
         streetAddress: "276 Holten Ave",
         addressLocality: "Staten Island",
@@ -72,7 +83,7 @@ export const site = {
         addressCountry: "US",
       },
     },
-  ],
+  ] as SiteLocation[],
   boilerplate: "High-performing offshore teams and managed business support built to scale.",
   socials: [
     { name: "LinkedIn", url: "https://www.linkedin.com/company/squadinternational" },

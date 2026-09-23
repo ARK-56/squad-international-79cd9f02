@@ -69,19 +69,31 @@ function ContactPage() {
               <li className="flex items-start gap-3">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-marigold" />
                 <span className="space-y-2">
-                  {site.locations.map((loc) => (
-                    <a
-                      key={loc.city}
-                      href={loc.mapUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={`${loc.city} office on Google Maps`}
-                      className="block transition-colors hover:text-marigold"
-                    >
-                      <span className="font-semibold text-charcoal">{loc.city}</span>{" "}
-                      {loc.lines.join(" ")}
-                    </a>
-                  ))}
+                  {/*
+                    The address is already written out here, so an office with no
+                    Maps listing simply is not a link. An anchor without an href
+                    is not one either, and reads as broken.
+                  */}
+                  {site.locations.map((loc) =>
+                    loc.mapUrl ? (
+                      <a
+                        key={loc.city}
+                        href={loc.mapUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${loc.city} office on Google Maps`}
+                        className="block transition-colors hover:text-marigold"
+                      >
+                        <span className="font-semibold text-charcoal">{loc.city}</span>{" "}
+                        {loc.lines.join(" ")}
+                      </a>
+                    ) : (
+                      <span key={loc.city} className="block">
+                        <span className="font-semibold text-charcoal">{loc.city}</span>{" "}
+                        {loc.lines.join(" ")}
+                      </span>
+                    ),
+                  )}
                 </span>
               </li>
               <li className="flex items-start gap-3">
