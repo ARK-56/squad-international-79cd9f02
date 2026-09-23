@@ -564,6 +564,30 @@ export const industries: Industry[] = [
       { label: "Operating cost", value: "-50%" },
     ],
   },
+  {
+    slug: "auto-trading",
+    name: "Auto Trading & Dealerships",
+    short:
+      "Dealerships and vehicle traders live on response speed, because an enquiry left waiting is a sale made from the next listing. Dedicated support keeps enquiries answered, appointments booked and the paperwork behind them moving.",
+    headline: "Answer Every Enquiry Before The Next Listing Does",
+    tagline: "Keep every enquiry answered and every vehicle appointment in the diary.",
+    keyFocus: ["Sales Enquiries", "Booking & Scheduling", "Documentation"],
+    challenges: [
+      "Enquiries arriving after hours and at weekends",
+      "Volume spiking whenever new stock lands",
+      "Paperwork holding up handover and delivery",
+    ],
+    solutions: [
+      "Enquiry response and lead qualification",
+      "Test drive and service appointment booking",
+      "Finance and registration document chasing",
+    ],
+    metrics: [
+      { label: "Enquiry response", value: "< 10 min" },
+      { label: "Appointments booked", value: "+38%" },
+      { label: "Admin cost", value: "-50%" },
+    ],
+  },
 ];
 
 export type CaseStudy = {

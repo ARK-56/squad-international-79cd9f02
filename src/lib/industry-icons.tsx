@@ -6,6 +6,7 @@ import {
   Briefcase,
   Building2,
   UtensilsCrossed,
+  Car,
   Layers,
   type LucideIcon,
 } from "lucide-react";
@@ -30,6 +31,7 @@ const INDUSTRY_ICONS: Record<string, LucideIcon> = {
   "financial-services": Briefcase,
   "real-estate": Building2,
   "restaurants-hospitality": UtensilsCrossed,
+  "auto-trading": Car,
 };
 
 /** Layers covers an industry added later, so a new one is never left bare. */
