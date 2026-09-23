@@ -816,6 +816,24 @@ export const faqs: { q: string; a: string[] }[] = [
 
 export const posts = [
   {
+    slug: "independent-reviews-and-outsourcing-transparency",
+    title: "Independent reviews, greater transparency, trusted outsourcing support",
+    excerpt:
+      "Squad International is now listed on GoodFirms. Why independent, verified reviews matter when you are choosing a partner.",
+    date: "2026-09-18",
+    readingTime: "4 min read",
+    category: "Company",
+    body: [
+      "Choosing an outsourcing partner is a major business decision. A company can look strong on its own website, but B2B buyers increasingly want something more before starting a conversation: independent information, real client feedback, and a clearer picture of who they would be working with.",
+      "That is why we are pleased to say Squad International is now listed on GoodFirms, a B2B research, ratings and review platform built to help businesses discover and evaluate service providers. Rather than relying on what a company says about itself, it combines company information, client reviews, market presence and service expertise so buyers can compare providers.",
+      "Outsourcing means trusting an external team with important parts of your business: customer conversations, lead generation, administrative workflows, sales support, healthcare billing. Businesses naturally want confidence before making that decision, and independent platforms add a layer of transparency a website cannot.",
+      "Verified reviews help answer the questions that actually decide an engagement. How responsive is the team? How well do they follow process? Do they communicate consistently, and adapt as requirements change? Can they become a dependable extension of the business rather than another thing to manage?",
+      "GoodFirms puts weight on authenticity: submitted reviews go through identity verification and content examination, and reviewer information is checked before anything is published. For a business comparing providers, that makes it a more useful source than testimonials chosen by the provider.",
+      "Our approach has not changed since 2019. Understand the business first, then build the support around it, rather than forcing a company into a predefined model. Outsourcing should give you more capacity, not another operational problem.",
+      "Our GoodFirms profile is live now. If you have worked with our team, we would value your feedback: visit the profile and choose Write a Review. Independent feedback helps prospective clients decide, and it tells us where to improve.",
+    ],
+  },
+  {
     slug: "when-to-outsource-customer-support",
     title: "When outsourcing customer support actually makes sense",
     excerpt:
